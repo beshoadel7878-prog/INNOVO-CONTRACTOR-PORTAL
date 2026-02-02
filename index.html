@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovo Subcontractor Portal | Construction Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --accent: #004aad;
+            --perspective: 1200px;
+            --rotate-x: 0deg;
+            --rotate-y: 0deg;
+            --scroll-y: 0;
+            --scale: 1.1;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+        
+        body::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* هيرو الجديد مع تأثيرات الماوس والتمرير */
+        .hero-viewport {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: var(--perspective);
+            overflow: hidden;
+        }
+
+        .parallax-stage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: 
+                rotateX(calc(var(--rotate-x) + (var(--scroll-y) * 0.08deg))) 
+                rotateY(calc(var(--rotate-y) + (var(--scroll-y) * 0.02deg)))
+                translateZ(calc(var(--scroll-y) * 0.1px))
+                scale(var(--scale));
+        }
+
+        /* طبقة العمارات الأساسية */
+        .layer-building {
+            position: absolute;
+            top: -20%;
+            left: -15%;
+            width: 130%;
+            height: 140%;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            filter: brightness(0.6);
+            transform: translateZ(-100px) translateY(calc(var(--scroll-y) * 0.15px));
+        }
+
+        /* طبقة الإضاءة التفاعلية */
+        .layer-windows-glow {
+            position: absolute;
+            top: -20%;
+            left: -15%;
+            width: 130%;
+            height: 140%;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            filter: brightness(1.6) saturate(1.4) contrast(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.4));
+            z-index: 5;
+            transform: translateZ(-95px) translateY(calc(var(--scroll-y) * 0.15px));
+            
+            -webkit-mask-image: radial-gradient(circle 150px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 150px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+        }
+
+        .glass-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Light effect that follows mouse */
+        .light-pointer {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(0, 100, 255, 0.3) 0%,
+                rgba(0, 50, 255, 0.1) 40%,
+                transparent 70%);
+            pointer-events: none;
+            z-index: 4;
+            mix-blend-mode: overlay;
+            filter: blur(30px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.1s;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Text Content Animations */
+        .content-box {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .animate-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: reveal 1.2s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+
+        .fade-in {
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; filter: blur(20px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        /* Loading Spinner */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 0.8s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(0, 74, 173, 0.1);
+            border-top-color: #004aad;
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Navigation styles */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                gap: 3rem;
+                font-size: 0.75rem;
+                font-weight: bold;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                opacity: 0.8;
+            }
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        /* إضاءة علوية إضافية */
+        .top-lighting {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 6;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translateZ(150px);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="flex items-center">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png" 
+                 alt="Innovo Logo" 
+                 class="h-24 mr-3"
+                 onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block';">
+            <div id="logo-text" style="display: none;" class="text-4xl font-black tracking-widest uppercase">INNOVO<span class="text-blue-600">_</span></div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#safety" class="nav-link hover:text-blue-600">Safety</a>
+            <a href="#access" class="nav-link hover:text-blue-600">Access Guide</a>
+            <a href="#training" class="nav-link hover:text-blue-600">Training</a>
+            <a href="#contact" class="nav-link hover:text-blue-600">Contact</a>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <!-- الهيرو الجديد مع تأثيرات الماوس والتمرير -->
+        <div class="hero-viewport fade-in" id="viewport">
+            <div class="parallax-stage" id="stage">
+                <!-- الصورة الأساسية -->
+                <div class="layer-building"></div>
+                
+                <!-- الصورة المضيئة (تتبع الماوس) -->
+                <div class="layer-windows-glow"></div>
+                
+                <!-- إضاءة علوية -->
+                <div class="top-lighting"></div>
+            </div>
+            
+            <!-- Light effect from original code -->
+            <div class="light-pointer" id="light-pointer"></div>
+            
+            <div class="glass-overlay"></div>
+
+            <div class="content-box">
+                <h1 class="text-6xl md:text-8xl font-black mb-8 animate-reveal delay-1 uppercase tracking-tighter">
+                    INNOVO<br/>CONTRACTOR<span class="text-blue-600"> PORTAL</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-12 animate-reveal delay-2 max-w-xl mx-auto font-light leading-relaxed">
+                    Explore Dubai's iconic skyline. Move mouse to navigate buildings and discover interactive lighting effects.
+                </p>
+                <div class="animate-reveal delay-3">
+                    <button onclick="scrollToSection('safety')" class="border border-white/20 hover:border-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs">
+                        Enter Portal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 100vh; background: #0a0a0a; padding: 100px 20px; color: white;" id="safety">
+        <h2 class="text-4xl font-bold text-center mb-10">Safety & Procedures</h2>
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+                <h3 class="text-xl font-bold mb-4">PPE Requirements</h3>
+                <p class="text-gray-400">Hard hat, safety vest, boots must be worn at all times on Innovo sites.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+                <h3 class="text-xl font-bold mb-4">Site Induction</h3>
+                <p class="text-gray-400">Mandatory safety induction before commencing any work activities.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
+                <h3 class="text-xl font-bold mb-4">Emergency Procedures</h3>
+                <p class="text-gray-400">Know evacuation routes, assembly points, and emergency contacts.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // المتغيرات للتأثيرات البصرية
+        const stage = document.getElementById('stage');
+        const lightPointer = document.getElementById('light-pointer');
+        
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        let scrollY = 0;
+        
+        const sensitivity = 6; 
+        const lerpFactor = 0.05;
+
+        // تتبع الماوس للتأثيرات التفاعلية
+        window.addEventListener('mousemove', (e) => {
+            // تأثير الهيرو الجديد
+            const mouseXPercent = (e.clientX / window.innerWidth) * 100;
+            const mouseYPercent = (e.clientY / window.innerHeight) * 100;
+            document.documentElement.style.setProperty('--mouse-x', `${mouseXPercent}%`);
+            document.documentElement.style.setProperty('--mouse-y', `${mouseYPercent}%`);
+
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            targetY = x * sensitivity;
+            targetX = -y * sensitivity;
+            
+            // تأثير الضوء من الكود الأصلي
+            lightPointer.style.left = `${e.clientX}px`;
+            lightPointer.style.top = `${e.clientY}px`;
+            lightPointer.style.opacity = '0.6';
+        });
+
+        // تتبع السكول لتحريك الصورة
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            document.documentElement.style.setProperty('--scroll-y', scrollY);
+        });
+
+        function animate() {
+            // تنعيم حركة الماوس
+            currentX += (targetX - currentX) * lerpFactor;
+            currentY += (targetY - currentY) * lerpFactor;
+
+            document.documentElement.style.setProperty('--rotate-x', `${currentX}deg`);
+            document.documentElement.style.setProperty('--rotate-y', `${currentY}deg`);
+
+            requestAnimationFrame(animate);
+        }
+
+        // Window resize handler
+        function onWindowResize() {
+            // Reset any necessary variables on resize
+            targetX = targetY = currentX = currentY = 0;
+        }
+        
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Initialize when page loads
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    
+                    // Start animation
+                    animate();
+                    
+                    // Add event listeners
+                    window.addEventListener('resize', onWindowResize);
+                    
+                    // Reset mouse pointer opacity when mouse leaves window
+                    document.addEventListener('mouseleave', () => {
+                        lightPointer.style.opacity = '0';
+                    });
+                    
+                    document.addEventListener('mouseenter', () => {
+                        lightPointer.style.opacity = '0.6';
+                    });
+                }, 800);
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
