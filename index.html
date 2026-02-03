@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Subcontractor Portal | Construction Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="flex items-center">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png" 
+                 alt="Innovo Logo" 
+                 class="h-24 mr-3"
+                 onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block';">
+            <div id="logo-text" style="display: none;" class="text-4xl font-black tracking-widest uppercase">INNOVO<span class="text-blue-600">_</span></div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link hover:text-blue-600">Main Portal</a>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <!-- الهيرو الجديد مع تأثيرات الماوس والتمرير -->
+        <div class="hero-viewport fade-in" id="viewport">
+            <div class="parallax-stage" id="stage">
+                <!-- الصورة الأساسية -->
+                <div class="layer-building"></div>
+                
+                <!-- الصورة المضيئة (تتبع الماوس) -->
+                <div class="layer-windows-glow"></div>
+                
+                <!-- إضاءة علوية -->
+                <div class="top-lighting"></div>
+            </div>
+            
+            <!-- Light effect from original code -->
+            <div class="light-pointer" id="light-pointer"></div>
+            
+            <div class="glass-overlay"></div>
+
+            <div class="content-box">
+                <h1 class="text-6xl md:text-8xl font-black mb-8 animate-reveal delay-1 uppercase tracking-tighter">
+                    CONTRACTOR<span class="text-blue-600"> PORTAL</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-12 animate-reveal delay-2 max-w-xl mx-auto font-light leading-relaxed">
+                    Access safety rules, inductions, and documents required to work on Innovo sites.
+                </p>
+                <div class="animate-reveal delay-3">
+                    <a href="dashboard.html" class="border border-white/20 hover:border-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs inline-block">
+                        ENTER PORTAL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body> 
+</html>
