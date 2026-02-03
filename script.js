@@ -1,3 +1,44 @@
+const THEME_KEY = 'innovo-theme';
+const rootElement = document.documentElement;
+const themeToggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
+const lockedTheme = rootElement.dataset.themeLock;
+
+function updateThemeToggle(theme) {
+    if (!themeToggles.length) return;
+    const label = theme === 'dark' ? 'Day Mood' : 'Dark Mood';
+    themeToggles.forEach((toggle) => {
+        toggle.textContent = label;
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    });
+}
+
+function applyTheme(theme, options = {}) {
+    const persist = options.persist !== false;
+    const nextTheme = theme === 'dark' ? 'dark' : 'light';
+    rootElement.dataset.theme = nextTheme;
+    rootElement.style.colorScheme = nextTheme;
+    if (persist) {
+        localStorage.setItem(THEME_KEY, nextTheme);
+    }
+    updateThemeToggle(nextTheme);
+}
+
+if (lockedTheme) {
+    applyTheme(lockedTheme, { persist: false });
+} else {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+    if (themeToggles.length) {
+        themeToggles.forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                const next = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+            });
+        });
+    }
+}
+
 const lightPointer = document.getElementById('light-pointer');
 const iconCards = Array.from(document.querySelectorAll('.icon-card'));
 
