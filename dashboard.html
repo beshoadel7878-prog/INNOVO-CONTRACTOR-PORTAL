@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="dashboard" data-title-key="title">
     <div class="page-nav">
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
@@ -17,19 +17,19 @@
             <span style="display: none;">INNOVO</span>
         </a>
         <div class="nav-actions">
-            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mood</button>
-            <a href="index.html" class="btn btn-outline nav-action">Back to Home</a>
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="index.html" class="btn btn-outline nav-action" data-i18n="nav.back_home">Back to Home</a>
         </div>
     </div>
 
     <div class="page-header">
-        <h1 class="page-title">Main Portal Dashboard</h1>
-        <p class="page-subtitle">Choose what you need to start work safely. Tap a card to open the page.</p>
+        <h1 class="page-title" data-i18n="header.title">Main Portal Dashboard</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Choose what you need to start work safely. Tap a card to open the page.</p>
     </div>
 
     <div class="max-w-6xl mx-auto px-5 pb-24">
         <div class="portal-grid">
-            <a href="digital-induction.html" class="portal-card card-accent-blue">
+            <a href="site-entry.html" class="portal-card card-accent-blue">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -38,39 +38,18 @@
                         </svg>
                     </span>
                     <div>
-                        <span class="portal-tag">Digital Induction</span>
-                        <div class="portal-title">Digital Induction</div>
+                        <span class="portal-tag" data-i18n="cards.site_entry.tag">Site Entry</span>
+                        <div class="portal-title" data-i18n="cards.site_entry.title">Site Entry</div>
                     </div>
                 </div>
                 <ul class="portal-list">
-                    <li>Safety rules</li>
-                    <li>Site rules</li>
-                    <li>Induction video / text</li>
+                    <li data-i18n="cards.site_entry.item1">Safety rules + PPE</li>
+                    <li data-i18n="cards.site_entry.item2">Working hours</li>
+                    <li data-i18n="cards.site_entry.item3">Emergency numbers + site map</li>
                 </ul>
             </a>
 
-            <a href="documents.html" class="portal-card card-accent-amber">
-                <div class="card-header">
-                    <span class="card-icon" aria-hidden="true">
-                        <svg viewBox="0 0 64 64">
-                            <path d="M20 8h18l12 12v36H20z"/>
-                            <path d="M38 8v12h12"/>
-                            <path d="M26 34h22M26 42h22M26 26h10"/>
-                        </svg>
-                    </span>
-                    <div>
-                        <span class="portal-tag">Documents & Guides</span>
-                        <div class="portal-title">Documents & Guides</div>
-                    </div>
-                </div>
-                <ul class="portal-list">
-                    <li>Procedures</li>
-                    <li>Policies</li>
-                    <li>PDFs and drawings (if available)</li>
-                </ul>
-            </a>
-
-            <a href="access-verification.html" class="portal-card card-accent-green">
+            <a href="access-verification.html" class="portal-card card-accent-amber">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -80,18 +59,121 @@
                         </svg>
                     </span>
                     <div>
-                        <span class="portal-tag">Access & Verification</span>
-                        <div class="portal-title">Access & Verification</div>
+                        <span class="portal-tag" data-i18n="cards.access.tag">Access</span>
+                        <div class="portal-title" data-i18n="cards.access.title">Access & Verification</div>
                     </div>
                 </div>
                 <ul class="portal-list">
-                    <li>Instructions</li>
-                    <li>Forms (if required)</li>
-                    <li>Approval steps</li>
+                    <li data-i18n="cards.access.item1">Entry steps</li>
+                    <li data-i18n="cards.access.item2">Verification checklist</li>
+                    <li data-i18n="cards.access.item3">Access maps</li>
                 </ul>
             </a>
 
-            <a href="training-videos.html" class="portal-card card-accent-purple">
+            <a href="documents.html" class="portal-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 8h18l12 12v36H20z"/>
+                            <path d="M38 8v12h12"/>
+                            <path d="M26 34h22M26 42h22M26 26h10"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="portal-tag" data-i18n="cards.documents.tag">Documents</span>
+                        <div class="portal-title" data-i18n="cards.documents.title">Documents & Guides</div>
+                    </div>
+                </div>
+                <ul class="portal-list">
+                    <li data-i18n="cards.documents.item1">Procedures + policies</li>
+                    <li data-i18n="cards.documents.item2">PDFs / drawings</li>
+                    <li data-i18n="cards.documents.item3">Download center</li>
+                </ul>
+            </a>
+
+            <a href="payment-claims.html" class="portal-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="12" y="16" width="40" height="32" rx="6"/>
+                            <path d="M20 26h24M20 34h16"/>
+                            <path d="M30 42h16"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="portal-tag" data-i18n="cards.payment.tag">Payment Claims</span>
+                        <div class="portal-title" data-i18n="cards.payment.title">Payment Claims</div>
+                    </div>
+                </div>
+                <ul class="portal-list">
+                    <li data-i18n="cards.payment.item1">Steps + deadlines</li>
+                    <li data-i18n="cards.payment.item2">Required documents</li>
+                    <li data-i18n="cards.payment.item3">Oracle/system link</li>
+                </ul>
+            </a>
+
+            <a href="safety.html" class="portal-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M32 6l20 8v14c0 14-8.5 26-20 30-11.5-4-20-16-20-30V14z"/>
+                            <path d="M24 32l6 6 12-12"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="portal-tag" data-i18n="cards.safety.tag">Safety</span>
+                        <div class="portal-title" data-i18n="cards.safety.title">Safety</div>
+                    </div>
+                </div>
+                <ul class="portal-list">
+                    <li data-i18n="cards.safety.item1">Procedures</li>
+                    <li data-i18n="cards.safety.item2">Incident reporting</li>
+                    <li data-i18n="cards.safety.item3">Toolbox talks + Do/Don't</li>
+                </ul>
+            </a>
+
+            <a href="quality-requirements.html" class="portal-card card-accent-purple">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 10h24l10 10v34H20z"/>
+                            <path d="M38 10v10h10"/>
+                            <path d="M26 30h22M26 38h16"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="portal-tag" data-i18n="cards.quality.tag">Quality</span>
+                        <div class="portal-title" data-i18n="cards.quality.title">Quality Requirements</div>
+                    </div>
+                </div>
+                <ul class="portal-list">
+                    <li data-i18n="cards.quality.item1">Inspection process</li>
+                    <li data-i18n="cards.quality.item2">Checklists + snag rules</li>
+                    <li data-i18n="cards.quality.item3">Material approvals</li>
+                </ul>
+            </a>
+
+            <a href="how-to.html" class="portal-card card-accent-rose">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M18 16h28M18 28h28M18 40h18"/>
+                            <path d="M14 16h2M14 28h2M14 40h2"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <span class="portal-tag" data-i18n="cards.howto.tag">How To</span>
+                        <div class="portal-title" data-i18n="cards.howto.title">How to Do Things</div>
+                    </div>
+                </div>
+                <ul class="portal-list">
+                    <li data-i18n="cards.howto.item1">Book an inspection</li>
+                    <li data-i18n="cards.howto.item2">Bring equipment</li>
+                    <li data-i18n="cards.howto.item3">Request permits</li>
+                </ul>
+            </a>
+
+            <a href="training-videos.html" class="portal-card card-accent-blue">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -100,15 +182,91 @@
                         </svg>
                     </span>
                     <div>
-                        <span class="portal-tag">Training & Videos</span>
-                        <div class="portal-title">Training & Videos</div>
+                        <span class="portal-tag" data-i18n="cards.videos.tag">Videos</span>
+                        <div class="portal-title" data-i18n="cards.videos.title">Videos</div>
                     </div>
                 </div>
                 <ul class="portal-list">
-                    <li>Safety videos</li>
-                    <li>How-to videos</li>
+                    <li data-i18n="cards.videos.item1">Watch 1 minute videos</li>
+                    <li data-i18n="cards.videos.item2">Safety + how-to</li>
                 </ul>
             </a>
+        </div>
+
+        <div class="page-header" style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
+            <h2 class="page-title" style="font-size: clamp(1.6rem, 4vw, 2.1rem);" data-i18n="quick_help.title">Quick Help</h2>
+            <p class="page-subtitle" data-i18n="quick_help.subtitle">Fast answers without paperwork.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="section-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 12h24v40H20z"/>
+                            <path d="M26 20h12M26 28h12M26 36h8"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="quick_help.forms.title">Forms & Templates</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="quick_help.forms.item1">Permit request form</li>
+                    <li data-i18n="quick_help.forms.item2">Inspection request form</li>
+                    <li data-i18n="quick_help.forms.item3">Incident report template</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M12 28h40v18H12z"/>
+                            <path d="M20 28v-6a12 12 0 0 1 24 0v6"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="quick_help.contact.title">Contact & Help</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="quick_help.contact.item1">Site supervisor phone</li>
+                    <li data-i18n="quick_help.contact.item2">Safety officer contact</li>
+                    <li data-i18n="quick_help.contact.item3">WhatsApp help line</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-purple">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M12 14h40v26H12z"/>
+                            <path d="M20 46h24"/>
+                            <path d="M22 22h20M22 30h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="quick_help.announcements.title">Announcements</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="quick_help.announcements.item1">Gate closures / access updates</li>
+                    <li data-i18n="quick_help.announcements.item2">Working hour changes</li>
+                    <li data-i18n="quick_help.announcements.item3">Site-wide alerts</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-rose">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M18 18h28v20H18z"/>
+                            <path d="M26 42h12"/>
+                            <path d="M30 26h4"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="quick_help.faq.title">FAQ</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="quick_help.faq.item1">Where do I go for this?</li>
+                    <li data-i18n="quick_help.faq.item2">How do I submit a claim?</li>
+                    <li data-i18n="quick_help.faq.item3">What do I need before entry?</li>
+                </ul>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

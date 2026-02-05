@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Entry | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="site_entry" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <div class="nav-actions">
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="dashboard.html" class="btn btn-outline nav-action" data-i18n="nav.back_dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">Site Entry</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Quick essentials before you enter the site.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-3xl mx-auto page-stack">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="16" y="12" width="32" height="40" rx="4"/>
+                            <path d="M24 12h16v8H24z"/>
+                            <path d="M24 30h16M24 38h16M24 46h10"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.safety_rules.title">Safety Rules</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.safety_rules.item1">Sign in and out every day.</li>
+                    <li data-i18n="sections.safety_rules.item2">Stay in your assigned work zone.</li>
+                    <li data-i18n="sections.safety_rules.item3">Follow traffic and lift exclusion zones.</li>
+                    <li data-i18n="sections.safety_rules.item4">Keep walkways clear and clean up daily.</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M32 6l20 8v14c0 14-8.5 26-20 30-11.5-4-20-16-20-30V14z"/>
+                            <path d="M24 32l6 6 12-12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.ppe.title">PPE Required</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.ppe.item1">Hard hat, safety boots, and high-vis vest.</li>
+                    <li data-i18n="sections.ppe.item2">Safety glasses and gloves for your task.</li>
+                    <li data-i18n="sections.ppe.item3">Hearing protection in noisy areas.</li>
+                    <li data-i18n="sections.ppe.item4">Respirator if dust or fumes are present.</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M12 34c0-10 8-18 20-18s20 8 20 18"/>
+                            <path d="M10 34h44v8c0 6-4 10-10 10H20c-6 0-10-4-10-10z"/>
+                            <path d="M24 20v12M40 20v12M32 18v14"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.hours.title">Working Hours</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.hours.item1">Check in at the gate before your shift.</li>
+                    <li data-i18n="sections.hours.item2">Follow site start and finish times.</li>
+                    <li data-i18n="sections.hours.item3">No work outside approved hours.</li>
+                    <li data-i18n="sections.hours.item4">Overtime must be approved.</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-purple">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M18 32l8 8 16-18"/>
+                            <path d="M18 46h28"/>
+                            <path d="M18 18h28"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.emergency.title">Emergency Numbers</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.emergency.item1">Site supervisor: +00 000 000 000</li>
+                    <li data-i18n="sections.emergency.item2">Security desk: +00 000 000 000</li>
+                    <li data-i18n="sections.emergency.item3">Safety officer: +00 000 000 000</li>
+                    <li data-i18n="sections.emergency.item4">Emergency services: 999 / 911</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-rose">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M32 10l22 40H10z"/>
+                            <path d="M32 24v14"/>
+                            <path d="M32 44h0.01"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.map.title">Site Map</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.map.item1">Main gate and security desk</li>
+                    <li data-i18n="sections.map.item2">Assembly points and exits</li>
+                    <li data-i18n="sections.map.item3">First aid and fire points</li>
+                    <li data-i18n="sections.map.item4">Parking and delivery zones</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="10" y="16" width="44" height="32" rx="6"/>
+                            <path d="M28 26l12 6-12 6z"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.video.title">Induction Video</h3>
+                </div>
+                <p class="text-gray-400 mb-4" data-i18n="sections.video.subtitle">Watch the 1 minute induction video before entry.</p>
+                <div class="download-grid">
+                    <a href="#" class="btn btn-outline" aria-disabled="true" data-i18n="sections.video.button">Watch Video (Placeholder)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

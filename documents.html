@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="documents" data-title-key="title">
     <div class="page-nav">
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
@@ -17,14 +17,14 @@
             <span style="display: none;">INNOVO</span>
         </a>
         <div class="nav-actions">
-            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mood</button>
-            <a href="dashboard.html" class="btn btn-outline nav-action">Back to Dashboard</a>
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="dashboard.html" class="btn btn-outline nav-action" data-i18n="nav.back_dashboard">Back to Dashboard</a>
         </div>
     </div>
 
     <div class="page-header">
-        <h1 class="page-title">Documents & Guides</h1>
-        <p class="page-subtitle">Find the documents you need before entering site.</p>
+        <h1 class="page-title" data-i18n="header.title">Documents & Guides</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Find the documents you need before entering site.</p>
     </div>
 
     <div class="content-section">
@@ -38,13 +38,13 @@
                             <path d="M24 30h22M24 38h22M24 46h14"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">Available Documents</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.available.title">Available Documents</h3>
                 </div>
                 <ul class="bullet-list">
-                    <li>Site induction guide and safety rules.</li>
-                    <li>Access maps, gate times, and parking info.</li>
-                    <li>Work permits and task risk checklists.</li>
-                    <li>Emergency contacts and incident forms.</li>
+                    <li data-i18n="sections.available.item1">Site induction guide and safety rules.</li>
+                    <li data-i18n="sections.available.item2">Access maps, gate times, and parking info.</li>
+                    <li data-i18n="sections.available.item3">Work permits and task risk checklists.</li>
+                    <li data-i18n="sections.available.item4">Emergency contacts and incident forms.</li>
                 </ul>
             </div>
 
@@ -56,13 +56,13 @@
                             <path d="M22 26h20M22 34h20M22 42h12"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">How to Use</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.howto.title">How to Use</h3>
                 </div>
                 <ul class="bullet-list">
-                    <li>Open the file, read the key points, and save it.</li>
-                    <li>Show required documents at the gate.</li>
-                    <li>Send completed forms to your supervisor.</li>
-                    <li>Check this page for updates before each shift.</li>
+                    <li data-i18n="sections.howto.item1">Open the file, read the key points, and save it.</li>
+                    <li data-i18n="sections.howto.item2">Show required documents at the gate.</li>
+                    <li data-i18n="sections.howto.item3">Send completed forms to your supervisor.</li>
+                    <li data-i18n="sections.howto.item4">Check this page for updates before each shift.</li>
                 </ul>
             </div>
 
@@ -75,13 +75,13 @@
                             <path d="M14 46h36"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">Downloads</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.downloads.title">Downloads</h3>
                 </div>
                 <div class="download-grid">
-                    <a href="#" class="btn btn-primary" aria-disabled="true">Download Induction PDF</a>
-                    <a href="#" class="btn btn-primary" aria-disabled="true">Download Safety Rules</a>
-                    <a href="#" class="btn btn-primary" aria-disabled="true">Download Access Map</a>
-                    <a href="#" class="btn btn-primary" aria-disabled="true">Download Permit Checklist</a>
+                    <a href="#" class="btn btn-primary" aria-disabled="true" data-i18n="sections.downloads.item1">Download Induction PDF</a>
+                    <a href="#" class="btn btn-primary" aria-disabled="true" data-i18n="sections.downloads.item2">Download Safety Rules</a>
+                    <a href="#" class="btn btn-primary" aria-disabled="true" data-i18n="sections.downloads.item3">Download Access Map</a>
+                    <a href="#" class="btn btn-primary" aria-disabled="true" data-i18n="sections.downloads.item4">Download Permit Checklist</a>
                 </div>
             </div>
         </div>

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Training & Videos | Innovo</title>
+    <title>Videos | Innovo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="videos" data-title-key="title">
     <div class="page-nav">
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
@@ -17,14 +17,14 @@
             <span style="display: none;">INNOVO</span>
         </a>
         <div class="nav-actions">
-            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mood</button>
-            <a href="dashboard.html" class="btn btn-outline nav-action">Back to Dashboard</a>
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="dashboard.html" class="btn btn-outline nav-action" data-i18n="nav.back_dashboard">Back to Dashboard</a>
         </div>
     </div>
 
     <div class="page-header">
-        <h1 class="page-title">Training & Videos</h1>
-        <p class="page-subtitle">Videos will be added here. Use these before starting work.</p>
+        <h1 class="page-title" data-i18n="header.title">Videos</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Watch 1 minute videos before starting work.</p>
     </div>
 
     <div class="content-section">
@@ -37,10 +37,13 @@
                             <path d="M24 30l6 6 12-12"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">Safety Basics</h3>
+                    <h3 class="text-xl font-bold" data-i18n="cards.safety.title">Safety Basics</h3>
                 </div>
-                <div class="video-placeholder">Video Placeholder</div>
-                <p class="text-gray-400 mt-4">Safety overview video coming soon.</p>
+                <video class="video-embed" autoplay muted loop playsinline controls preload="metadata">
+                    <source src="videos/Innovo Safety Essentials Dubai Construction Site Training.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="text-gray-400 mt-4" data-i18n="cards.safety.subtitle">Safety overview (1 minute).</p>
             </div>
 
             <div class="section-card card-accent-amber">
@@ -52,10 +55,10 @@
                             <path d="M32 10v8"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">Working at Height</h3>
+                    <h3 class="text-xl font-bold" data-i18n="cards.howto.title">How to Do Things</h3>
                 </div>
-                <div class="video-placeholder">Video Placeholder</div>
-                <p class="text-gray-400 mt-4">Height safety training video coming soon.</p>
+                <div class="video-placeholder" data-i18n="cards.howto.placeholder">Watch 1 minute video</div>
+                <p class="text-gray-400 mt-4" data-i18n="cards.howto.subtitle">How to book inspections (1 minute).</p>
             </div>
 
             <div class="section-card card-accent-green">
@@ -66,10 +69,10 @@
                             <path d="M34 18l6-6 12 12-6 6"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold">Tools & Equipment</h3>
+                    <h3 class="text-xl font-bold" data-i18n="cards.site.title">Site Entry</h3>
                 </div>
-                <div class="video-placeholder">Video Placeholder</div>
-                <p class="text-gray-400 mt-4">Tools and equipment video coming soon.</p>
+                <div class="video-placeholder" data-i18n="cards.site.placeholder">Watch 1 minute video</div>
+                <p class="text-gray-400 mt-4" data-i18n="cards.site.subtitle">Site entry rules (1 minute).</p>
             </div>
         </div>
     </div>

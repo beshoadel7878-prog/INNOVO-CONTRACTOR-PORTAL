@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Do Things | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="howto" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <div class="nav-actions">
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="dashboard.html" class="btn btn-outline nav-action" data-i18n="nav.back_dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">How to Do Things</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Quick guides for the most common requests.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-3xl mx-auto page-stack">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="12" y="16" width="40" height="32" rx="6"/>
+                            <path d="M22 26h20M22 34h14"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.inspection.title">Book an Inspection</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.inspection.item1">Complete the inspection request form.</li>
+                    <li data-i18n="sections.inspection.item2">Attach checklist and drawings.</li>
+                    <li data-i18n="sections.inspection.item3">Send to the QA/QC team 24 hours before.</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M16 44l16-16 8 8 16-16"/>
+                            <path d="M16 20h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.equipment.title">Bring Equipment to Site</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.equipment.item1">Share equipment list with security.</li>
+                    <li data-i18n="sections.equipment.item2">Provide operator licenses if needed.</li>
+                    <li data-i18n="sections.equipment.item3">Enter only through the approved gate.</li>
+                </ul>
+            </div>
+
+            <div class="section-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 10h24l10 10v34H20z"/>
+                            <path d="M38 10v10h10"/>
+                            <path d="M26 30h22M26 38h16"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.permit.title">Request a Permit</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.permit.item1">Submit permit request before work starts.</li>
+                    <li data-i18n="sections.permit.item2">Attach method statement and risk assessment.</li>
+                    <li data-i18n="sections.permit.item3">Wait for approval before mobilizing.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

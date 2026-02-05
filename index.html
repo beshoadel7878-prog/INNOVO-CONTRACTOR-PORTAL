@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="index" data-title-key="title">
 
     <div id="loader">
         <div class="spinner"></div>
@@ -25,7 +25,16 @@
         
         <div class="nav-right">
             <div class="nav-links">
-                <a href="dashboard.html" class="nav-link hover:text-blue-600">Main Portal</a>
+                <a href="dashboard.html" class="nav-link hover:text-blue-600" data-i18n="nav.main_portal">Main Portal</a>
+                <details class="lang-switch">
+                    <summary class="nav-link" data-i18n="nav.choose_language">Choose Language</summary>
+                    <div class="lang-menu">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="ar">Arabic</a>
+                        <a href="#" data-lang="hi">Hindi</a>
+                        <a href="lang-ur.html">Urdu</a>
+                    </div>
+                </details>
             </div>
         </div>
     </nav>
@@ -51,15 +60,20 @@
 
             <div class="content-box">
                 <h1 class="text-6xl md:text-8xl font-black mb-8 animate-reveal delay-1 uppercase tracking-tighter hero-title">
-                    CONTRACTOR<span class="text-blue-600"> PORTAL</span>
+                    <span data-i18n="hero.title_main">CONTRACTOR</span><span class="text-blue-600" data-i18n="hero.title_accent"> PORTAL</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-400 mb-12 animate-reveal delay-2 max-w-xl mx-auto font-light leading-relaxed hero-subtitle">
+                <p class="text-lg md:text-xl text-gray-400 mb-12 animate-reveal delay-2 max-w-xl mx-auto font-light leading-relaxed hero-subtitle" data-i18n="hero.subtitle">
                     Access safety rules, inductions, and documents required to work on Innovo sites.
                 </p>
                 <div class="animate-reveal delay-3">
-                    <a href="dashboard.html" class="border border-white/20 hover:border-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs inline-block">
-                        ENTER PORTAL
-                    </a>
+                    <div class="grid gap-4 md:grid-cols-2 max-w-xl mx-auto">
+                        <a href="dashboard.html" class="border border-white/20 hover:border-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs text-center" data-i18n="hero.enter_portal">
+                            ENTER PORTAL
+                        </a>
+                        <a href="payment-claims.html" class="border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-600 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs text-center" data-i18n="hero.payment_claims">
+                            PAYMENT CLAIMS
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
