@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue & Feedback | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="issue_feedback" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <div class="nav-actions">
+            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
+            <a href="dashboard.html" class="btn btn-outline nav-action" data-i18n="nav.back_dashboard">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">Issue & Feedback</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Send questions, report issues, and raise concerns.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="panel-stack">
+            <div class="section-card strip-panel panel-ask card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M16 18h32v20H16z"/>
+                            <path d="M24 44h16"/>
+                            <path d="M30 26h4"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.ask.title">Ask an Innovo PM/Super</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.ask.item1">Send a question with a photo.</li>
+                    <li data-i18n="sections.ask.item2">Describe the location and trade.</li>
+                    <li data-i18n="sections.ask.item3">Get a response with next steps.</li>
+                </ul>
+            </div>
+
+            <div class="section-card strip-panel panel-anonymous card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M32 10l22 40H10z"/>
+                            <path d="M32 26v12"/>
+                            <path d="M32 44h0.01"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.anonymous.title">Anonymous Safety Concerns</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.anonymous.item1">Raise safety concerns without sharing your name.</li>
+                    <li data-i18n="sections.anonymous.item2">Include photos if available.</li>
+                    <li data-i18n="sections.anonymous.item3">Safety team reviews within 24 hours.</li>
+                </ul>
+            </div>
+
+            <div class="section-card strip-panel panel-report card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="14" y="16" width="36" height="32" rx="6"/>
+                            <path d="M22 26h20M22 34h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.report.title">Report Site Issues</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.report.item1">Log issues with location and priority.</li>
+                    <li data-i18n="sections.report.item2">Attach evidence for quicker resolution.</li>
+                    <li data-i18n="sections.report.item3">Track updates from the Innovo team.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

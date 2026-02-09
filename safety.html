@@ -28,8 +28,8 @@
     </div>
 
     <div class="content-section">
-        <div class="max-w-3xl mx-auto page-stack">
-            <div class="section-card card-accent-blue">
+        <div class="panel-stack">
+            <div class="section-card strip-panel panel-procedures card-accent-blue">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -46,7 +46,25 @@
                 </ul>
             </div>
 
-            <div class="section-card card-accent-amber">
+            <div class="section-card strip-panel panel-ppe card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 12h24l10 10v30H20z"/>
+                            <path d="M34 12v10h10"/>
+                            <path d="M26 30h16M26 38h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.ppe.title">Required PPE</h3>
+                </div>
+                <ul class="bullet-list">
+                    <li data-i18n="sections.ppe.item1">Hard hat, safety boots, and high-visibility vest.</li>
+                    <li data-i18n="sections.ppe.item2">Gloves and eye protection based on task.</li>
+                    <li data-i18n="sections.ppe.item3">Hearing protection in high-noise areas.</li>
+                </ul>
+            </div>
+
+            <div class="section-card strip-panel panel-incident card-accent-amber">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -64,7 +82,7 @@
                 </ul>
             </div>
 
-            <div class="section-card card-accent-green">
+            <div class="section-card strip-panel panel-toolbox card-accent-green">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -81,7 +99,7 @@
                 </ul>
             </div>
 
-            <div class="section-card card-accent-purple">
+            <div class="section-card strip-panel panel-dos card-accent-purple">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
@@ -92,12 +110,16 @@
                     </span>
                     <h3 class="text-xl font-bold" data-i18n="sections.dos.title">Do & Don't</h3>
                 </div>
-                <ul class="bullet-list">
-                    <li data-i18n="sections.dos.item1">Do keep work areas tidy.</li>
-                    <li data-i18n="sections.dos.item2">Do follow supervisor instructions.</li>
-                    <li data-i18n="sections.dos.item3">Don't bypass safety devices.</li>
-                    <li data-i18n="sections.dos.item4">Don't use phones while walking.</li>
-                </ul>
+                <div class="do-dont-grid">
+                    <ul class="bullet-list do-list">
+                        <li data-i18n="sections.dos.item1">Do keep work areas tidy.</li>
+                        <li data-i18n="sections.dos.item2">Do follow supervisor instructions.</li>
+                    </ul>
+                    <ul class="bullet-list dont-list">
+                        <li data-i18n="sections.dos.item3">Don't bypass safety devices.</li>
+                        <li data-i18n="sections.dos.item4">Don't use phones while walking.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

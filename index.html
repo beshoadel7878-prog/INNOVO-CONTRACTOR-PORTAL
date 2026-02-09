@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-theme-lock="dark">
+<html lang="en" data-theme="light" data-theme-lock="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Subcontractor Portal | Construction Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page="index" data-title-key="title">
+<body data-page="index" data-title-key="title" class="page-home">
 
     <div id="loader">
         <div class="spinner"></div>
     </div>
 
-    <!-- Navigation Menu -->
-    <nav>
-        <div class="flex items-center">
-            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png" 
-                 alt="Innovo Logo" 
-                 class="h-24 mr-3"
-                 onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block';">
-            <div id="logo-text" style="display: none;" class="text-4xl font-black tracking-widest uppercase">INNOVO<span class="text-blue-600">_</span></div>
-        </div>
-        
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="dashboard.html" class="nav-link hover:text-blue-600" data-i18n="nav.main_portal">Main Portal</a>
+    <header class="site-header" id="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="index.html" aria-label="Innovo Contractor Portal">
+                <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                     alt="Innovo Logo"
+                     class="brand-logo"
+                     onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-flex';">
+                <span id="logo-text" class="brand-text" style="display: none;">INNOVO<span class="brand-accent">_</span></span>
+            </a>
+
+            <nav class="site-nav">
+                <a href="dashboard.html" class="nav-link" data-i18n="nav.main_portal">Main Portal</a>
+                <a href="site-entry.html" class="nav-link" data-i18n="nav.site_entry">Site Entry</a>
+                <a href="documents.html" class="nav-link" data-i18n="nav.documents">Documents</a>
+                <a href="safety.html" class="nav-link" data-i18n="nav.safety">Safety</a>
                 <details class="lang-switch">
                     <summary class="nav-link" data-i18n="nav.choose_language">Choose Language</summary>
                     <div class="lang-menu">
@@ -35,47 +40,95 @@
                         <a href="lang-ur.html">Urdu</a>
                     </div>
                 </details>
+            </nav>
+
+            <div class="site-actions">
+                <button class="search-trigger" type="button" data-search-open aria-label="Open search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="M16.8 16.8L21 21"></path>
+                    </svg>
+                </button>
+                <button class="menu-trigger" type="button" data-menu-toggle aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
-    </nav>
 
-    <div class="hero-container">
-        <!-- الهيرو الجديد مع تأثيرات الماوس والتمرير -->
-        <div class="hero-viewport fade-in" id="viewport">
-            <div class="parallax-stage" id="stage">
-                <!-- الصورة الأساسية -->
-                <div class="layer-building"></div>
-                
-                <!-- الصورة المضيئة (تتبع الماوس) -->
-                <div class="layer-windows-glow"></div>
-                
-                <!-- إضاءة علوية -->
-                <div class="top-lighting"></div>
+        <div class="mobile-panel" id="mobile-panel">
+            <a href="dashboard.html" data-i18n="nav.main_portal">Main Portal</a>
+            <a href="site-entry.html" data-i18n="nav.site_entry">Site Entry</a>
+            <a href="documents.html" data-i18n="nav.documents">Documents</a>
+            <a href="safety.html" data-i18n="nav.safety">Safety</a>
+            <a href="payment-claims.html" data-i18n="nav.payment_claims">Payment Claims</a>
+        </div>
+    </header>
+
+    <main class="home">
+        <section class="hero">
+            <div class="hero-media">
+                <div class="hero-image"></div>
+                <div class="hero-overlay"></div>
+                <div class="light-pointer" id="light-pointer"></div>
             </div>
-            
-            <!-- Light effect from original code -->
-            <div class="light-pointer" id="light-pointer"></div>
-            
-            <div class="glass-overlay"></div>
-
-            <div class="content-box">
-                <h1 class="text-6xl md:text-8xl font-black mb-8 animate-reveal delay-1 uppercase tracking-tighter hero-title">
-                    <span data-i18n="hero.title_main">CONTRACTOR</span><span class="text-blue-600" data-i18n="hero.title_accent"> PORTAL</span>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span data-i18n="hero.title_main">Contractor</span>
+                    <span class="hero-title-accent" data-i18n="hero.title_accent">Portal</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-400 mb-12 animate-reveal delay-2 max-w-xl mx-auto font-light leading-relaxed hero-subtitle" data-i18n="hero.subtitle">
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
                     Access safety rules, inductions, and documents required to work on Innovo sites.
                 </p>
-                <div class="animate-reveal delay-3">
-                    <div class="grid gap-4 md:grid-cols-2 max-w-xl mx-auto">
-                        <a href="dashboard.html" class="border border-white/20 hover:border-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs text-center" data-i18n="hero.enter_portal">
-                            ENTER PORTAL
-                        </a>
-                        <a href="payment-claims.html" class="border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-600 text-white px-10 py-4 rounded-sm font-bold transition-all uppercase tracking-widest text-xs text-center" data-i18n="hero.payment_claims">
-                            PAYMENT CLAIMS
-                        </a>
-                    </div>
+                <div class="hero-actions">
+                    <a href="dashboard.html" class="btn-primary-hero" data-i18n="hero.enter_portal">Enter Portal</a>
+                    <a href="payment-claims.html" class="btn-outline-hero" data-i18n="hero.payment_claims">Payment Claims</a>
                 </div>
             </div>
+        </section>
+
+        <section class="section section-dark">
+            <div class="section-inner">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="section.portal.title">Portal Areas</h2>
+                    <p class="section-subtitle" data-i18n="section.portal.subtitle">Everything you need for safe, compliant, and fast site access.</p>
+                </div>
+                <div class="feature-grid">
+                    <a class="feature-card" href="site-entry.html">
+                        <span class="feature-label" data-i18n="section.portal.site_entry.label">Site Entry</span>
+                        <h3 data-i18n="section.portal.site_entry.title">Safety Rules & Entry Steps</h3>
+                        <p data-i18n="section.portal.site_entry.copy">Key rules, PPE requirements, and daily access instructions.</p>
+                    </a>
+                    <a class="feature-card" href="documents.html">
+                        <span class="feature-label" data-i18n="section.portal.documents.label">Documents</span>
+                        <h3 data-i18n="section.portal.documents.title">Guides & Downloads</h3>
+                        <p data-i18n="section.portal.documents.copy">Policies, forms, and approved checklists ready to use.</p>
+                    </a>
+                    <a class="feature-card" href="safety.html">
+                        <span class="feature-label" data-i18n="section.portal.hse.label">HSE</span>
+                        <h3 data-i18n="section.portal.hse.title">Safety & Incident Support</h3>
+                        <p data-i18n="section.portal.hse.copy">Procedures, reporting, and on-site best practices.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="search-overlay" id="search-overlay" aria-hidden="true">
+        <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+            <div class="search-header">
+                <h2 id="search-title" data-i18n="search.title">Search the portal</h2>
+                <button class="search-close" type="button" data-search-close aria-label="Close search">✕</button>
+            </div>
+            <form class="search-form">
+                <input type="search" placeholder="Search safety, documents, claims..." aria-label="Search" data-i18n-placeholder="search.placeholder">
+                <button type="submit" data-i18n="search.button">Search</button>
+            </form>
+            <div class="search-suggestions">
+                <button type="button" data-i18n="search.payment_claims">Payment claims</button>
+            </div>
+            <div class="search-results" id="search-results" aria-live="polite"></div>
         </div>
     </div>
 

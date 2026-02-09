@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videos | Innovo</title>
+    <title>Training | Innovo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page="videos" data-title-key="title">
+<body data-page="training" data-title-key="title">
     <div class="page-nav">
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
@@ -23,56 +23,117 @@
     </div>
 
     <div class="page-header">
-        <h1 class="page-title" data-i18n="header.title">Videos</h1>
-        <p class="page-subtitle" data-i18n="header.subtitle">Watch 1 minute videos before starting work.</p>
+        <h1 class="page-title" data-i18n="header.title">Training</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Short modules, sign-off tracking, and onboarding content.</p>
     </div>
 
     <div class="content-section">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
             <div class="section-card card-accent-blue">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
-                            <path d="M32 10l18 8v12c0 12-7 22-18 26-11-4-18-14-18-26V18z"/>
-                            <path d="M24 30l6 6 12-12"/>
+                            <rect x="12" y="14" width="40" height="30" rx="6"/>
+                            <path d="M24 24h16M24 32h10"/>
+                            <path d="M30 44h12"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold" data-i18n="cards.safety.title">Safety Basics</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.modules.title">Short Training Modules</h3>
                 </div>
-                <video class="video-embed" autoplay muted loop playsinline controls preload="metadata">
-                    <source src="videos/Innovo Safety Essentials Dubai Construction Site Training.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <p class="text-gray-400 mt-4" data-i18n="cards.safety.subtitle">Safety overview (1 minute).</p>
+                <div class="grid gap-3">
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.modules.action1">Start Modules</a>
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.modules.action2">View Module List</a>
+                </div>
             </div>
 
             <div class="section-card card-accent-amber">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
-                            <path d="M20 54V18h24v36"/>
-                            <path d="M20 30h24M20 42h24"/>
-                            <path d="M32 10v8"/>
+                            <rect x="14" y="12" width="36" height="40" rx="6"/>
+                            <path d="M22 24h20M22 32h12"/>
+                            <path d="M26 42l6 6 12-12"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold" data-i18n="cards.howto.title">How to Do Things</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.signoff.title">Acknowledgement & Sign-Off</h3>
                 </div>
-                <div class="video-placeholder" data-i18n="cards.howto.placeholder">Watch 1 minute video</div>
-                <p class="text-gray-400 mt-4" data-i18n="cards.howto.subtitle">How to book inspections (1 minute).</p>
+                <div class="grid gap-3">
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.signoff.action1">Sign Acknowledgement</a>
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.signoff.action2">View Completion Status</a>
+                </div>
             </div>
 
             <div class="section-card card-accent-green">
                 <div class="card-header">
                     <span class="card-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64">
-                            <path d="M14 46l18-18 8 8-18 18z"/>
-                            <path d="M34 18l6-6 12 12-6 6"/>
+                            <path d="M18 18h28v20H18z"/>
+                            <path d="M26 42h12"/>
+                            <path d="M30 26h4"/>
                         </svg>
                     </span>
-                    <h3 class="text-xl font-bold" data-i18n="cards.site.title">Site Entry</h3>
+                    <h3 class="text-xl font-bold" data-i18n="sections.onboarding.title">New Worker Onboarding</h3>
                 </div>
-                <div class="video-placeholder" data-i18n="cards.site.placeholder">Watch 1 minute video</div>
-                <p class="text-gray-400 mt-4" data-i18n="cards.site.subtitle">Site entry rules (1 minute).</p>
+                <div class="grid gap-3">
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.onboarding.action1">Start Induction</a>
+                    <a class="btn btn-outline nav-action text-center" href="#" data-i18n="sections.onboarding.action2">Download PPE Guide</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-5xl mx-auto">
+            <div class="page-header" style="margin-bottom: 24px;">
+                <h2 class="page-title text-2xl" data-i18n="training_videos.title">Training Videos</h2>
+                <p class="page-subtitle" data-i18n="training_videos.subtitle">Auto-play samples until official videos are provided.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="section-card card-accent-blue">
+                    <div class="card-header">
+                        <span class="card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <rect x="12" y="14" width="40" height="30" rx="6"/>
+                                <path d="M28 24l14 8-14 8z"/>
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-bold" data-i18n="training_videos.card1.title">Site Induction</h3>
+                    </div>
+                    <video class="w-full rounded-lg" autoplay muted loop playsinline controls>
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="section-card card-accent-amber">
+                    <div class="card-header">
+                        <span class="card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <rect x="12" y="14" width="40" height="30" rx="6"/>
+                                <path d="M28 24l14 8-14 8z"/>
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-bold" data-i18n="training_videos.card2.title">Safety Basics</h3>
+                    </div>
+                    <video class="w-full rounded-lg" autoplay muted loop playsinline controls>
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="section-card card-accent-green">
+                    <div class="card-header">
+                        <span class="card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <rect x="12" y="14" width="40" height="30" rx="6"/>
+                                <path d="M28 24l14 8-14 8z"/>
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-bold" data-i18n="training_videos.card3.title">Access & Verification</h3>
+                    </div>
+                    <video class="w-full rounded-lg" autoplay muted loop playsinline controls>
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
     </div>

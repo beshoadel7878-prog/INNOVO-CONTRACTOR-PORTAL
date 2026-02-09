@@ -1,4 +1,4 @@
-const THEME_KEY = 'innovo-theme';
+﻿const THEME_KEY = 'innovo-theme';
 const LANGUAGE_KEY = 'innovo-lang';
 const rootElement = document.documentElement;
 const themeToggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
@@ -32,6 +32,10 @@ const translations = {
             "nav.back_home": "العودة للرئيسية",
             "nav.back_dashboard": "العودة للوحة البوابة",
             "nav.main_portal": "البوابة الرئيسية",
+            "nav.site_entry": "دخول الموقع",
+            "nav.documents": "المستندات",
+            "nav.safety": "السلامة",
+            "nav.payment_claims": "المطالبات المالية",
             "nav.choose_language": "اختر اللغة"
         },
         index: {
@@ -40,12 +44,27 @@ const translations = {
             "hero.title_accent": " المقاولين",
             "hero.subtitle": "دليلك الرقمي لدخول الموقع: قواعد السلامة، المستندات، والفيديوهات المهمة.",
             "hero.enter_portal": "دخول البوابة",
-            "hero.payment_claims": "المطالبات المالية"
+            "hero.payment_claims": "المطالبات المالية",
+            "search.title": "ابحث في البوابة",
+            "search.placeholder": "ابحث عن السلامة، المستندات، المطالبات...",
+            "search.button": "بحث",
+            "search.payment_claims": "المطالبات المالية",
+            "section.portal.title": "مناطق البوابة",
+            "section.portal.subtitle": "كل ما تحتاجه للوصول الآمن والمتوافق والسريع للموقع.",
+            "section.portal.site_entry.label": "دخول الموقع",
+            "section.portal.site_entry.title": "قواعد السلامة وخطوات الدخول",
+            "section.portal.site_entry.copy": "أهم القواعد، متطلبات معدات الوقاية، وتعليمات الدخول اليومية.",
+            "section.portal.documents.label": "المستندات",
+            "section.portal.documents.title": "أدلة وتحميلات",
+            "section.portal.documents.copy": "سياسات، نماذج، وقوائم فحص معتمدة جاهزة للاستخدام.",
+            "section.portal.hse.label": "السلامة والصحة",
+            "section.portal.hse.title": "السلامة ودعم الحوادث",
+            "section.portal.hse.copy": "إجراءات، بلاغات، وأفضل ممارسات أثناء العمل في الموقع."
         },
         dashboard: {
             title: "لوحة البوابة الرئيسية | Innovo",
             "header.title": "لوحة البوابة الرئيسية",
-            "header.subtitle": "اختر ما تحتاجه لبدء العمل بأمان. اضغط على البطاقة لفتح الصفحة.",
+            "header.subtitle": "كل ما تحتاجه للعمل بأمان والبقاء على توافق مع Innovo. اضغط على البطاقة لفتح الصفحة.",
             "cards.site_entry.tag": "دخول الموقع",
             "cards.site_entry.title": "دخول الموقع",
             "cards.site_entry.item1": "قواعد السلامة + معدات الوقاية",
@@ -61,16 +80,26 @@ const translations = {
             "cards.documents.item1": "الإجراءات والسياسات",
             "cards.documents.item2": "ملفات PDF ورسومات",
             "cards.documents.item3": "مركز التنزيل",
-            "cards.payment.tag": "المطالبات المالية",
-            "cards.payment.title": "المطالبات المالية",
-            "cards.payment.item1": "الخطوات + المواعيد النهائية",
+            "cards.payment.tag": "المدفوعات",
+            "cards.payment.title": "المدفوعات",
+            "cards.payment.item1": "تقديم مطالبات الدفع",
             "cards.payment.item2": "المستندات المطلوبة",
-            "cards.payment.item3": "رابط النظام (Oracle)",
+            "cards.payment.item3": "مواعيد التسليم النهائية",
             "cards.safety.tag": "السلامة",
             "cards.safety.title": "السلامة",
             "cards.safety.item1": "إجراءات السلامة",
-            "cards.safety.item2": "الإبلاغ عن الحوادث",
-            "cards.safety.item3": "اجتماعات السلامة + افعل/لا تفعل",
+            "cards.safety.item2": "معدات الوقاية المطلوبة",
+            "cards.safety.item3": "الإبلاغ عن الحوادث ومشكلات السلامة",
+            "cards.training.tag": "التدريب",
+            "cards.training.title": "التدريب",
+            "cards.training.item1": "وحدات تدريب قصيرة (2-5 دقائق)",
+            "cards.training.item2": "تتبع الإقرار والتوقيع",
+            "cards.training.item3": "محتوى تعريف العمال الجدد",
+            "cards.issue.tag": "المشكلات والملاحظات",
+            "cards.issue.title": "المشكلات والملاحظات",
+            "cards.issue.item1": "اسأل مدير المشروع/المشرف في Innovo مع صورة",
+            "cards.issue.item2": "مخاوف السلامة المجهولة",
+            "cards.issue.item3": "الإبلاغ السريع عن مشكلات الموقع",
             "cards.quality.tag": "الجودة",
             "cards.quality.title": "متطلبات الجودة",
             "cards.quality.item1": "عملية التفتيش",
@@ -167,6 +196,10 @@ const translations = {
             "sections.procedures.item1": "استخدم الأدوات فقط إذا كنت مدربًا ومصرحًا.",
             "sections.procedures.item2": "التزم بمسارات المرور ومناطق الحظر.",
             "sections.procedures.item3": "أوقف العمل إذا كانت الظروف غير آمنة.",
+            "sections.ppe.title": "معدات الوقاية المطلوبة",
+            "sections.ppe.item1": "خوذة، حذاء أمان، وسترة عاكسة.",
+            "sections.ppe.item2": "قفازات ونظارات حسب المهمة.",
+            "sections.ppe.item3": "حماية السمع في المناطق المزدحمة.",
             "sections.incident.title": "الإبلاغ عن الحوادث",
             "sections.incident.item1": "بلّغ المشرف فورًا.",
             "sections.incident.item2": "أكمل نموذج البلاغ.",
@@ -223,7 +256,7 @@ const translations = {
             title: "الفيديوهات | Innovo",
             "header.title": "الفيديوهات",
             "header.subtitle": "شاهد فيديوهات دقيقة واحدة قبل بدء العمل.",
-            "cards.safety.title": "أساسيات السلامة",
+            "cards.safety.title": "السلامة",
             "cards.safety.placeholder": "شاهد فيديو دقيقة واحدة",
             "cards.safety.subtitle": "نظرة عامة على السلامة (1 دقيقة).",
             "cards.howto.title": "كيفية تنفيذ الأمور",
@@ -232,6 +265,44 @@ const translations = {
             "cards.site.title": "دخول الموقع",
             "cards.site.placeholder": "شاهد فيديو دقيقة واحدة",
             "cards.site.subtitle": "قواعد الدخول للموقع (1 دقيقة)."
+        },
+        training: {
+            title: "التدريب | Innovo",
+            "header.title": "التدريب",
+            "header.subtitle": "وحدات قصيرة، تتبع الإقرار، ومحتوى التعريف.",
+            "sections.modules.title": "وحدات تدريب قصيرة",
+            "sections.modules.action1": "ابدأ الوحدات",
+            "sections.modules.action2": "عرض قائمة الوحدات",
+            "sections.signoff.title": "الإقرار والتوقيع",
+            "sections.signoff.action1": "وقّع الإقرار",
+            "sections.signoff.action2": "عرض حالة الإكمال",
+            "sections.onboarding.title": "تعريف العاملين الجدد",
+            "sections.onboarding.action1": "ابدأ التعريف",
+            "sections.onboarding.action2": "تحميل دليل معدات الوقاية"
+        },
+        training_videos: {
+            "training_videos.title": "فيديوهات التدريب",
+            "training_videos.subtitle": "عينات تعمل تلقائيًا حتى تزويد الفيديوهات الرسمية.",
+            "training_videos.card1.title": "تعريف الموقع",
+            "training_videos.card2.title": "أساسيات السلامة",
+            "training_videos.card3.title": "الدخول والتحقق"
+        },
+        issue_feedback: {
+            title: "المشكلات والملاحظات | Innovo",
+            "header.title": "المشكلات والملاحظات",
+            "header.subtitle": "أرسل الأسئلة، بلّغ عن المشكلات، وارفع المخاوف.",
+            "sections.ask.title": "اسأل مدير المشروع/المشرف",
+            "sections.ask.item1": "أرسل سؤالًا مع صورة.",
+            "sections.ask.item2": "اشرح الموقع والتخصص.",
+            "sections.ask.item3": "احصل على رد بالخطوات التالية.",
+            "sections.anonymous.title": "مخاوف السلامة المجهولة",
+            "sections.anonymous.item1": "بلّغ عن مخاوف السلامة بدون اسمك.",
+            "sections.anonymous.item2": "أضف صورًا إن توفرت.",
+            "sections.anonymous.item3": "فريق السلامة يراجع خلال 24 ساعة.",
+            "sections.report.title": "الإبلاغ عن مشكلات الموقع",
+            "sections.report.item1": "سجّل المشكلات مع الموقع والأولوية.",
+            "sections.report.item2": "أرفق الأدلة لتسريع الحل.",
+            "sections.report.item3": "تابع التحديثات من فريق Innovo."
         },
         documents: {
             title: "المستندات والإرشادات | Innovo",
@@ -282,6 +353,10 @@ const translations = {
             "nav.back_home": "मुखपृष्ठ पर लौटें",
             "nav.back_dashboard": "डैशबोर्ड पर लौटें",
             "nav.main_portal": "मुख्य पोर्टल",
+            "nav.site_entry": "साइट एंट्री",
+            "nav.documents": "डॉक्यूमेंट्स",
+            "nav.safety": "सेफ़्टी",
+            "nav.payment_claims": "पेमेंट क्लेम्स",
             "nav.choose_language": "भाषा चुनें"
         },
         index: {
@@ -290,12 +365,27 @@ const translations = {
             "hero.title_accent": " पोर्टल",
             "hero.subtitle": "साइट में प्रवेश के लिए डिजिटल गाइड: सुरक्षा नियम, दस्तावेज़ और ज़रूरी वीडियो।",
             "hero.enter_portal": "पोर्टल में प्रवेश",
-            "hero.payment_claims": "पेमेंट क्लेम"
+            "hero.payment_claims": "पेमेंट क्लेम",
+            "search.title": "पोर्टल में खोजें",
+            "search.placeholder": "सेफ्टी, डॉक्यूमेंट्स, क्लेम्स खोजें...",
+            "search.button": "खोजें",
+            "search.payment_claims": "पेमेंट क्लेम्स",
+            "section.portal.title": "पोर्टल क्षेत्र",
+            "section.portal.subtitle": "सुरक्षित, अनुपालन और तेज़ साइट एक्सेस के लिए सब कुछ।",
+            "section.portal.site_entry.label": "साइट एंट्री",
+            "section.portal.site_entry.title": "सुरक्षा नियम और एंट्री स्टेप्स",
+            "section.portal.site_entry.copy": "मुख्य नियम, PPE आवश्यकताएँ, और दैनिक प्रवेश निर्देश।",
+            "section.portal.documents.label": "डॉक्यूमेंट्स",
+            "section.portal.documents.title": "गाइड्स और डाउनलोड",
+            "section.portal.documents.copy": "नीतियाँ, फॉर्म्स, और स्वीकृत चेकलिस्ट उपयोग के लिए तैयार।",
+            "section.portal.hse.label": "HSE",
+            "section.portal.hse.title": "सुरक्षा और घटना समर्थन",
+            "section.portal.hse.copy": "प्रक्रियाएँ, रिपोर्टिंग, और ऑन-साइट सर्वोत्तम अभ्यास।"
         },
         dashboard: {
             title: "मुख्य पोर्टल डैशबोर्ड | Innovo",
             "header.title": "मुख्य पोर्टल डैशबोर्ड",
-            "header.subtitle": "काम सुरक्षित शुरू करने के लिए ज़रूरी चीज़ चुनें। कार्ड पर टैप करें।",
+            "header.subtitle": "सुरक्षित रूप से काम करने और Innovo के साथ जुड़े रहने के लिए सब कुछ। पेज खोलने के लिए कार्ड पर टैप करें।",
             "cards.site_entry.tag": "साइट एंट्री",
             "cards.site_entry.title": "साइट एंट्री",
             "cards.site_entry.item1": "सेफ्टी नियम + PPE",
@@ -311,16 +401,26 @@ const translations = {
             "cards.documents.item1": "प्रोसीजर्स + पॉलिसीज़",
             "cards.documents.item2": "PDFs / ड्रॉइंग्स",
             "cards.documents.item3": "डाउनलोड सेंटर",
-            "cards.payment.tag": "पेमेंट क्लेम",
-            "cards.payment.title": "पेमेंट क्लेम",
-            "cards.payment.item1": "स्टेप्स + डेडलाइन्स",
+            "cards.payment.tag": "पेमेंट्स",
+            "cards.payment.title": "पेमेंट्स",
+            "cards.payment.item1": "पेमेंट क्लेम सबमिशन",
             "cards.payment.item2": "ज़रूरी डॉक्यूमेंट्स",
-            "cards.payment.item3": "Oracle/सिस्टम लिंक",
+            "cards.payment.item3": "सबमिशन डेडलाइन्स",
             "cards.safety.tag": "सेफ्टी",
             "cards.safety.title": "सेफ्टी",
-            "cards.safety.item1": "सेफ्टी प्रोसीजर्स",
-            "cards.safety.item2": "इंसिडेंट रिपोर्टिंग",
-            "cards.safety.item3": "टूलबॉक्स टॉक्स + करें/न करें",
+            "cards.safety.item1": "सेफ्टी प्रक्रियाएँ",
+            "cards.safety.item2": "ज़रूरी PPE",
+            "cards.safety.item3": "घटनाओं और सुरक्षा मुद्दों की रिपोर्टिंग",
+            "cards.training.tag": "ट्रेनिंग",
+            "cards.training.title": "ट्रेनिंग",
+            "cards.training.item1": "छोटे ट्रेनिंग मॉड्यूल (2-5 मिनट)",
+            "cards.training.item2": "स्वीकृति और साइन-ऑफ ट्रैकिंग",
+            "cards.training.item3": "नए कर्मचारियों का ऑनबोर्डिंग कंटेंट",
+            "cards.issue.tag": "इश्यू व फीडबैक",
+            "cards.issue.title": "इश्यू व फीडबैक",
+            "cards.issue.item1": "फोटो के साथ Innovo PM/सुपर से पूछें",
+            "cards.issue.item2": "गुमनाम सुरक्षा चिंताएँ",
+            "cards.issue.item3": "साइट इश्यू जल्दी रिपोर्ट करें",
             "cards.quality.tag": "क्वालिटी",
             "cards.quality.title": "क्वालिटी रिक्वायरमेंट्स",
             "cards.quality.item1": "इंस्पेक्शन प्रोसेस",
@@ -417,6 +517,10 @@ const translations = {
             "sections.procedures.item1": "ट्रेंड/ऑथराइज़्ड होने पर ही टूल्स इस्तेमाल करें।",
             "sections.procedures.item2": "ट्रैफिक और एक्सक्लूजन ज़ोन फॉलो करें।",
             "sections.procedures.item3": "अगर स्थिति असुरक्षित लगे तो काम रोकें।",
+            "sections.ppe.title": "ज़रूरी PPE",
+            "sections.ppe.item1": "हार्ड हैट, सेफ्टी बूट और हाई-विज़ वेस्ट।",
+            "sections.ppe.item2": "काम के अनुसार दस्ताने और आई प्रोटेक्शन।",
+            "sections.ppe.item3": "ज़्यादा शोर वाले क्षेत्रों में हियरिंग प्रोटेक्शन।",
             "sections.incident.title": "इंसिडेंट रिपोर्टिंग",
             "sections.incident.item1": "तुरंत सुपरवाइज़र को रिपोर्ट करें।",
             "sections.incident.item2": "इंसिडेंट रिपोर्ट फॉर्म भरें।",
@@ -473,7 +577,7 @@ const translations = {
             title: "वीडियो | Innovo",
             "header.title": "वीडियो",
             "header.subtitle": "काम शुरू करने से पहले 1 मिनट के वीडियो देखें।",
-            "cards.safety.title": "सेफ्टी बेसिक्स",
+            "cards.safety.title": "सेफ्टी",
             "cards.safety.placeholder": "1 मिनट का वीडियो देखें",
             "cards.safety.subtitle": "सेफ्टी ओवरव्यू (1 मिनट)।",
             "cards.howto.title": "काम कैसे करें",
@@ -482,6 +586,44 @@ const translations = {
             "cards.site.title": "साइट एंट्री",
             "cards.site.placeholder": "1 मिनट का वीडियो देखें",
             "cards.site.subtitle": "साइट एंट्री नियम (1 मिनट)।"
+        },
+        training: {
+            title: "ट्रेनिंग | Innovo",
+            "header.title": "ट्रेनिंग",
+            "header.subtitle": "छोटे मॉड्यूल, साइन-ऑफ ट्रैकिंग और ऑनबोर्डिंग कंटेंट।",
+            "sections.modules.title": "छोटे ट्रेनिंग मॉड्यूल",
+            "sections.modules.action1": "मॉड्यूल शुरू करें",
+            "sections.modules.action2": "मॉड्यूल लिस्ट देखें",
+            "sections.signoff.title": "स्वीकृति और साइन-ऑफ",
+            "sections.signoff.action1": "स्वीकृति पर साइन करें",
+            "sections.signoff.action2": "कम्प्लीशन स्टेटस देखें",
+            "sections.onboarding.title": "नए कर्मचारियों का ऑनबोर्डिंग",
+            "sections.onboarding.action1": "इंडक्शन शुरू करें",
+            "sections.onboarding.action2": "PPE गाइड डाउनलोड करें"
+        },
+        training_videos: {
+            "training_videos.title": "ट्रेनिंग वीडियो",
+            "training_videos.subtitle": "आधिकारिक वीडियो मिलने तक ऑटो-प्ले सैंपल्स।",
+            "training_videos.card1.title": "साइट इंडक्शन",
+            "training_videos.card2.title": "सेफ्टी बेसिक्स",
+            "training_videos.card3.title": "एक्सेस व वेरिफिकेशन"
+        },
+        issue_feedback: {
+            title: "इश्यू व फीडबैक | Innovo",
+            "header.title": "इश्यू व फीडबैक",
+            "header.subtitle": "सवाल भेजें, समस्याएं रिपोर्ट करें, और चिंताएँ उठाएं।",
+            "sections.ask.title": "Innovo PM/सुपर से पूछें",
+            "sections.ask.item1": "फोटो के साथ सवाल भेजें।",
+            "sections.ask.item2": "लोकेशन और ट्रेड बताएं।",
+            "sections.ask.item3": "अगले स्टेप्स के साथ जवाब पाएं।",
+            "sections.anonymous.title": "गुमनाम सेफ्टी चिंताएँ",
+            "sections.anonymous.item1": "नाम बताए बिना सेफ्टी चिंताएँ उठाएं।",
+            "sections.anonymous.item2": "अगर उपलब्ध हो तो फोटो जोड़ें।",
+            "sections.anonymous.item3": "सेफ्टी टीम 24 घंटे में रिव्यू करती है।",
+            "sections.report.title": "साइट इश्यू रिपोर्ट करें",
+            "sections.report.item1": "लोकेशन और प्रायोरिटी के साथ इश्यू लॉग करें।",
+            "sections.report.item2": "तेज़ समाधान के लिए सबूत जोड़ें।",
+            "sections.report.item3": "Innovo टीम से अपडेट्स ट्रैक करें।"
         },
         documents: {
             title: "डॉक्यूमेंट्स व गाइड्स | Innovo",
@@ -698,6 +840,20 @@ if (languageOverlay) {
 const lightPointer = document.getElementById('light-pointer');
 const iconCards = Array.from(document.querySelectorAll('.icon-card'));
 
+// Auto-focus safety panels on hover/touch
+const stripPanels = Array.from(document.querySelectorAll('.panel-stack .strip-panel'));
+if (stripPanels.length) {
+    const container = stripPanels[0].parentElement;
+    const scrollToPanel = (panel) => {
+        if (!panel || !container) return;
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    };
+    stripPanels.forEach((panel) => {
+        panel.addEventListener('mouseenter', () => scrollToPanel(panel));
+        panel.addEventListener('touchstart', () => scrollToPanel(panel), { passive: true });
+    });
+}
+
 let targetX = 0;
 let targetY = 0;
 let currentX = 0;
@@ -731,6 +887,131 @@ window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
     document.documentElement.style.setProperty('--scroll-y', scrollY);
 });
+
+const siteHeader = document.getElementById('site-header');
+const mobileToggle = document.querySelector('[data-menu-toggle]');
+const mobilePanel = document.getElementById('mobile-panel');
+const searchOpens = Array.from(document.querySelectorAll('[data-search-open]'));
+const searchClose = document.querySelector('[data-search-close]');
+const searchOverlay = document.getElementById('search-overlay');
+const searchResults = document.getElementById('search-results');
+
+function updateHeaderState() {
+    if (!siteHeader) return;
+    if (window.scrollY > 10) {
+        siteHeader.classList.add('scrolled');
+    } else {
+        siteHeader.classList.remove('scrolled');
+    }
+}
+
+if (siteHeader) {
+    updateHeaderState();
+    window.addEventListener('scroll', updateHeaderState, { passive: true });
+}
+
+if (mobileToggle && mobilePanel) {
+    mobileToggle.addEventListener('click', () => {
+        mobilePanel.classList.toggle('open');
+    });
+}
+
+function openSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.add('show');
+    searchOverlay.setAttribute('aria-hidden', 'false');
+    const input = searchOverlay.querySelector('input[type="search"]');
+    if (input) {
+        setTimeout(() => input.focus(), 50);
+    }
+}
+
+function closeSearch() {
+    if (!searchOverlay) return;
+    searchOverlay.classList.remove('show');
+    searchOverlay.setAttribute('aria-hidden', 'true');
+}
+
+if (searchOpens.length) {
+    searchOpens.forEach((btn) => btn.addEventListener('click', openSearch));
+}
+
+if (searchClose) {
+    searchClose.addEventListener('click', closeSearch);
+}
+
+if (searchOverlay) {
+    const searchForm = searchOverlay.querySelector('.search-form');
+    const searchInput = searchOverlay.querySelector('input[type="search"]');
+
+    function buildSearchIndex() {
+        const nodes = Array.from(document.querySelectorAll('a, h1, h2, h3, h4, h5, p, li'));
+        return nodes
+            .map((node) => {
+                const text = (node.textContent || '').trim();
+                if (!text) return null;
+                const href = node.tagName.toLowerCase() === 'a' ? node.getAttribute('href') : null;
+                return { text, href };
+            })
+            .filter(Boolean);
+    }
+
+    const searchIndex = buildSearchIndex();
+
+    function renderResults(query) {
+        if (!searchResults || !query) {
+            if (searchResults) searchResults.innerHTML = '';
+            return;
+        }
+        const q = query.toLowerCase();
+        const matches = searchIndex
+            .filter((item) => item.text.toLowerCase().includes(q))
+            .slice(0, 12);
+
+        if (!matches.length) {
+            searchResults.innerHTML = `<div class="search-result">No results found.</div>`;
+            return;
+        }
+
+        searchResults.innerHTML = matches
+            .map((item) => {
+                const display = item.text.length > 120 ? `${item.text.slice(0, 117)}...` : item.text;
+                if (item.href) {
+                    return `<div class="search-result"><a href="${item.href}">${display}</a><small>${item.href}</small></div>`;
+                }
+                return `<div class="search-result">${display}</div>`;
+            })
+            .join('');
+    }
+
+    if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            renderResults(searchInput.value.trim());
+        });
+        searchInput.addEventListener('input', () => {
+            renderResults(searchInput.value.trim());
+        });
+    }
+
+    searchOverlay.addEventListener('click', (event) => {
+        if (event.target === searchOverlay) {
+            closeSearch();
+        }
+    });
+
+    const suggestionButtons = Array.from(searchOverlay.querySelectorAll('.search-suggestions button'));
+    suggestionButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const input = searchOverlay.querySelector('input[type="search"]');
+            if (input) {
+                input.value = button.textContent || '';
+                input.focus();
+                renderResults(input.value.trim());
+            }
+        });
+    });
+}
 
 function updateIconParallax() {
     if (!iconCards.length) return;
@@ -796,4 +1077,7 @@ window.onload = () => {
         });
     }
 };
+
+
+
 
