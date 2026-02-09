@@ -416,8 +416,13 @@ nav {
     padding: 10px;
     display: grid;
     gap: 6px;
+    grid-auto-flow: row;
     z-index: 10;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lang-switch:not([open]) .lang-menu {
+    display: none;
 }
 
 .lang-menu a {
@@ -645,6 +650,19 @@ nav {
 .panel-stack::-webkit-scrollbar-thumb {
     background: rgba(15, 23, 42, 0.2);
     border-radius: 999px;
+}
+
+.panel-stack-vertical {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    overflow: visible;
+    scroll-snap-type: none;
+}
+
+.panel-stack-vertical .strip-panel {
+    min-width: 100%;
+    max-width: none;
 }
 
 .strip-panel {
@@ -927,6 +945,10 @@ nav {
     justify-content: flex-end;
 }
 
+.glow-logo {
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.4));
+}
+
 .page-header {
     text-align: center;
     padding: 70px 20px 30px;
@@ -1061,6 +1083,196 @@ nav {
         width: 100%;
         text-align: center;
     }
+
+    .page-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo-link {
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .nav-actions {
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+.nav-actions .btn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+}
+
+.issue-action {
+    cursor: pointer;
+}
+
+.issue-action.action-pressed {
+    animation: pulse-action 0.35s ease;
+}
+
+@keyframes pulse-action {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(37, 99, 235, 0.0); }
+    50% { transform: scale(1.05); box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25); }
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(37, 99, 235, 0.0); }
+}
+
+.action-form {
+    margin-top: 10px;
+    display: grid;
+    gap: 10px;
+}
+
+.action-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-name {
+    font-weight: 600;
+    color: var(--muted);
+    min-height: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-input {
+    width: 0;
+}
+
+.action-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.action-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px 20px 18px 20px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 18px 34px rgba(15, 23, 42, 0.10);
+    display: grid;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.action-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.action-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: #0f172a;
+    background: rgba(15, 23, 42, 0.06);
+}
+
+.action-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+.action-kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+    color: rgba(15, 23, 42, 0.65);
+}
+
+.action-card h3 {
+    margin: 2px 0 4px;
+    font-size: 1.05rem;
+    color: #0b132b;
+}
+
+.action-text {
+    margin: 0;
+    color: rgba(15, 23, 42, 0.8);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: grid;
+    gap: 10px;
+}
+
+.upload-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: 1px dashed rgba(148, 163, 184, 0.7);
+    background: rgba(248, 250, 252, 0.9);
+    font-weight: 600;
+    color: rgba(15, 23, 42, 0.85);
+    cursor: pointer;
+}
+
+.upload-chip input {
+    display: none;
+}
+
+.action-blue .action-icon {
+    color: #1d4ed8;
+    background: rgba(37, 99, 235, 0.12);
+}
+
+.action-amber .action-icon {
+    color: #d97706;
+    background: rgba(251, 191, 36, 0.14);
+}
+
+.action-green .action-icon {
+    color: #0f9a5f;
+    background: rgba(16, 185, 129, 0.14);
+}
+
+.action-card .btn-primary {
+    letter-spacing: 0.08em;
+    font-weight: 800;
+}
+
+.action-blue {
+    --card-border: rgba(37, 99, 235, 0.3);
+}
+
+.action-amber {
+    --card-border: rgba(217, 119, 6, 0.35);
+}
+
+.action-green {
+    --card-border: rgba(16, 185, 129, 0.32);
+}
+
+.action-text {
+    font-weight: 600;
+    color: var(--text);
+}
 }
 
 @media (min-width: 900px) {

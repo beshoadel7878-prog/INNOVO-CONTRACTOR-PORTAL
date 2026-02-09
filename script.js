@@ -290,7 +290,7 @@ const translations = {
         issue_feedback: {
             title: "المشكلات والملاحظات | Innovo",
             "header.title": "المشكلات والملاحظات",
-            "header.subtitle": "أرسل الأسئلة، بلّغ عن المشكلات، وارفع المخاوف.",
+            "header.subtitle": "أرسل الأسئلة، بلّغ عن المشكلات، وارفع المخاوف مباشرة إلى فريق Innovo.",
             "sections.ask.title": "اسأل مدير المشروع/المشرف",
             "sections.ask.item1": "أرسل سؤالًا مع صورة.",
             "sections.ask.item2": "اشرح الموقع والتخصص.",
@@ -611,7 +611,7 @@ const translations = {
         issue_feedback: {
             title: "इश्यू व फीडबैक | Innovo",
             "header.title": "इश्यू व फीडबैक",
-            "header.subtitle": "सवाल भेजें, समस्याएं रिपोर्ट करें, और चिंताएँ उठाएं।",
+            "header.subtitle": "Innovo टीम को सीधे सवाल, समस्याएँ और चिंताएँ भेजें।",
             "sections.ask.title": "Innovo PM/सुपर से पूछें",
             "sections.ask.item1": "फोटो के साथ सवाल भेजें।",
             "sections.ask.item2": "लोकेशन और ट्रेड बताएं।",
@@ -755,28 +755,8 @@ function hideLanguageOverlay() {
 }
 
 function ensureLanguageOverlay() {
-    if (languageOverlay) return;
-
-    const overlay = document.createElement('div');
-    overlay.className = 'language-overlay';
-    overlay.id = 'language-overlay';
-    overlay.setAttribute('aria-hidden', 'true');
-    overlay.innerHTML = `
-        <div class="language-modal" role="dialog" aria-labelledby="language-title" aria-modal="true">
-            <p class="language-eyebrow">Subcontractor Portal (QR)</p>
-            <h2 class="language-title" id="language-title">Choose your preferred language</h2>
-            <p class="language-subtitle">Select a language to open the portal.</p>
-            <div class="language-grid">
-                <a class="language-btn" href="#" data-language-select data-lang="en">English</a>
-                <a class="language-btn" href="#" data-language-select data-lang="ar">Arabic</a>
-                <a class="language-btn" href="#" data-language-select data-lang="hi">Hindi</a>
-                <a class="language-btn" href="lang-ur.html">Urdu</a>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
-    languageOverlay = overlay;
-    languageLinks = Array.from(document.querySelectorAll('[data-language-select]'));
+    languageOverlay = document.getElementById('language-overlay');
+    languageLinks = Array.from(document.querySelectorAll('[data-language-select], .lang-menu a[data-lang]'));
 }
 
 ensureLanguageOverlay();
@@ -784,57 +764,33 @@ ensureLanguageOverlay();
 const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
 setLanguage(savedLanguage || 'en');
 
-if (languageOverlay) {
-    if (isHomePage()) {
-        languageShowTimer = setTimeout(showLanguageOverlay, 300);
-    }
-
+if (languageLinks.length) {
     languageLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
+            event.preventDefault();
             if (languageShowTimer) {
                 clearTimeout(languageShowTimer);
                 languageShowTimer = null;
             }
-            event.preventDefault();
-            const selectedLang = link.getAttribute('data-lang');
-            if (selectedLang) {
-                setLanguage(selectedLang);
-            }
-            hideLanguageOverlay();
-        });
-    });
-
-    const navActions = document.querySelector('.page-nav .nav-actions');
-    if (navActions && !navActions.querySelector('.lang-switch')) {
-        const langSwitch = document.createElement('details');
-        langSwitch.className = 'lang-switch';
-        langSwitch.innerHTML = `
-            <summary class="btn btn-outline nav-action" data-i18n="nav.choose_language">Choose Language</summary>
-            <div class="lang-menu">
-                <a href="#" data-lang="en">English</a>
-                <a href="#" data-lang="ar">Arabic</a>
-                <a href="#" data-lang="hi">Hindi</a>
-                <a href="lang-ur.html">Urdu</a>
-            </div>
-        `;
-        navActions.insertBefore(langSwitch, navActions.firstChild);
-        applyTranslations(rootElement.lang || 'en');
-    }
-
-    const langMenuLinks = Array.from(document.querySelectorAll('.lang-menu a[data-lang]'));
-    langMenuLinks.forEach((link) => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const lang = link.getAttribute('data-lang');
+            const lang = link.getAttribute('data-lang') || link.dataset.lang;
             if (lang) {
                 setLanguage(lang);
-                const details = link.closest('details');
-                if (details) {
-                    details.removeAttribute('open');
-                }
+            }
+            const details = link.closest('details');
+            if (details) {
+                details.removeAttribute('open');
+            }
+            if (languageOverlay) {
+                hideLanguageOverlay();
             }
         });
     });
+}
+
+if (languageOverlay) {
+    if (isHomePage()) {
+        languageShowTimer = setTimeout(showLanguageOverlay, 300);
+    }
 }
 
 const lightPointer = document.getElementById('light-pointer');
@@ -851,6 +807,44 @@ if (stripPanels.length) {
     stripPanels.forEach((panel) => {
         panel.addEventListener('mouseenter', () => scrollToPanel(panel));
         panel.addEventListener('touchstart', () => scrollToPanel(panel), { passive: true });
+    });
+}
+
+// Issue actions interaction
+const issueActions = Array.from(document.querySelectorAll('.issue-action'));
+const isIssueFeedbackPage = document.body?.dataset?.page === 'issue_feedback';
+if (issueActions.length && !isIssueFeedbackPage) {
+    issueActions.forEach((action) => {
+        action.addEventListener('click', (e) => {
+            e.preventDefault();
+            action.classList.remove('action-pressed');
+            void action.offsetWidth; // restart animation
+            action.classList.add('action-pressed');
+            const form = action.closest('.section-card')?.querySelector('.action-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                const input = form.querySelector('input, textarea');
+                if (input) input.focus({ preventScroll: true });
+            }
+        });
+    });
+}
+
+// Custom file triggers for issue forms
+const fileTriggers = Array.from(document.querySelectorAll('.file-trigger'));
+if (fileTriggers.length) {
+    fileTriggers.forEach((trigger) => {
+        const inputId = trigger.dataset.input;
+        const input = document.getElementById(inputId);
+        const fileNameEl = document.getElementById(`${inputId}-name`);
+        if (!input) return;
+        trigger.addEventListener('click', () => input.click());
+        input.addEventListener('change', () => {
+            if (fileNameEl) {
+                const name = input.files && input.files.length ? input.files[0].name : '';
+                fileNameEl.textContent = name;
+            }
+        });
     });
 }
 
