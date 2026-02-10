@@ -38,7 +38,7 @@
             padding: 0;
         }
 
-        /* Navigation Bar - Same as Safety page */
+        /* Navigation Bar */
         .page-nav {
             position: relative;
             display: flex;
@@ -120,10 +120,6 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 14px 30px rgba(37, 99, 235, 0.3);
-        }
-
-        .w-full {
-            width: 100%;
         }
 
         /* FormSubmit Styles */
@@ -450,28 +446,6 @@
             line-height: 1.5;
         }
 
-        .action-text {
-            color: var(--text);
-            font-size: 0.95rem;
-            margin: 12px 0;
-            padding-left: 0.5rem;
-            position: relative;
-        }
-
-        .action-text::before {
-            content: '•';
-            color: var(--card-color);
-            position: absolute;
-            left: 0;
-        }
-
-        .action-buttons {
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
         /* Success Message */
         .success-message {
             position: fixed;
@@ -604,7 +578,7 @@
         })();
     </script>
 
-    <!-- Navigation Bar - Same as Safety page -->
+    <!-- Navigation Bar -->
     <div class="page-nav">
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
@@ -620,7 +594,7 @@
                     <a href="#" data-language-select data-lang="en">ENGLISH</a>
                     <a href="#" data-language-select data-lang="ar">ARABIC</a>
                     <a href="#" data-language-select data-lang="hi">HINDI</a>
-                    <a href="lang-ur.html">URDU</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
                 </div>
             </details>
             <button type="button" class="btn btn-outline theme-toggle nav-action" data-theme-toggle>Dark Mode</button>
@@ -647,7 +621,6 @@
                 <input type="hidden" name="_subject" value="Innovo Portal: Ask PM/Supervisor">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html">
                 <input type="hidden" name="form_type" value="ask_pm">
                 
                 <div class="action-top">
@@ -704,7 +677,6 @@
                 <input type="hidden" name="_subject" value="Innovo Portal: Anonymous Safety Concern">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html">
                 <input type="hidden" name="form_type" value="anonymous_safety">
                 
                 <div class="action-top">
@@ -758,7 +730,6 @@
                 <input type="hidden" name="_subject" value="Innovo Portal: Site Issue Report">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html">
                 <input type="hidden" name="form_type" value="site_issue">
                 
                 <div class="action-top">
@@ -826,6 +797,31 @@
     </div>
 
     <script>
+        // Theme toggle functionality
+        document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+            button.addEventListener('click', function() {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                html.style.colorScheme = newTheme;
+                localStorage.setItem('innovo-theme', newTheme);
+                
+                // Update button text
+                this.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            });
+        });
+
+        // Update theme toggle button text on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const themeButtons = document.querySelectorAll('[data-theme-toggle]');
+            themeButtons.forEach(button => {
+                button.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            });
+        });
+
         // File upload feedback
         const fileInputs = [
             { input: 'pm_photos', display: 'pm_files' },
@@ -922,6 +918,5 @@
             });
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
