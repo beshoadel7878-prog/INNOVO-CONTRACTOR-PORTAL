@@ -6,6 +6,7 @@
     <title>Issue & Feedback | Innovo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* All CSS styles remain exactly the same */
         :root {
             --bg: #f4f6fb;
             --bg-alt: #ffffff;
@@ -38,7 +39,6 @@
             padding: 0;
         }
 
-        /* Navigation Bar */
         .page-nav {
             position: relative;
             display: flex;
@@ -122,7 +122,6 @@
             box-shadow: 0 14px 30px rgba(37, 99, 235, 0.3);
         }
 
-        /* FormSubmit Notice */
         .formsubmit-notice {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -141,7 +140,6 @@
             font-weight: bold;
         }
 
-        /* Language Switch Styles */
         .lang-switch {
             position: relative;
         }
@@ -204,7 +202,6 @@
             background: rgba(59, 130, 246, 0.1);
         }
 
-        /* Page Header */
         .page-header {
             text-align: center;
             padding: 70px 20px 30px;
@@ -223,7 +220,6 @@
             font-size: clamp(1rem, 4vw, 1.2rem);
         }
 
-        /* Content Section */
         .content-section {
             padding: 40px 20px;
             background: var(--bg);
@@ -241,7 +237,6 @@
             margin-right: auto;
         }
 
-        /* Action Grid */
         .action-grid {
             display: grid;
             gap: 24px;
@@ -253,7 +248,6 @@
             }
         }
 
-        /* Action Card */
         .action-card {
             position: relative;
             padding: 32px;
@@ -273,7 +267,6 @@
             box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45), 0 0 30px var(--card-glow, rgba(0, 74, 173, 0.35));
         }
 
-        /* Form Elements Inside Cards */
         .form-card {
             display: flex;
             flex-direction: column;
@@ -321,7 +314,6 @@
             cursor: pointer;
         }
 
-        /* File Upload */
         .file-upload-wrapper {
             display: flex;
             flex-direction: column;
@@ -380,7 +372,6 @@
             min-height: 20px;
         }
 
-        /* Card Colors */
         .action-blue {
             --card-color: #60a5fa;
             --card-bg: rgba(59, 130, 246, 0.18);
@@ -446,7 +437,6 @@
             line-height: 1.5;
         }
 
-        /* Success Message */
         .success-message {
             position: fixed;
             top: 20px;
@@ -456,6 +446,20 @@
             padding: 15px 20px;
             border-radius: 10px;
             box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        .error-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
             z-index: 1000;
             animation: slideIn 0.3s ease;
             display: none;
@@ -472,7 +476,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .page-nav {
                 padding: 20px 16px;
@@ -543,7 +546,6 @@
             }
         }
 
-        /* Animation */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -616,11 +618,10 @@
         <div class="max-w-5xl mx-auto action-grid">
 
             <!-- Ask PM/Supervisor Form - Formspree Endpoint -->
-            <form class="action-card action-blue form-card" method="POST" enctype="multipart/form-data"
+            <form class="action-card action-blue form-card formspree-form" method="POST" enctype="multipart/form-data"
                   action="https://formspree.io/f/xgolvbpe">
                 <input type="hidden" name="_subject" value="Innovo Portal: Ask PM/Supervisor">
-                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
-                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
+                <input type="hidden" name="_cc" value="i-beshoy.mesaha@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -632,6 +633,13 @@
                         <h3>Ask an Innovo PM / Supervisor</h3>
                         <p class="action-desc">Get expert guidance and answers to your project questions</p>
                     </div>
+                </div>
+
+                <!-- Email field required by Formspree -->
+                <div class="form-group">
+                    <label for="email_pm">Your Email (required for response) *</label>
+                    <input type="email" id="email_pm" name="email" class="form-control" 
+                           placeholder="your.email@example.com" required>
                 </div>
 
                 <div class="form-group">
@@ -671,11 +679,10 @@
             </form>
 
             <!-- Anonymous Safety Concerns Form - Formspree Endpoint -->
-            <form class="action-card action-amber form-card" method="POST" enctype="multipart/form-data"
+            <form class="action-card action-amber form-card formspree-form" method="POST" enctype="multipart/form-data"
                   action="https://formspree.io/f/xpqjweow">
                 <input type="hidden" name="_subject" value="Innovo Portal: Anonymous Safety Concern">
-                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
-                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
+                <input type="hidden" name="_cc" value="i-beshoy.mesaha@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -691,6 +698,9 @@
                     </div>
                 </div>
 
+                <!-- Hidden email field for anonymous reports -->
+                <input type="hidden" name="email" value="anonymous@innovogroup.com">
+                
                 <div class="form-group">
                     <label for="safety_issue">Safety Concern Description *</label>
                     <textarea id="safety_issue" name="safety_issue" class="form-control" placeholder="Describe the safety concern in detail..." required></textarea>
@@ -723,11 +733,10 @@
             </form>
 
             <!-- Report Site Issues Form - Formspree Endpoint -->
-            <form class="action-card action-green form-card" method="POST" enctype="multipart/form-data"
+            <form class="action-card action-green form-card formspree-form" method="POST" enctype="multipart/form-data"
                   action="https://formspree.io/f/xeelowry">
                 <input type="hidden" name="_subject" value="Innovo Portal: Site Issue Report">
-                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
-                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
+                <input type="hidden" name="_cc" value="i-beshoy.mesaha@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -741,6 +750,13 @@
                         <h3>Report Site Issues</h3>
                         <p class="action-desc">Document and track site-related issues for quick resolution</p>
                     </div>
+                </div>
+
+                <!-- Email field required by Formspree -->
+                <div class="form-group">
+                    <label for="email_site">Your Email (required for updates) *</label>
+                    <input type="email" id="email_site" name="email" class="form-control" 
+                           placeholder="your.email@example.com" required>
                 </div>
 
                 <div class="form-group">
@@ -791,6 +807,11 @@
     <!-- Success Message -->
     <div id="successMessage" class="success-message">
         <strong>✓ Submitted Successfully!</strong> Your feedback has been sent to the Innovo team. You will receive a confirmation email.
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage" class="error-message">
+        <strong>✗ Submission Failed!</strong> Please check your connection and try again.
     </div>
 
     <script>
@@ -846,22 +867,22 @@
             }
         });
 
-        // Form submission handling لـ Formspree
-        document.querySelectorAll('form').forEach(form => {
+        // Form submission handling for Formspree forms ONLY
+        document.querySelectorAll('.formspree-form').forEach(form => {
             form.addEventListener('submit', async function(e) {
-                e.preventDefault(); // منع الإرسال الافتراضي
+                e.preventDefault(); // Prevent default form submission
                 
                 const submitBtn = this.querySelector('.issue-action');
                 const formData = new FormData(this);
                 
                 if (submitBtn) {
-                    // حفظ النص الأصلي للزر
+                    // Save original button text
                     const originalText = submitBtn.textContent;
                     submitBtn.textContent = 'Submitting...';
                     submitBtn.disabled = true;
                     
                     try {
-                        // إرسال البيانات إلى Formspree
+                        // Send data to Formspree
                         const response = await fetch(this.action, {
                             method: 'POST',
                             body: formData,
@@ -870,36 +891,91 @@
                             }
                         });
                         
+                        // Formspree returns 200 OK even on validation errors
+                        // So we check response.ok which is true for 200-299
                         if (response.ok) {
-                            // إظهار رسالة النجاح
-                            const successMsg = document.getElementById('successMessage');
-                            if (successMsg) {
-                                successMsg.style.display = 'block';
+                            try {
+                                const result = await response.json();
+                                
+                                // Some Formspree endpoints return empty object {}
+                                // So we don't check for result.success
+                                
+                                // Show success message
+                                const successMsg = document.getElementById('successMessage');
+                                if (successMsg) {
+                                    successMsg.style.display = 'block';
+                                    setTimeout(() => {
+                                        successMsg.style.display = 'none';
+                                    }, 5000);
+                                }
+                                
+                                // Reset form
+                                this.reset();
+                                
+                                // Reset file names
+                                fileInputs.forEach(item => {
+                                    const display = document.getElementById(item.display);
+                                    if (display) display.textContent = '';
+                                });
+                                
+                                // Additional confirmation message
+                                alert('Thank you! Your submission has been received. You will receive a confirmation email in English from Innovo Team.');
+                                
+                            } catch (jsonError) {
+                                // Formspree might return empty response or non-JSON
+                                // Still treat as success if response was ok
+                                const successMsg = document.getElementById('successMessage');
+                                if (successMsg) {
+                                    successMsg.style.display = 'block';
+                                    setTimeout(() => {
+                                        successMsg.style.display = 'none';
+                                    }, 5000);
+                                }
+                                
+                                // Reset form
+                                this.reset();
+                                
+                                // Reset file names
+                                fileInputs.forEach(item => {
+                                    const display = document.getElementById(item.display);
+                                    if (display) display.textContent = '';
+                                });
+                                
+                                alert('Thank you! Your submission has been sent successfully.');
+                            }
+                            
+                        } else {
+                            // Handle HTTP errors (400, 500, etc.)
+                            const errorMsg = document.getElementById('errorMessage');
+                            if (errorMsg) {
+                                errorMsg.style.display = 'block';
                                 setTimeout(() => {
-                                    successMsg.style.display = 'none';
+                                    errorMsg.style.display = 'none';
                                 }, 5000);
                             }
                             
-                            // إعادة تعيين النموذج
-                            this.reset();
-                            
-                            // إعادة تعيين أسماء الملفات
-                            fileInputs.forEach(item => {
-                                const display = document.getElementById(item.display);
-                                if (display) display.textContent = '';
-                            });
-                            
-                            // رسالة تأكيد إضافية
-                            alert('Thank you! Your submission has been received. You will receive a confirmation email in English from Innovo Team.');
-                            
-                        } else {
-                            alert('There was an error submitting your form. Please try again.');
+                            try {
+                                const errorResult = await response.json();
+                                console.error('Formspree error:', errorResult);
+                                alert('Submission failed. Error: ' + (errorResult.error || 'Please check your input and try again.'));
+                            } catch {
+                                alert('Submission failed. Please check your connection and try again.');
+                            }
                         }
                     } catch (error) {
+                        // Network error or fetch failed
+                        const errorMsg = document.getElementById('errorMessage');
+                        if (errorMsg) {
+                            errorMsg.style.display = 'block';
+                            setTimeout(() => {
+                                errorMsg.style.display = 'none';
+                            }, 5000);
+                        }
+                        
+                        console.error('Network error:', error);
                         alert('Network error. Please check your connection and try again.');
-                        console.error('Form submission error:', error);
                     } finally {
-                        // إعادة تعيين الزر بعد 2 ثانية
+                        // Reset button after 2 seconds
                         setTimeout(() => {
                             submitBtn.textContent = originalText;
                             submitBtn.disabled = false;
@@ -942,6 +1018,18 @@
                 }
             });
         });
+
+        // Debug function to test Formspree endpoints
+        function testFormspreeEndpoints() {
+            console.log('Formspree Endpoints Configuration:');
+            console.log('1. Ask PM/Supervisor: https://formspree.io/f/xgolvbpe');
+            console.log('2. Anonymous Safety: https://formspree.io/f/xpqjweow');
+            console.log('3. Report Site Issues: https://formspree.io/f/xeelowry');
+            console.log('All forms CC to: i-beshoy.mesaha@innovogroup.com');
+        }
+        
+        // Run debug on page load
+        window.addEventListener('load', testFormspreeEndpoints);
     </script>
 </body>
 </html>
