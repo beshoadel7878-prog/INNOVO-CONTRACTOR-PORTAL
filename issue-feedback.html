@@ -68,15 +68,15 @@
             border-radius: 6px;
         }
 
-        [data-theme="dark"] .logo-img {
-            background: transparent;
-            padding: 0;
-            box-shadow: none;
-            filter: brightness(3.6) contrast(2) saturate(0)
-                drop-shadow(0 0 3px rgba(255, 255, 255, 1))
-                drop-shadow(0 0 12px rgba(255, 255, 255, 0.9))
-                drop-shadow(0 0 26px rgba(255, 255, 255, 0.65));
-        }
+       [data-theme="dark"] .logo-link {  
+         background: transparent;
+         padding: 0;
+         box-shadow: none;
+         filter: brightness(3.6) contrast(2) saturate(0)
+        drop-shadow(0 0 3px rgba(255, 255, 255, 1))
+        drop-shadow(0 0 12px rgba(255, 255, 255, 0.9))
+        drop-shadow(0 0 26px rgba(255, 255, 255, 0.65));
+       }
 
         .nav-actions {
             display: flex;
@@ -609,10 +609,10 @@
         <p class="page-subtitle" data-i18n="header.subtitle">Send questions, report issues, and raise concerns directly to the Innovo team.</p>
     </div>
 
-    <!-- Formspree Notice -->
     <div class="formsubmit-notice mx-auto">
-        <strong>Powered by Formspree:</strong> All submissions are securely sent via Formspree. You will receive a confirmation email in English after submission.
+    <strong data-i18n="notice.safety">Your safety is our top priority. If you have any concerns, issues, or questions, please don’t hesitate to reach out.</strong>
     </div>
+
 
     <div class="content-section">
         <div class="max-w-5xl mx-auto action-grid">
@@ -623,183 +623,179 @@
                 <input type="hidden" name="_subject" value="Innovo Portal: Ask PM/Supervisor">
                 <input type="hidden" name="_to" value="i-beshoy.mesaha@innovogroup.com">
                 
-                <div class="action-top">
-                    <div class="action-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3>Ask an Innovo PM / Supervisor</h3>
-                        <p class="action-desc">Get expert guidance and answers to your project questions</p>
-                    </div>
+            <div class="action-top">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
                 </div>
-
-                <!-- Email field required by Formspree -->
-                <div class="form-group">
-                    <label for="email_pm">Your Email (required for response) *</label>
-                    <input type="email" id="email_pm" name="email" class="form-control" 
-                           placeholder="your.email@example.com" required>
+                <div>
+                    <h3 data-i18n="sections.ask.title">Ask an Innovo PM / Supervisor</h3>
+                    <p class="action-desc" data-i18n="sections.ask.desc">Get expert guidance and answers to your project questions</p>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="question">Your Question *</label>
-                    <textarea id="question" name="question" class="form-control" placeholder="Describe your question in detail..." required></textarea>
-                </div>
+            <!-- Email field required by Formspree -->
+            <div class="form-group">
+                <label for="email_pm" data-i18n="sections.ask.email.label">Your Email (required for response) *</label>
+                <input type="email" id="email_pm" name="email" class="form-control" 
+                       placeholder="your.email@example.com" required data-i18n-placeholder="sections.ask.email.placeholder">
+            </div>
 
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text" id="location" name="location" class="form-control" placeholder="Site location or area">
-                </div>
+            <div class="form-group">
+                <label for="question" data-i18n="sections.ask.question.label">Your Question *</label>
+                <textarea id="question" name="question" class="form-control" placeholder="Describe your question in detail..." required data-i18n-placeholder="sections.ask.question.placeholder"></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="trade">Trade / Department</label>
-                    <input type="text" id="trade" name="trade" class="form-control" placeholder="e.g., Electrical, Civil, MEP">
-                </div>
+            <div class="form-group">
+                <label for="location" data-i18n="sections.ask.location.label">Location</label>
+                <input type="text" id="location" name="location" class="form-control" placeholder="Site location or area" data-i18n-placeholder="sections.ask.location.placeholder">
+            </div>
 
-                <div class="form-group">
-                    <label>Upload supporting photos (optional)</label>
-                    <div class="file-upload-wrapper">
-                        <div class="file-input-wrapper">
-                            <input type="file" id="pm_photos" name="pm_photos" accept="image/*" multiple>
-                            <div class="file-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                <span>Click to upload photos</span>
-                            </div>
+            <div class="form-group">
+                <label for="trade" data-i18n="sections.ask.trade.label">Trade / Department</label>
+                <input type="text" id="trade" name="trade" class="form-control" placeholder="e.g., Electrical, Civil, MEP" data-i18n-placeholder="sections.ask.trade.placeholder">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="sections.ask.upload.label">Upload supporting photos (optional)</label>
+                <div class="file-upload-wrapper">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="pm_photos" name="pm_photos" accept="image/*" multiple>
+                        <div class="file-label">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span data-i18n="sections.ask.upload.cta">Click to upload photos</span>
                         </div>
-                        <div id="pm_files" class="file-name"></div>
                     </div>
+                    <div id="pm_files" class="file-name"></div>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary issue-action">Submit Question</button>
-            </form>
+            <button type="submit" class="btn btn-primary issue-action" data-i18n="sections.ask.submit">Submit Question</button>
+        </form>
 
-            <!-- Anonymous Safety Concerns Form - Formspree Endpoint -->
-            <form class="action-card action-amber form-card formspree-form" method="POST" enctype="multipart/form-data"
-                  action="https://formspree.io/f/xgolvbpe">
-                <input type="hidden" name="_subject" value="Innovo Portal: Anonymous Safety Concern">
-                <input type="hidden" name="_to" value="i-beshoy.mesaha@innovogroup.com">
-                
-                <div class="action-top">
-                    <div class="action-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                            <line x1="12" y1="9" x2="12" y2="13" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <line x1="12" y1="17" x2="12.01" y2="17" fill="none" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3>Anonymous Safety Concerns</h3>
-                        <p class="action-desc">Report safety issues confidentially. Your identity is protected</p>
-                    </div>
+        <!-- Anonymous Safety Concerns Form - Formspree Endpoint -->
+        <form class="action-card action-amber form-card formspree-form" method="POST" enctype="multipart/form-data"
+              action="https://formspree.io/f/xgolvbpe">
+            <input type="hidden" name="_subject" value="Innovo Portal: Anonymous Safety Concern">
+            
+            <div class="action-top">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
                 </div>
-
-                <!-- Hidden email field for anonymous reports -->
-                <input type="hidden" name="email" value="i-beshoy.mesaha@innovogroup.com">
-                
-                <div class="form-group">
-                    <label for="safety_issue">Safety Concern Description *</label>
-                    <textarea id="safety_issue" name="safety_issue" class="form-control" placeholder="Describe the safety concern in detail..." required></textarea>
+                <div>
+                    <h3 data-i18n="sections.anonymous.title">Anonymous Safety Concerns</h3>
+                    <p class="action-desc" data-i18n="sections.anonymous.desc">Report safety issues confidentially. Your identity is protected</p>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="safety_area">Area / Location</label>
-                    <input type="text" id="safety_area" name="safety_area" class="form-control" placeholder="Specific area where concern exists">
-                </div>
+            <div class="form-group">
+                <label for="safety_issue" data-i18n="sections.anonymous.issue.label">Safety Concern Description *</label>
+                <textarea id="safety_issue" name="safety_issue" class="form-control" placeholder="Describe the safety concern in detail..." required data-i18n-placeholder="sections.anonymous.issue.placeholder"></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label>Upload evidence photos (optional)</label>
-                    <div class="file-upload-wrapper">
-                        <div class="file-input-wrapper">
-                            <input type="file" id="safety_photos" name="safety_photos" accept="image/*" multiple>
-                            <div class="file-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                <span>Click to upload photos</span>
-                            </div>
+            <div class="form-group">
+                <label for="safety_area" data-i18n="sections.anonymous.area.label">Area / Location</label>
+                <input type="text" id="safety_area" name="safety_area" class="form-control" placeholder="Specific area where concern exists" data-i18n-placeholder="sections.anonymous.area.placeholder">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="sections.anonymous.upload.label">Upload evidence photos (optional)</label>
+                <div class="file-upload-wrapper">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="safety_photos" name="safety_photos" accept="image/*" multiple>
+                        <div class="file-label">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span data-i18n="sections.anonymous.upload.cta">Click to upload photos</span>
                         </div>
-                        <div id="safety_files" class="file-name"></div>
                     </div>
+                    <div id="safety_files" class="file-name"></div>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary issue-action">Report Anonymously</button>
-            </form>
+            <button type="submit" class="btn btn-primary issue-action" data-i18n="sections.anonymous.submit">Report Anonymously</button>
+        </form>
 
-            <!-- Report Site Issues Form - Formspree Endpoint -->
-            <form class="action-card action-green form-card formspree-form" method="POST" enctype="multipart/form-data"
-                  action="https://formspree.io/f/xeelowry">
+        <!-- Report Site Issues Form - Formspree Endpoint -->
+        <form class="action-card action-green form-card formspree-form" method="POST" enctype="multipart/form-data"
+              action="https://formspree.io/f/xeelowry">
                 <input type="hidden" name="_subject" value="Innovo Portal: Site Issue Report">
                 <input type="hidden" name="_to" value="i-beshoy.mesaha@innovogroup.com">
                 
-                <div class="action-top">
-                    <div class="action-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="4" width="18" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <line x1="8" y1="10" x2="16" y2="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <line x1="8" y1="14" x2="12" y2="14" fill="none" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3>Report Site Issues</h3>
-                        <p class="action-desc">Document and track site-related issues for quick resolution</p>
-                    </div>
+            <div class="action-top">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="8" y1="10" x2="16" y2="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="8" y1="14" x2="12" y2="14" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
                 </div>
-
-                <!-- Email field required by Formspree -->
-                <div class="form-group">
-                    <label for="email_site">Your Email (required for updates) *</label>
-                    <input type="email" id="email_site" name="email" class="form-control" 
-                           placeholder="your.email@example.com" required>
+                <div>
+                    <h3 data-i18n="sections.report.title">Report Site Issues</h3>
+                    <p class="action-desc" data-i18n="sections.report.desc">Document and track site-related issues for quick resolution</p>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="site_issue">Issue Description *</label>
-                    <textarea id="site_issue" name="site_issue" class="form-control" placeholder="Describe the site issue in detail..." required></textarea>
-                </div>
+            <!-- Email field required by Formspree -->
+            <div class="form-group">
+                <label for="email_site" data-i18n="sections.report.email.label">Your Email (required for updates) *</label>
+                <input type="email" id="email_site" name="email" class="form-control" 
+                       placeholder="your.email@example.com" required data-i18n-placeholder="sections.report.email.placeholder">
+            </div>
 
-                <div class="form-group">
-                    <label for="site_location">Location *</label>
-                    <input type="text" id="site_location" name="site_location" class="form-control" placeholder="Exact location of the issue" required>
-                </div>
+            <div class="form-group">
+                <label for="site_issue" data-i18n="sections.report.issue.label">Issue Description *</label>
+                <textarea id="site_issue" name="site_issue" class="form-control" placeholder="Describe the site issue in detail..." required data-i18n-placeholder="sections.report.issue.placeholder"></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="priority">Priority Level *</label>
-                    <select id="priority" name="priority" class="form-control" required>
-                        <option value="">Select priority</option>
-                        <option value="Low">Low - Can wait</option>
-                        <option value="Medium">Medium - Needs attention</option>
-                        <option value="High">High - Urgent</option>
-                        <option value="Critical">Critical - Safety concern</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="site_location" data-i18n="sections.report.location.label">Location *</label>
+                <input type="text" id="site_location" name="site_location" class="form-control" placeholder="Exact location of the issue" required data-i18n-placeholder="sections.report.location.placeholder">
+            </div>
 
-                <div class="form-group">
-                    <label>Attach photos or documents (optional)</label>
-                    <div class="file-upload-wrapper">
-                        <div class="file-input-wrapper">
-                            <input type="file" id="site_documents" name="site_documents" accept="image/*,.pdf,.doc,.docx" multiple>
-                            <div class="file-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                <span>Click to upload files</span>
-                            </div>
+            <div class="form-group">
+                <label for="priority" data-i18n="sections.report.priority.label">Priority Level *</label>
+                <select id="priority" name="priority" class="form-control" required>
+                    <option value="" data-i18n="sections.report.priority.placeholder">Select priority</option>
+                    <option value="Low" data-i18n="sections.report.priority.low">Low - Can wait</option>
+                    <option value="Medium" data-i18n="sections.report.priority.medium">Medium - Needs attention</option>
+                    <option value="High" data-i18n="sections.report.priority.high">High - Urgent</option>
+                    <option value="Critical" data-i18n="sections.report.priority.critical">Critical - Safety concern</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="sections.report.upload.label">Attach photos or documents (optional)</label>
+                <div class="file-upload-wrapper">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="site_documents" name="site_documents" accept="image/*,.pdf,.doc,.docx" multiple>
+                        <div class="file-label">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="17 8 12 3 7 8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span data-i18n="sections.report.upload.cta">Click to upload files</span>
                         </div>
-                        <div id="site_files" class="file-name"></div>
                     </div>
+                    <div id="site_files" class="file-name"></div>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary issue-action">Report Issue</button>
-            </form>
+            <button type="submit" class="btn btn-primary issue-action" data-i18n="sections.report.submit">Report Issue</button>
+        </form>
 
         </div>
     </div>
@@ -814,32 +810,8 @@
         <strong>✗ Submission Failed!</strong> Please check your connection and try again.
     </div>
 
+    <script src="script.js"></script>
     <script>
-        // Theme toggle functionality
-        document.querySelectorAll('[data-theme-toggle]').forEach(button => {
-            button.addEventListener('click', function() {
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                html.setAttribute('data-theme', newTheme);
-                html.style.colorScheme = newTheme;
-                localStorage.setItem('innovo-theme', newTheme);
-                
-                // Update button text
-                this.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
-            });
-        });
-
-        // Update theme toggle button text on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const themeButtons = document.querySelectorAll('[data-theme-toggle]');
-            themeButtons.forEach(button => {
-                button.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
-            });
-        });
-
         // File upload feedback
         const fileInputs = [
             { input: 'pm_photos', display: 'pm_files' },
@@ -1001,21 +973,6 @@
             if (langSwitch && !langSwitch.contains(e.target)) {
                 langSwitch.open = false;
             }
-        });
-
-        // Language selection
-        document.querySelectorAll('[data-language-select]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                if (lang) {
-                    const details = this.closest('details');
-                    if (details) {
-                        details.open = false;
-                    }
-                    alert(`Language changed to: ${this.textContent}`);
-                }
-            });
         });
 
         // Debug function to test Formspree endpoints

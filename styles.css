@@ -398,6 +398,7 @@ nav {
 .lang-switch summary {
     list-style: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 .lang-switch summary::-webkit-details-marker {
@@ -946,7 +947,16 @@ nav {
 }
 
 .glow-logo {
-    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.4));
+    -webkit-filter:
+        drop-shadow(0 0 6px rgba(37, 99, 235, 0.45))
+        drop-shadow(0 0 14px rgba(37, 99, 235, 0.35))
+        drop-shadow(0 0 26px rgba(37, 99, 235, 0.25));
+    filter:
+        drop-shadow(0 0 6px rgba(37, 99, 235, 0.45))
+        drop-shadow(0 0 14px rgba(37, 99, 235, 0.35))
+        drop-shadow(0 0 26px rgba(37, 99, 235, 0.25));
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.18);
+    will-change: filter;
 }
 
 .page-header {
@@ -1571,6 +1581,7 @@ nav {
     min-height: 100vh;
     display: grid;
     align-items: center;
+    justify-items: center;
     padding: 160px 20px 90px;
     overflow: hidden;
 }
@@ -1807,8 +1818,11 @@ nav {
     background: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 18px 12px;
+    overflow-y: auto;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -1828,6 +1842,8 @@ nav {
     border: 1px solid rgba(148, 163, 184, 0.35);
     box-shadow: 0 30px 70px rgba(15, 23, 42, 0.2);
     animation: searchPop 0.4s ease;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 @keyframes searchPop {

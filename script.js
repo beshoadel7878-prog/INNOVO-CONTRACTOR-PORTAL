@@ -291,18 +291,46 @@ const translations = {
             title: "المشكلات والملاحظات | Innovo",
             "header.title": "المشكلات والملاحظات",
             "header.subtitle": "أرسل الأسئلة، بلّغ عن المشكلات، وارفع المخاوف مباشرة إلى فريق Innovo.",
-            "sections.ask.title": "اسأل مدير المشروع/المشرف",
-            "sections.ask.item1": "أرسل سؤالًا مع صورة.",
-            "sections.ask.item2": "اشرح الموقع والتخصص.",
-            "sections.ask.item3": "احصل على رد بالخطوات التالية.",
+            "notice.safety": "سلامتك هي أولويتنا القصوى. إذا كان لديك أي مخاوف أو مشكلات أو أسئلة، فلا تتردد في التواصل.",
+            "sections.ask.title": "اسأل مدير مشروع / مشرف Innovo",
+            "sections.ask.desc": "احصل على إرشاد وإجابات لأسئلتك في المشروع.",
+            "sections.ask.email.label": "بريدك الإلكتروني (مطلوب للرد) *",
+            "sections.ask.email.placeholder": "your.email@example.com",
+            "sections.ask.question.label": "سؤالك *",
+            "sections.ask.question.placeholder": "اشرح سؤالك بالتفصيل...",
+            "sections.ask.location.label": "الموقع",
+            "sections.ask.location.placeholder": "موقع العمل أو المنطقة",
+            "sections.ask.trade.label": "التخصص / القسم",
+            "sections.ask.trade.placeholder": "مثال: كهرباء، مدني، ميكانيكا",
+            "sections.ask.upload.label": "ارفع صورًا داعمة (اختياري)",
+            "sections.ask.upload.cta": "اضغط لرفع الصور",
+            "sections.ask.submit": "إرسال السؤال",
             "sections.anonymous.title": "مخاوف السلامة المجهولة",
-            "sections.anonymous.item1": "بلّغ عن مخاوف السلامة بدون اسمك.",
-            "sections.anonymous.item2": "أضف صورًا إن توفرت.",
-            "sections.anonymous.item3": "فريق السلامة يراجع خلال 24 ساعة.",
+            "sections.anonymous.desc": "أبلغ عن قضايا السلامة بسرية تامة.",
+            "sections.anonymous.issue.label": "وصف مخاوف السلامة *",
+            "sections.anonymous.issue.placeholder": "صف مخاوف السلامة بالتفصيل...",
+            "sections.anonymous.area.label": "المنطقة / الموقع",
+            "sections.anonymous.area.placeholder": "المكان المحدد للمشكلة",
+            "sections.anonymous.upload.label": "أرفق صور أدلة (اختياري)",
+            "sections.anonymous.upload.cta": "اضغط لرفع الصور",
+            "sections.anonymous.submit": "إبلاغ مجهول",
             "sections.report.title": "الإبلاغ عن مشكلات الموقع",
-            "sections.report.item1": "سجّل المشكلات مع الموقع والأولوية.",
-            "sections.report.item2": "أرفق الأدلة لتسريع الحل.",
-            "sections.report.item3": "تابع التحديثات من فريق Innovo."
+            "sections.report.desc": "وثّق وتتبع مشكلات الموقع لحل سريع.",
+            "sections.report.email.label": "بريدك الإلكتروني (للتحديثات) *",
+            "sections.report.email.placeholder": "your.email@example.com",
+            "sections.report.issue.label": "وصف المشكلة *",
+            "sections.report.issue.placeholder": "صف مشكلة الموقع بالتفصيل...",
+            "sections.report.location.label": "الموقع *",
+            "sections.report.location.placeholder": "الموقع الدقيق للمشكلة",
+            "sections.report.priority.label": "مستوى الأولوية *",
+            "sections.report.priority.placeholder": "اختر الأولوية",
+            "sections.report.priority.low": "منخفضة - يمكن الانتظار",
+            "sections.report.priority.medium": "متوسطة - تحتاج انتباه",
+            "sections.report.priority.high": "مرتفعة - عاجلة",
+            "sections.report.priority.critical": "حرجة - تتعلق بالسلامة",
+            "sections.report.upload.label": "أرفق صورًا أو مستندات (اختياري)",
+            "sections.report.upload.cta": "اضغط لرفع الملفات",
+            "sections.report.submit": "إبلاغ عن المشكلة"
         },
         documents: {
             title: "المستندات والإرشادات | Innovo",
@@ -612,18 +640,46 @@ const translations = {
             title: "इश्यू व फीडबैक | Innovo",
             "header.title": "इश्यू व फीडबैक",
             "header.subtitle": "Innovo टीम को सीधे सवाल, समस्याएँ और चिंताएँ भेजें।",
-            "sections.ask.title": "Innovo PM/सुपर से पूछें",
-            "sections.ask.item1": "फोटो के साथ सवाल भेजें।",
-            "sections.ask.item2": "लोकेशन और ट्रेड बताएं।",
-            "sections.ask.item3": "अगले स्टेप्स के साथ जवाब पाएं।",
+            "notice.safety": "आपकी सुरक्षा हमारी सर्वोच्च प्राथमिकता है। यदि कोई चिंता, समस्या या सवाल हों, तो बेझिझक संपर्क करें।",
+            "sections.ask.title": "Innovo PM/सुपरवाइज़र से पूछें",
+            "sections.ask.desc": "प्रोजेक्ट सवालों के लिए मार्गदर्शन और जवाब पाएं।",
+            "sections.ask.email.label": "आपका ईमेल (जवाब के लिए आवश्यक) *",
+            "sections.ask.email.placeholder": "your.email@example.com",
+            "sections.ask.question.label": "आपका सवाल *",
+            "sections.ask.question.placeholder": "अपना सवाल विस्तार से लिखें...",
+            "sections.ask.location.label": "लोकेशन",
+            "sections.ask.location.placeholder": "साइट का स्थान या क्षेत्र",
+            "sections.ask.trade.label": "ट्रेड / विभाग",
+            "sections.ask.trade.placeholder": "उदा: इलेक्ट्रिकल, सिविल, MEP",
+            "sections.ask.upload.label": "समर्थन फोटो अपलोड करें (वैकल्पिक)",
+            "sections.ask.upload.cta": "फोटो अपलोड करने के लिए क्लिक करें",
+            "sections.ask.submit": "सवाल भेजें",
             "sections.anonymous.title": "गुमनाम सेफ्टी चिंताएँ",
-            "sections.anonymous.item1": "नाम बताए बिना सेफ्टी चिंताएँ उठाएं।",
-            "sections.anonymous.item2": "अगर उपलब्ध हो तो फोटो जोड़ें।",
-            "sections.anonymous.item3": "सेफ्टी टीम 24 घंटे में रिव्यू करती है।",
+            "sections.anonymous.desc": "अपनी पहचान बताए बिना सेफ्टी मुद्दे भेजें।",
+            "sections.anonymous.issue.label": "सेफ्टी चिंता विवरण *",
+            "sections.anonymous.issue.placeholder": "सेफ्टी चिंता को विस्तार से लिखें...",
+            "sections.anonymous.area.label": "क्षेत्र / लोकेशन",
+            "sections.anonymous.area.placeholder": "समस्या का सटीक क्षेत्र",
+            "sections.anonymous.upload.label": "सबूत फोटो अपलोड करें (वैकल्पिक)",
+            "sections.anonymous.upload.cta": "फोटो अपलोड करने के लिए क्लिक करें",
+            "sections.anonymous.submit": "गुमनाम रिपोर्ट भेजें",
             "sections.report.title": "साइट इश्यू रिपोर्ट करें",
-            "sections.report.item1": "लोकेशन और प्रायोरिटी के साथ इश्यू लॉग करें।",
-            "sections.report.item2": "तेज़ समाधान के लिए सबूत जोड़ें।",
-            "sections.report.item3": "Innovo टीम से अपडेट्स ट्रैक करें।"
+            "sections.report.desc": "साइट इश्यू को रिकॉर्ड करें और जल्दी हल करें।",
+            "sections.report.email.label": "आपका ईमेल (अपडेट्स के लिए) *",
+            "sections.report.email.placeholder": "your.email@example.com",
+            "sections.report.issue.label": "इश्यू विवरण *",
+            "sections.report.issue.placeholder": "साइट इश्यू को विस्तार से लिखें...",
+            "sections.report.location.label": "लोकेशन *",
+            "sections.report.location.placeholder": "इश्यू का सटीक स्थान",
+            "sections.report.priority.label": "प्रायोरिटी स्तर *",
+            "sections.report.priority.placeholder": "प्रायोरिटी चुनें",
+            "sections.report.priority.low": "Low - प्रतीक्षा कर सकता है",
+            "sections.report.priority.medium": "Medium - ध्यान ज़रूरी",
+            "sections.report.priority.high": "High - तुरंत",
+            "sections.report.priority.critical": "Critical - सेफ्टी चिंता",
+            "sections.report.upload.label": "फोटो या दस्तावेज़ जोड़ें (वैकल्पिक)",
+            "sections.report.upload.cta": "फ़ाइलें अपलोड करने के लिए क्लिक करें",
+            "sections.report.submit": "इश्यू रिपोर्ट करें"
         },
         documents: {
             title: "डॉक्यूमेंट्स व गाइड्स | Innovo",
@@ -691,6 +747,21 @@ function applyTranslations(lang) {
             el.textContent = value;
         } else if (lang === 'en' && typeof fallback === 'string') {
             el.textContent = fallback;
+        }
+    });
+
+    // Translate placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        if (!el.dataset.i18nPlaceholderDefault) {
+            el.dataset.i18nPlaceholderDefault = el.getAttribute('placeholder') || '';
+        }
+        const key = el.getAttribute('data-i18n-placeholder');
+        const value = pageTranslations[key] ?? commonTranslations[key];
+        const fallback = el.dataset.i18nPlaceholderDefault;
+        if (typeof value === 'string') {
+            el.setAttribute('placeholder', value);
+        } else if (lang === 'en') {
+            el.setAttribute('placeholder', fallback);
         }
     });
 
