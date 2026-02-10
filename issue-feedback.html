@@ -622,6 +622,8 @@
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="form_type" value="ask_pm">
+                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
+                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -678,6 +680,8 @@
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="form_type" value="anonymous_safety">
+                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
+                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -731,6 +735,8 @@
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="form_type" value="site_issue">
+                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
+                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -849,39 +855,37 @@
             }
         });
 
-        // Form submission handling
+        // Form submission handling - نسخة معدلة للعمل مع Netlify
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function(e) {
                 const submitBtn = this.querySelector('.issue-action');
                 if (submitBtn) {
+                    // حفظ النص الأصلي للزر
+                    const originalText = submitBtn.textContent;
                     submitBtn.textContent = 'Submitting...';
                     submitBtn.disabled = true;
                     
-                    // Show success message after delay (simulate successful submission)
+                    // السماح للنموذج بالإرسال العادي إلى FormSubmit
+                    // لا نمنع السلوك الافتراضي (لا e.preventDefault())
+                    
+                    // بعد 2 ثانية، إظهار رسالة النجاح (حتى لو كان الإرسال لا يزال جارياً)
                     setTimeout(() => {
                         const successMsg = document.getElementById('successMessage');
                         if (successMsg) {
                             successMsg.style.display = 'block';
                             setTimeout(() => {
                                 successMsg.style.display = 'none';
-                            }, 3000);
+                            }, 5000);
                         }
                         
-                        // Reset button after 3 seconds
+                        // إعادة تعيين الزر بعد 3 ثوانٍ إضافية
                         setTimeout(() => {
-                            submitBtn.textContent = submitBtn.dataset.originalText || 
-                                (form.classList.contains('action-blue') ? 'Submit Question' :
-                                 form.classList.contains('action-amber') ? 'Report Anonymously' : 'Report Issue');
+                            submitBtn.textContent = originalText;
                             submitBtn.disabled = false;
                         }, 3000);
-                    }, 1500);
+                    }, 2000);
                 }
             });
-        });
-
-        // Store original button text
-        document.querySelectorAll('.issue-action').forEach(btn => {
-            btn.dataset.originalText = btn.textContent;
         });
 
         // Set RGB values for CSS variables based on card type
