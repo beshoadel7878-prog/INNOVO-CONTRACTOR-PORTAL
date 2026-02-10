@@ -122,7 +122,7 @@
             box-shadow: 0 14px 30px rgba(37, 99, 235, 0.3);
         }
 
-        /* FormSubmit Styles */
+        /* FormSubmit Notice */
         .formsubmit-notice {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -607,23 +607,20 @@
         <p class="page-subtitle" data-i18n="header.subtitle">Send questions, report issues, and raise concerns directly to the Innovo team.</p>
     </div>
 
-    <!-- FormSubmit Notice -->
+    <!-- Formspree Notice -->
     <div class="formsubmit-notice mx-auto">
-        <strong>Powered by FormSubmit:</strong> All submissions are securely sent via FormSubmit to i-beshoy.mesaha@innovogroup.com
+        <strong>Powered by Formspree:</strong> All submissions are securely sent via Formspree. You will receive a confirmation email in English after submission.
     </div>
 
     <div class="content-section">
         <div class="max-w-5xl mx-auto action-grid">
 
-            <!-- Ask PM/Supervisor Form -->
+            <!-- Ask PM/Supervisor Form - Formspree Endpoint -->
             <form class="action-card action-blue form-card" method="POST" enctype="multipart/form-data"
-                  action="https://formsubmit.co/i-beshoy.mesaha@innovogroup.com">
+                  action="https://formspree.io/f/xgolvbpe">
                 <input type="hidden" name="_subject" value="Innovo Portal: Ask PM/Supervisor">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="form_type" value="ask_pm">
-                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
-                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
+                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
+                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -673,15 +670,12 @@
                 <button type="submit" class="btn btn-primary issue-action">Submit Question</button>
             </form>
 
-            <!-- Anonymous Safety Concerns Form -->
+            <!-- Anonymous Safety Concerns Form - Formspree Endpoint -->
             <form class="action-card action-amber form-card" method="POST" enctype="multipart/form-data"
-                  action="https://formsubmit.co/i-beshoy.mesaha@innovogroup.com">
+                  action="https://formspree.io/f/xpqjweow">
                 <input type="hidden" name="_subject" value="Innovo Portal: Anonymous Safety Concern">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="form_type" value="anonymous_safety">
-                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
-                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
+                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
+                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -728,15 +722,12 @@
                 <button type="submit" class="btn btn-primary issue-action">Report Anonymously</button>
             </form>
 
-            <!-- Report Site Issues Form -->
+            <!-- Report Site Issues Form - Formspree Endpoint -->
             <form class="action-card action-green form-card" method="POST" enctype="multipart/form-data"
-                  action="https://formsubmit.co/i-beshoy.mesaha@innovogroup.com">
+                  action="https://formspree.io/f/xeelowry">
                 <input type="hidden" name="_subject" value="Innovo Portal: Site Issue Report">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="form_type" value="site_issue">
-                <!-- إضافة حقل _next للتأكد من العودة للصفحة -->
-                <input type="hidden" name="_next" value="https://preeminent-sopapillas-fdb232.netlify.app/issue-feedback">
+                <!-- إضافة حقل _replyto لرسالة التأكيد الإنجليزية -->
+                <input type="hidden" name="_replyto" value="no-reply@innovogroup.com">
                 
                 <div class="action-top">
                     <div class="action-icon">
@@ -799,7 +790,7 @@
 
     <!-- Success Message -->
     <div id="successMessage" class="success-message">
-        <strong>✓ Submitted Successfully!</strong> Your feedback has been sent to the Innovo team.
+        <strong>✓ Submitted Successfully!</strong> Your feedback has been sent to the Innovo team. You will receive a confirmation email.
     </div>
 
     <script>
@@ -855,35 +846,65 @@
             }
         });
 
-        // Form submission handling - نسخة معدلة للعمل مع Netlify
+        // Form submission handling لـ Formspree
         document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault(); // منع الإرسال الافتراضي
+                
                 const submitBtn = this.querySelector('.issue-action');
+                const formData = new FormData(this);
+                
                 if (submitBtn) {
                     // حفظ النص الأصلي للزر
                     const originalText = submitBtn.textContent;
                     submitBtn.textContent = 'Submitting...';
                     submitBtn.disabled = true;
                     
-                    // السماح للنموذج بالإرسال العادي إلى FormSubmit
-                    // لا نمنع السلوك الافتراضي (لا e.preventDefault())
-                    
-                    // بعد 2 ثانية، إظهار رسالة النجاح (حتى لو كان الإرسال لا يزال جارياً)
-                    setTimeout(() => {
-                        const successMsg = document.getElementById('successMessage');
-                        if (successMsg) {
-                            successMsg.style.display = 'block';
-                            setTimeout(() => {
-                                successMsg.style.display = 'none';
-                            }, 5000);
-                        }
+                    try {
+                        // إرسال البيانات إلى Formspree
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
                         
-                        // إعادة تعيين الزر بعد 3 ثوانٍ إضافية
+                        if (response.ok) {
+                            // إظهار رسالة النجاح
+                            const successMsg = document.getElementById('successMessage');
+                            if (successMsg) {
+                                successMsg.style.display = 'block';
+                                setTimeout(() => {
+                                    successMsg.style.display = 'none';
+                                }, 5000);
+                            }
+                            
+                            // إعادة تعيين النموذج
+                            this.reset();
+                            
+                            // إعادة تعيين أسماء الملفات
+                            fileInputs.forEach(item => {
+                                const display = document.getElementById(item.display);
+                                if (display) display.textContent = '';
+                            });
+                            
+                            // رسالة تأكيد إضافية
+                            alert('Thank you! Your submission has been received. You will receive a confirmation email in English from Innovo Team.');
+                            
+                        } else {
+                            alert('There was an error submitting your form. Please try again.');
+                        }
+                    } catch (error) {
+                        alert('Network error. Please check your connection and try again.');
+                        console.error('Form submission error:', error);
+                    } finally {
+                        // إعادة تعيين الزر بعد 2 ثانية
                         setTimeout(() => {
                             submitBtn.textContent = originalText;
                             submitBtn.disabled = false;
-                        }, 3000);
-                    }, 2000);
+                        }, 2000);
+                    }
                 }
             });
         });
