@@ -901,16 +901,8 @@ nav {
     background: transparent;
     padding: 0;
     box-shadow: none;
-    -webkit-filter:
-        brightness(3.4)
-        contrast(2.1)
-        saturate(0)
-        drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
-    filter:
-        brightness(3.4)
-        contrast(2.1)
-        saturate(0)
-        drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+    -webkit-filter: brightness(2.4) contrast(1.6) saturate(0);
+    filter: brightness(2.4) contrast(1.6) saturate(0);
 }
 
 [data-theme="dark"] .logo-link {
