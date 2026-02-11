@@ -287,7 +287,7 @@ body::-webkit-scrollbar {
     max-width: 36rem;
     margin-left: auto;
     margin-right: auto;
-    color: var(--muted);
+    color: #0f172a;
 }
 
 .animate-reveal {
@@ -1718,18 +1718,20 @@ nav {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(120deg, rgba(248, 250, 252, 0.75), rgba(248, 250, 252, 0.2)),
+        linear-gradient(120deg, rgba(248, 250, 252, 0.28), rgba(248, 250, 252, 0.08)),
         url('https://raw.githubusercontent.com/beshoadel7878-prog/INNOVO-CONTRACTOR-PORTAL/refs/heads/main/ChatGPT%20Image%20Feb%208%2C%202026%2C%2002_54_40%20PM.png');
     background-size: cover;
-    background-position: center;
+    background-position: center calc(50% + (var(--scroll-y) * 0.08px));
+    will-change: transform, background-position;
+    transform: translateY(calc(var(--scroll-y) * -0.1px)) scale(1.02);
     filter: brightness(1);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.25), transparent 55%),
-        linear-gradient(180deg, rgba(248, 250, 252, 0.35) 0%, rgba(248, 250, 252, 0.9) 80%);
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
 }
 
 .hero-content {
@@ -1757,6 +1759,9 @@ nav {
     text-transform: uppercase;
     margin-bottom: 20px;
     letter-spacing: 0.08em;
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.35),
+        0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .hero-title-accent {
@@ -1765,11 +1770,14 @@ nav {
 }
 
 .hero-subtitle {
-    color: rgba(71, 85, 105, 0.9);
+    color: #0f172a;
     font-size: clamp(1.05rem, 3.6vw, 1.35rem);
     line-height: 1.7;
     margin: 0 auto 32px;
     max-width: 560px;
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(0, 0, 0, 0.18);
 }
 
 .hero-actions {
@@ -2175,5 +2183,53 @@ nav {
         display: inline-flex;
         align-items: center;
         gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header-inner {
+        padding: 0.9rem 0.9rem;
+        gap: 8px;
+    }
+
+    .brand-logo {
+        height: 42px;
+    }
+
+    .search-trigger,
+    .menu-trigger {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero {
+        min-height: 88vh;
+        padding: 120px 14px 70px;
+    }
+
+    .hero-content {
+        max-width: 95vw;
+    }
+
+    .hero-title {
+        font-size: clamp(2.2rem, 11vw, 3rem);
+        letter-spacing: 0.04em;
+        line-height: 1.05;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 4.6vw, 1.2rem);
+        margin-bottom: 26px;
+    }
+
+    .hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btn-primary-hero,
+    .btn-outline-hero {
+        width: 100%;
+        justify-content: center;
     }
 }

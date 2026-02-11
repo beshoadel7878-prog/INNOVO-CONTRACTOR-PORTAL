@@ -9,6 +9,8 @@ let languageShowTimer = null;
 let mobileToggle = document.querySelector('[data-menu-toggle]');
 let mobilePanel = document.getElementById('mobile-panel');
 const defaultTitle = document.title;
+let heroTypingTimer = null;
+const heroSubtitleSelector = '.hero-subtitle';
 
 const closeMobilePanel = () => {
     if (mobilePanel) {
@@ -880,11 +882,25 @@ const translations = {
             "sections.ppe.item1": "ہیلمٹ + سیفٹی بوٹ + عکاس جیکٹ۔",
             "sections.ppe.item2": "کام کے مطابق عینک اور دستانے۔",
             "sections.ppe.item3": "شور والے علاقوں میں سماعت کا تحفظ۔",
+            "sections.ppe.item4": "اگر دھول یا دھواں ہو تو ریسپیریٹر استعمال کریں۔",
             "sections.hours.title": "کام کے اوقات",
             "sections.hours.item1": "شفٹ شروع ہونے سے پہلے گیٹ پر چیک ان کریں۔",
             "sections.hours.item2": "منظور شدہ آغاز/اختتام اوقات پر عمل کریں۔",
             "sections.hours.item3": "منظور شدہ وقت کے باہر کام نہیں۔",
             "sections.hours.item4": "اوور ٹائم کیلئے منظوری ضروری۔",
+            "sections.emergency.title": "ہنگامی نمبرز",
+            "sections.emergency.item1": "سائٹ سپروائزر: +00 000 000 000",
+            "sections.emergency.item2": "سیکورٹی ڈیسک: +00 000 000 000",
+            "sections.emergency.item3": "حفاظت افسر: +00 000 000 000",
+            "sections.emergency.item4": "ایمرجنسی سروسز: 999 / 911",
+            "sections.map.title": "سائٹ نقشہ",
+            "sections.map.item1": "مرکزی گیٹ اور سکیورٹی ڈیسک",
+            "sections.map.item2": "اجتماع کے مقامات اور اخراج کے راستے",
+            "sections.map.item3": "فرسٹ ایڈ اور فائر پوائنٹس",
+            "sections.map.item4": "پارکنگ اور ڈلیوری زونز",
+            "sections.video.title": "انڈکشن ویڈیو",
+            "sections.video.subtitle": "داخلے سے پہلے 1 منٹ کی انڈکشن ویڈیو دیکھیں۔",
+            "sections.video.button": "ویڈیو دیکھیں (Placeholder)",
             "sections.access_maps.title": "رسائی نقشے",
             "sections.access_maps.item1": "PDF نقشہ ڈاؤن لوڈ کریں",
             "sections.access_maps.item2": "تصویری نقشہ دیکھیں"
@@ -1143,6 +1159,11 @@ function applyTranslations(lang) {
             document.title = defaultTitle;
         }
     }
+
+    // Retype hero subtitle on home page after translation update
+    if (isHomePage()) {
+        startHeroTyping();
+    }
 }
 
 function setLanguage(lang) {
@@ -1247,8 +1268,6 @@ function bindMobilePanelAutoClose() {
     items.forEach((item) => {
         if (item.__autoCloseBound) return;
         item.__autoCloseBound = true;
-        // Keep the panel open when clicking the language trigger so its submenu can open
-        if (item.matches('[data-mobile-lang]')) return;
         item.addEventListener('click', () => closeMobilePanel());
     });
 }
@@ -1472,6 +1491,37 @@ if (siteHeader) {
     window.addEventListener('scroll', updateHeaderState, { passive: true });
 }
 
+function startHeroTyping() {
+    if (!isHomePage()) return;
+    const subtitle = document.querySelector(heroSubtitleSelector);
+    if (!subtitle) return;
+    const text = subtitle.textContent.trim();
+    if (!text) return;
+    if (heroTypingTimer) {
+        clearInterval(heroTypingTimer);
+        heroTypingTimer = null;
+    }
+    subtitle.textContent = '';
+    let i = 0;
+    // Safety fallback: ensure full text appears even if tab throttles timers
+    const safetyTimeout = setTimeout(() => {
+        subtitle.textContent = text;
+        if (heroTypingTimer) clearInterval(heroTypingTimer);
+        heroTypingTimer = null;
+    }, Math.max(2200, text.length * 25));
+
+    heroTypingTimer = setInterval(() => {
+        if (i <= text.length) {
+            subtitle.textContent = text.slice(0, i);
+            i += 1;
+        } else {
+            clearInterval(heroTypingTimer);
+            heroTypingTimer = null;
+            clearTimeout(safetyTimeout);
+        }
+    }, 38); // slower typing to be noticeable on both desktop and mobile
+}
+
 if (mobileToggle && mobilePanel) {
     mobileToggle.addEventListener('click', () => {
         const langDetails = document.querySelector('.lang-switch');
@@ -1479,6 +1529,16 @@ if (mobileToggle && mobilePanel) {
         mobilePanel.classList.toggle('open');
     });
 }
+
+// Close mobile panel on outside click or tap
+document.addEventListener('click', (event) => {
+    if (!mobilePanel || !mobileToggle) return;
+    const isClickInsidePanel = mobilePanel.contains(event.target);
+    const isToggle = mobileToggle.contains(event.target);
+    if (!isClickInsidePanel && !isToggle) {
+        mobilePanel.classList.remove('open');
+    }
+}, true);
 
 // Close mobile panel if language dropdown opens
 const langDetails = document.querySelector('.lang-switch');
@@ -1664,6 +1724,7 @@ window.onload = () => {
         loader.style.display = 'none';
     }
 
+    startHeroTyping();
     animate();
     window.addEventListener('resize', onWindowResize);
 
