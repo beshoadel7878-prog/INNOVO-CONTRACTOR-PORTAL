@@ -10,6 +10,40 @@ let mobileToggle = document.querySelector('[data-menu-toggle]');
 let mobilePanel = document.getElementById('mobile-panel');
 const defaultTitle = document.title;
 
+const closeMobilePanel = () => {
+    if (mobilePanel) {
+        mobilePanel.classList.remove('open');
+    }
+    document.querySelectorAll('.mobile-lang-menu').forEach((menu) => menu.classList.remove('open'));
+};
+
+function setupLangSwitchDropdown() {
+    const langSwitch = document.querySelector('.lang-switch');
+    if (!langSwitch) return;
+    const summary = langSwitch.querySelector('summary');
+    if (summary && !summary.__langBound) {
+        summary.__langBound = true;
+        summary.addEventListener('click', (event) => {
+            event.preventDefault();
+            const isOpen = langSwitch.hasAttribute('open');
+            document.querySelectorAll('.lang-switch[open]').forEach((d) => d.removeAttribute('open'));
+            if (!isOpen) {
+                langSwitch.setAttribute('open', '');
+            }
+        });
+    }
+
+    // Close when clicking outside
+    if (!langSwitch.__outsideBound) {
+        langSwitch.__outsideBound = true;
+        document.addEventListener('click', (event) => {
+            if (!langSwitch.contains(event.target) && !event.target.closest('[data-mobile-lang]')) {
+                langSwitch.removeAttribute('open');
+            }
+        });
+    }
+}
+
 function isHomePage() {
     const path = window.location.pathname.toLowerCase();
     return path.endsWith('index.html') || path === '/' || path === '';
@@ -18,9 +52,11 @@ function isHomePage() {
 function updateThemeToggle(theme) {
     if (!themeToggles.length) return;
     const isArabic = document.documentElement.lang === 'ar';
+    const isHindi = document.documentElement.lang === 'hi';
+    const isUrdu = document.documentElement.lang === 'ur';
     const label = theme === 'dark'
-        ? (isArabic ? 'الوضع الفاتح' : 'Light Mode')
-        : (isArabic ? 'الوضع الداكن' : 'Dark Mode');
+        ? (isArabic ? 'الوضع الفاتح' : isHindi ? 'लाइट मोड' : isUrdu ? 'لائٹ موڈ' : 'Light Mode')
+        : (isArabic ? 'الوضع الداكن' : isHindi ? 'डार्क मोड' : isUrdu ? 'ڈارک موڈ' : 'Dark Mode');
     themeToggles.forEach((toggle) => {
         toggle.textContent = label;
         toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
@@ -267,8 +303,8 @@ const translations = {
             "cards.site.title": "دخول الموقع",
             "cards.site.placeholder": "شاهد فيديو دقيقة واحدة",
             "cards.site.subtitle": "قواعد الدخول للموقع (1 دقيقة)."
-        },
-        training: {
+    },
+    training: {
             title: "التدريب | Innovo",
             "header.title": "التدريب",
             "header.subtitle": "وحدات قصيرة، تتبع الإقرار، ومحتوى التعريف.",
@@ -280,9 +316,8 @@ const translations = {
             "sections.signoff.action2": "عرض حالة الإكمال",
             "sections.onboarding.title": "تعريف العاملين الجدد",
             "sections.onboarding.action1": "ابدأ التعريف",
-            "sections.onboarding.action2": "تحميل دليل معدات الوقاية"
-        },
-        training_videos: {
+            "sections.onboarding.action2": "تحميل دليل معدات الوقاية",
+            /* Training videos section shares the same page key */
             "training_videos.title": "فيديوهات التدريب",
             "training_videos.subtitle": "عينات تعمل تلقائيًا حتى تزويد الفيديوهات الرسمية.",
             "training_videos.card1.title": "تعريف الموقع",
@@ -616,11 +651,11 @@ const translations = {
             "cards.site.title": "साइट एंट्री",
             "cards.site.placeholder": "1 मिनट का वीडियो देखें",
             "cards.site.subtitle": "साइट एंट्री नियम (1 मिनट)।"
-        },
-        training: {
-            title: "ट्रेनिंग | Innovo",
-            "header.title": "ट्रेनिंग",
-            "header.subtitle": "छोटे मॉड्यूल, साइन-ऑफ ट्रैकिंग और ऑनबोर्डिंग कंटेंट।",
+    },
+    training: {
+        title: "ट्रेनिंग | Innovo",
+        "header.title": "ट्रेनिंग",
+        "header.subtitle": "छोटे मॉड्यूल, साइन-ऑफ ट्रैकिंग और ऑनबोर्डिंग कंटेंट।",
             "sections.modules.title": "छोटे ट्रेनिंग मॉड्यूल",
             "sections.modules.action1": "मॉड्यूल शुरू करें",
             "sections.modules.action2": "मॉड्यूल लिस्ट देखें",
@@ -629,15 +664,14 @@ const translations = {
             "sections.signoff.action2": "कम्प्लीशन स्टेटस देखें",
             "sections.onboarding.title": "नए कर्मचारियों का ऑनबोर्डिंग",
             "sections.onboarding.action1": "इंडक्शन शुरू करें",
-            "sections.onboarding.action2": "PPE गाइड डाउनलोड करें"
-        },
-        training_videos: {
+            "sections.onboarding.action2": "PPE गाइड डाउनलोड करें",
+            /* Training videos section shares the same page key */
             "training_videos.title": "ट्रेनिंग वीडियो",
             "training_videos.subtitle": "आधिकारिक वीडियो मिलने तक ऑटो-प्ले सैंपल्स।",
             "training_videos.card1.title": "साइट इंडक्शन",
             "training_videos.card2.title": "सेफ्टी बेसिक्स",
-            "training_videos.card3.title": "एक्सेस व वेरिफिकेशन"
-        },
+        "training_videos.card3.title": "एक्सेस व वेरिफिकेशन"
+    },
         issue_feedback: {
             title: "इश्यू व फीडबैक | Innovo",
             "header.title": "इश्यू व फीडबैक",
@@ -726,9 +760,342 @@ const translations = {
             "sections.maps.item1": "एक्सेस मैप PDF",
             "sections.maps.item2": "एक्सेस मैप इमेज"
         }
+    },
+    ur: {
+        common: {
+            "nav.back_home": "ہوم پر واپس جائیں",
+            "nav.back_dashboard": "ڈیش بورڈ پر واپس جائیں",
+            "nav.main_portal": "مین پورٹل",
+            "nav.site_entry": "سائٹ انٹری",
+            "nav.documents": "دستاویزات",
+            "nav.safety": "حفاظت",
+            "nav.payment_claims": "ادائیگی کے دعوے",
+            "nav.choose_language": "زبان منتخب کریں"
+        },
+        index: {
+            title: "سب کنٹریکٹر پورٹل | Innovo",
+            "hero.title_main": "کنٹریکٹر",
+            "hero.title_accent": " پورٹل",
+            "hero.subtitle": "سائٹ میں داخلے کے لیے ڈیجیٹل گائیڈ: حفاظتی قواعد، دستاویزات، اور ضروری ویڈیوز۔",
+            "hero.enter_portal": "پورٹل میں جائیں",
+            "hero.payment_claims": "ادائیگی کے دعوے",
+            "search.title": "پورٹل میں تلاش کریں",
+            "search.placeholder": "حفاظت، دستاویزات، دعوے تلاش کریں...",
+            "search.button": "تلاش",
+            "search.payment_claims": "ادائیگی کے دعوے",
+            "section.portal.title": "پورٹل کے حصے",
+            "section.portal.subtitle": "محفوظ اور تیز سائٹ رسائی کے لیے ہر چیز۔",
+            "section.portal.site_entry.label": "سائٹ انٹری",
+            "section.portal.site_entry.title": "حفاظتی قواعد اور انٹری مراحل",
+            "section.portal.site_entry.copy": "اہم قواعد، PPE تقاضے، اور روزانہ کی ہدایات۔",
+            "section.portal.documents.label": "دستاویزات",
+            "section.portal.documents.title": "گائیڈز اور ڈاؤن لوڈز",
+            "section.portal.documents.copy": "پالیسیز، فارمز، اور منظور شدہ چیک لسٹیں تیار۔",
+            "section.portal.hse.label": "HSE",
+            "section.portal.hse.title": "حفاظت و واقعہ سپورٹ",
+            "section.portal.hse.copy": "طریقہ کار، رپورٹنگ، اور سائٹ کی بہترین مشقیں۔"
+        },
+        dashboard: {
+            title: "مین پورٹل ڈیش بورڈ | Innovo",
+            "header.title": "مین پورٹل ڈیش بورڈ",
+            "header.subtitle": "محفوظ کام اور Innovo کے ساتھ ہم آہنگ رہنے کے لیے سب کچھ۔ کارڈ کھولنے کے لیے ٹیپ کریں۔",
+            "cards.site_entry.tag": "سائٹ انٹری",
+            "cards.site_entry.title": "سائٹ انٹری",
+            "cards.site_entry.item1": "حفاظتی قواعد + PPE",
+            "cards.site_entry.item2": "کام کے اوقات",
+            "cards.site_entry.item3": "ہنگامی نمبرز + سائٹ نقشہ",
+            "cards.access.tag": "رسائی",
+            "cards.access.title": "رسائی اور تصدیق",
+            "cards.access.item1": "انٹری مراحل",
+            "cards.access.item2": "تصدیقی چیک لسٹ",
+            "cards.access.item3": "رسائی نقشے",
+            "cards.documents.tag": "دستاویزات",
+            "cards.documents.title": "دستاویزات و گائیڈز",
+            "cards.documents.item1": "طریقہ کار + پالیسیز",
+            "cards.documents.item2": "PDFs / ڈرائنگز",
+            "cards.documents.item3": "ڈاؤن لوڈ سینٹر",
+            "cards.payment.tag": "ادائیگیاں",
+            "cards.payment.title": "ادائیگیاں",
+            "cards.payment.item1": "ادائیگی دعویٰ جمع کرائیں",
+            "cards.payment.item2": "ضروری دستاویزات",
+            "cards.payment.item3": "جمع کرانے کی آخری تاریخیں",
+            "cards.safety.tag": "حفاظت",
+            "cards.safety.title": "حفاظت",
+            "cards.safety.item1": "حفاظتی طریقہ کار",
+            "cards.safety.item2": "PPE تقاضے",
+            "cards.safety.item3": "واقعات اور مسائل کی رپورٹنگ",
+            "cards.training.tag": "تربیت",
+            "cards.training.title": "تربیت",
+            "cards.training.item1": "مختصر تربیتی ماڈیولز (2-5 منٹ)",
+            "cards.training.item2": "منظوری اور سائن آف ٹریکنگ",
+            "cards.training.item3": "نئے کارکنوں کا آن بورڈنگ مواد",
+            "cards.issue.tag": "مسائل و فیڈبیک",
+            "cards.issue.title": "مسائل و فیڈبیک",
+            "cards.issue.item1": "Innovo PM/سپر سے تصویر کے ساتھ پوچھیں",
+            "cards.issue.item2": "گمنام حفاظتی خدشات",
+            "cards.issue.item3": "سائٹ مسائل کی فوری رپورٹ",
+            "cards.quality.tag": "کوالٹی",
+            "cards.quality.title": "کوالٹی تقاضے",
+            "cards.quality.item1": "معائنہ عمل",
+            "cards.quality.item2": "چیک لسٹ + عیب کے اصول",
+            "cards.quality.item3": "مواد کی منظوری",
+            "cards.howto.tag": "طریقہ کار",
+            "cards.howto.title": "کام کیسے کریں",
+            "cards.howto.item1": "معائنہ بُک کریں",
+            "cards.howto.item2": "آلات اندر لانا",
+            "cards.howto.item3": "اجازت کی درخواست",
+            "cards.videos.tag": "ویڈیوز",
+            "cards.videos.title": "ویڈیوز",
+            "cards.videos.item1": "1 منٹ کی ویڈیوز دیکھیں",
+            "cards.videos.item2": "حفاظت + طریقہ کار",
+            "quick_help.title": "فوری مدد",
+            "quick_help.subtitle": "کاغذی کارروائی کے بغیر تیز جوابات۔",
+            "quick_help.forms.title": "فارمز و ٹیمپلیٹس",
+            "quick_help.forms.item1": "اجازت درخواست فارم",
+            "quick_help.forms.item2": "معائنہ درخواست فارم",
+            "quick_help.forms.item3": "واقعہ رپورٹ ٹیمپلیٹ",
+            "quick_help.contact.title": "رابطہ و مدد",
+            "quick_help.contact.item1": "سائٹ سپروائزر فون",
+            "quick_help.contact.item2": "حفاظت افسر رابطہ",
+            "quick_help.contact.item3": "واٹس ایپ ہیلپ لائن",
+            "quick_help.announcements.title": "اعلانات",
+            "quick_help.announcements.item1": "گیٹ بندش / رسائی اپ ڈیٹس",
+            "quick_help.announcements.item2": "کام کے اوقات میں تبدیلیاں",
+            "quick_help.announcements.item3": "سائٹ وائیڈ الرٹس",
+            "quick_help.faq.title": "عمومی سوالات",
+            "quick_help.faq.item1": "مجھے یہ کرنے کے لیے کہاں جانا ہے؟",
+            "quick_help.faq.item2": "دعویٰ کیسے جمع کراؤں؟",
+            "quick_help.faq.item3": "داخلے سے پہلے کیا درکار ہے؟"
+        },
+        site_entry: {
+            title: "سائٹ انٹری | Innovo",
+            "header.title": "سائٹ انٹری",
+            "header.subtitle": "داخلے سے پہلے اہم نکات۔",
+            "sections.safety_rules.title": "حفاظتی قواعد",
+            "sections.safety_rules.item1": "روزانہ اندر/باہر رجسٹر کریں۔",
+            "sections.safety_rules.item2": "صرف مقررہ علاقے میں کام کریں۔",
+            "sections.safety_rules.item3": "ٹریفک راستوں اور ممنوعہ زونز کی پابندی کریں۔",
+            "sections.safety_rules.item4": "راستے صاف رکھیں۔",
+            "sections.ppe.title": "PPE تقاضے",
+            "sections.ppe.item1": "ہیلمٹ + سیفٹی بوٹ + عکاس جیکٹ۔",
+            "sections.ppe.item2": "کام کے مطابق عینک اور دستانے۔",
+            "sections.ppe.item3": "شور والے علاقوں میں سماعت کا تحفظ۔",
+            "sections.hours.title": "کام کے اوقات",
+            "sections.hours.item1": "شفٹ شروع ہونے سے پہلے گیٹ پر چیک ان کریں۔",
+            "sections.hours.item2": "منظور شدہ آغاز/اختتام اوقات پر عمل کریں۔",
+            "sections.hours.item3": "منظور شدہ وقت کے باہر کام نہیں۔",
+            "sections.hours.item4": "اوور ٹائم کیلئے منظوری ضروری۔",
+            "sections.access_maps.title": "رسائی نقشے",
+            "sections.access_maps.item1": "PDF نقشہ ڈاؤن لوڈ کریں",
+            "sections.access_maps.item2": "تصویری نقشہ دیکھیں"
+        },
+        access: {
+            title: "رسائی اور تصدیق | Innovo",
+            "header.title": "رسائی اور تصدیق",
+            "header.subtitle": "سائٹ میں آسان داخلے کے لیے مراحل فالو کریں۔",
+            "sections.steps.title": "رسائی مراحل",
+            "sections.steps.item1": "مرکزی گیٹ پر پہنچیں اور شناخت دکھائیں۔",
+            "sections.steps.item2": "سائن ان کریں اور بیج لیں۔",
+            "sections.steps.item3": "انڈکشن اور تربیتی ثبوت دکھائیں۔",
+            "sections.steps.item4": "کام کا علاقہ اور سپروائزر کا رابطہ کنفرم کریں۔",
+            "sections.steps.item5": "داخلے سے پہلے سائٹ کا نقشہ اور ہنگامی معلومات لیں۔",
+            "sections.arrival.title": "سائٹ آمد",
+            "sections.arrival.item1": "مرکزی گیٹ استعمال کریں اور سکیورٹی ہدایات مانیں۔",
+            "sections.arrival.item2": "صرف مقررہ پارکنگ میں گاڑی کھڑی کریں۔",
+            "sections.arrival.item3": "تیز چیک اِن کیلئے شناخت تیار رکھیں۔",
+            "sections.verify.title": "تصدیق",
+            "sections.verify.item1": "درست PPE چیک کریں۔",
+            "sections.verify.item2": "ضروری پرمٹس اور منظوری دکھائیں۔",
+            "sections.verify.item3": "کام کے زون میں جانے سے پہلے بیج حاصل کریں۔",
+            "sections.maps.title": "رسائی نقشے (PDF/تصویر)",
+            "sections.maps.subtitle": "جب دستیاب ہوں تو ڈاؤن لوڈ کریں۔",
+            "sections.maps.item1": "رسائی نقشہ PDF",
+            "sections.maps.item2": "رسائی نقشہ تصویر"
+        },
+        documents: {
+            title: "دستاویزات و گائیڈز | Innovo",
+            "header.title": "دستاویزات و گائیڈز",
+            "header.subtitle": "سائٹ انٹری سے پہلے ضروری دستاویزات حاصل کریں۔",
+            "sections.available.title": "دستیاب دستاویزات",
+            "sections.available.item1": "سائٹ انڈکشن گائیڈ اور حفاظتی قواعد۔",
+            "sections.available.item2": "رسائی نقشے، گیٹ اوقات، پارکنگ معلومات۔",
+            "sections.available.item3": "ورک پرمٹس اور رسک چیک لسٹ۔",
+            "sections.available.item4": "ہنگامی رابطے اور واقعہ فارم۔",
+            "sections.howto.title": "استعمال کا طریقہ",
+            "sections.howto.item1": "فائل کھولیں، اہم نکات پڑھیں اور محفوظ کریں۔",
+            "sections.howto.item2": "گیٹ پر مطلوبہ دستاویزات دکھائیں۔",
+            "sections.howto.item3": "فارمز سپروائزر کو جمع کرائیں۔",
+            "sections.howto.item4": "ہر شفٹ سے پہلے اپ ڈیٹس چیک کریں۔",
+            "sections.downloads.title": "ڈاؤن لوڈز",
+            "sections.downloads.item1": "انڈکشن PDF ڈاؤن لوڈ کریں",
+            "sections.downloads.item2": "حفاظتی قواعد ڈاؤن لوڈ کریں",
+            "sections.downloads.item3": "رسائی نقشہ ڈاؤن لوڈ کریں",
+            "sections.downloads.item4": "پرمٹ چیک لسٹ ڈاؤن لوڈ کریں"
+        },
+        safety: {
+            title: "حفاظت | Innovo",
+            "header.title": "حفاظت",
+            "header.subtitle": "طریقہ کار، رپورٹنگ، اور سائٹ کی بہترین مشقیں۔",
+            "sections.procedures.title": "حفاظتی طریقہ کار",
+            "sections.procedures.item1": "صرف تربیت یافتہ اور مجاز ہونے پر اوزار استعمال کریں۔",
+            "sections.procedures.item2": "ٹریفک راستے اور ممنوعہ زونز فالو کریں۔",
+            "sections.procedures.item3": "اگر حالت غیر محفوظ ہو تو کام روک دیں۔",
+            "sections.ppe.title": "PPE تقاضے",
+            "sections.ppe.item1": "ہیلمٹ، سیفٹی بوٹ، عکاس جیکٹ۔",
+            "sections.ppe.item2": "کام کے مطابق دستانے اور آنکھوں کا تحفظ۔",
+            "sections.ppe.item3": "زیادہ شور والے علاقوں میں سماعت کا تحفظ۔",
+            "sections.incident.title": "واقعہ رپورٹنگ",
+            "sections.incident.item1": "واقعات فوراً سپروائزر کو رپورٹ کریں۔",
+            "sections.incident.item2": "واقعہ رپورٹ فارم مکمل کریں۔",
+            "sections.incident.item3": "ممکن ہو تو تصاویر شامل کریں۔",
+            "sections.toolbox.title": "ٹول باکس ٹاکس",
+            "sections.toolbox.item1": "کام شروع ہونے سے پہلے ٹول باکس ٹاک میں شریک ہوں۔",
+            "sections.toolbox.item2": "اگر کوئی چیز واضح نہ ہو تو سوال کریں۔",
+            "sections.toolbox.item3": "بریفنگ کے بعد حاضری پر دستخط کریں۔",
+            "sections.dos.title": "کیا کریں / کیا نہ کریں",
+            "sections.dos.item1": "کام کی جگہ صاف ستھری رکھیں۔",
+            "sections.dos.item2": "سپروائزر کی ہدایات پر عمل کریں۔",
+            "sections.dos.item3": "حفاظتی آلات کو بائی پاس نہ کریں۔",
+            "sections.dos.item4": "چلتے وقت فون استعمال نہ کریں۔"
+        },
+        payment_claims: {
+            title: "ادائیگی کے دعوے | Innovo",
+            "header.title": "ادائیگی کے دعوے",
+            "header.subtitle": "دعویٰ جمع کرانے کے مراحل اور تقاضے۔",
+            "sections.steps.title": "دعویٰ مراحل",
+            "sections.steps.item1": "فارم مکمل کریں اور دستاویزات منسلک کریں۔",
+            "sections.steps.item2": "آخری تاریخ سے پہلے جمع کرائیں۔",
+            "sections.steps.item3": "رسید یا ٹریکنگ نمبر محفوظ کریں۔",
+            "sections.steps.item4": "منظوری کی حالت ٹریک کریں اور سوالات کے جواب دیں۔",
+            "sections.docs.title": "ضروری دستاویزات",
+            "sections.docs.item1": "انڈوائس / بو لیٹنگ",
+            "sections.docs.item2": "حوالہ PO یا معاہدہ",
+            "sections.docs.item3": "ٹائم شیٹس یا ڈلیوری ثبوت",
+            "sections.docs.item4": "سپروائزر کی منظوری (ای میل یا دستخط)",
+            "sections.deadline.title": "آخری تاریخ",
+            "sections.deadline.item1": "ہفتہ وار دعوے ہر جمعرات جمع کریں۔",
+            "sections.deadline.item2": "تاخیر سے جمع کرانے والے اگلے سائیکل میں جاتے ہیں۔",
+            "sections.deadline.item3": "وضاحتوں کا جواب 48 گھنٹے میں دیں۔",
+            "sections.system.title": "سسٹم لنک",
+            "sections.system.subtitle": "سرکاری ادائیگی سسٹم (Oracle یا پورٹل لنک) استعمال کریں۔",
+            "sections.system.button": "Oracle پیمنٹ پورٹل کھولیں"
+        },
+        quality: {
+            title: "کوالٹی تقاضے | Innovo",
+            "header.title": "کوالٹی تقاضے",
+            "header.subtitle": "معائنہ، چیک لسٹ، اور مواد کی منظوری۔",
+            "sections.inspection.title": "معائنہ عمل",
+            "sections.inspection.item1": "معائنہ پہلے سے بُک کریں۔",
+            "sections.inspection.item2": "چیک لسٹ اور ڈرائنگز شامل کریں۔",
+            "sections.inspection.item3": "کوالٹی ٹیم کو 24 گھنٹے پہلے بھیجیں۔",
+            "sections.defects.title": "عیوب کے اصول",
+            "sections.defects.item1": "خرابی ملنے پر فوراً رپورٹ کریں۔",
+            "sections.defects.item2": "درستگی کے بعد دوبارہ معائنہ کرائیں۔",
+            "sections.material.title": "مواد کی منظوری",
+            "sections.material.item1": "مواد کی جمع آوری جلد بھیجیں۔",
+            "sections.material.item2": "منظوری سے پہلے تنصیب نہیں۔",
+            "sections.material.item3": "منظور شدہ دستاویزات سائٹ پر رکھیں۔"
+        },
+        howto: {
+            title: "کام کیسے کریں | Innovo",
+            "header.title": "کام کیسے کریں",
+            "header.subtitle": "عام کاموں کے لیے تیز گائیڈز۔",
+            "sections.inspection.title": "معائنہ بُک کریں",
+            "sections.inspection.item1": "معائنہ درخواست فارم پُر کریں۔",
+            "sections.inspection.item2": "چیک لسٹ اور ڈرائنگز منسلک کریں۔",
+            "sections.inspection.item3": "کوالٹی ٹیم کو 24 گھنٹے پہلے بھیجیں۔",
+            "sections.equipment.title": "آلات سائٹ پر لائیں",
+            "sections.equipment.item1": "آلات کی فہرست سکیورٹی کو دیں۔",
+            "sections.equipment.item2": "ضرورت ہو تو آپریٹر لائسنس دیں۔",
+            "sections.equipment.item3": "صرف منظور شدہ گیٹ سے داخل ہوں۔",
+            "sections.permit.title": "اجازت کی درخواست",
+            "sections.permit.item1": "کام شروع ہونے سے پہلے درخواست دیں۔",
+            "sections.permit.item2": "میٿڈ سٹیٹمنٹ اور رسک اسسمنٹ شامل کریں۔",
+            "sections.permit.item3": "منظوری کے بعد ہی آگے بڑھیں۔"
+        },
+        training: {
+            title: "تربیت | Innovo",
+            "header.title": "تربیت",
+            "header.subtitle": "مختصر ماڈیولز، سائن آف ٹریکنگ، اور آن بورڈنگ مواد۔",
+            "sections.modules.title": "مختصر تربیتی ماڈیولز",
+            "sections.modules.action1": "ماڈیولز شروع کریں",
+            "sections.modules.action2": "ماڈیول فہرست دیکھیں",
+            "sections.signoff.title": "منظوری اور سائن آف",
+            "sections.signoff.action1": "منظوری پر سائن کریں",
+            "sections.signoff.action2": "تکمیل کی حالت دیکھیں",
+            "sections.onboarding.title": "نئے کارکنوں کی آن بورڈنگ",
+            "sections.onboarding.action1": "انڈکشن شروع کریں",
+            "sections.onboarding.action2": "PPE گائیڈ ڈاؤن لوڈ کریں",
+            /* Training videos */
+            "training_videos.title": "تربیتی ویڈیوز",
+            "training_videos.subtitle": "سرکاری ویڈیوز آنے تک خودکار چلنے والے نمونے۔",
+            "training_videos.card1.title": "سائٹ انڈکشن",
+            "training_videos.card2.title": "حفاظت کی بنیادی باتیں",
+            "training_videos.card3.title": "رسائی اور تصدیق"
+        },
+        videos: {
+            title: "ویڈیوز | Innovو",
+            "header.title": "ویڈیوز",
+            "header.subtitle": "کام شروع کرنے سے پہلے 1 منٹ کی ویڈیوز دیکھیں۔",
+            "cards.safety.title": "حفاظت",
+            "cards.safety.placeholder": "1 منٹ کی ویڈیو دیکھیں",
+            "cards.safety.subtitle": "حفاظت کا جائزہ (1 منٹ)۔",
+            "cards.howto.title": "کیسے کریں",
+            "cards.howto.placeholder": "1 منٹ کی ویڈیو دیکھیں",
+            "cards.howto.subtitle": "معائنہ بُکنگ (1 منٹ)۔",
+            "cards.site.title": "سائٹ انٹری",
+            "cards.site.placeholder": "1 منٹ کی ویڈیو دیکھیں",
+            "cards.site.subtitle": "سائٹ انٹری قواعد (1 منٹ)۔"
+        },
+        issue_feedback: {
+            title: "مسائل و فیڈبیک | Innovo",
+            "header.title": "مسائل و فیڈبیک",
+            "header.subtitle": "سوالات، مسائل، اور خدشات براہ راست Innovo ٹیم کو بھیجیں۔",
+            "notice.safety": "آپ کی حفاظت ہماری پہلی ترجیح ہے۔ کوئی بھی خدشہ یا سوال ہو تو رابطہ کریں۔",
+            "sections.ask.title": "Innovo PM/سپر سے پوچھیں",
+            "sections.ask.desc": "پروجیکٹ سوالات کے لیے رہنمائی حاصل کریں۔",
+            "sections.ask.email.label": "آپ کا ای میل (جواب کیلئے ضروری) *",
+            "sections.ask.email.placeholder": "your.email@example.com",
+            "sections.ask.question.label": "آپ کا سوال *",
+            "sections.ask.question.placeholder": "اپنا سوال تفصیل سے لکھیں...",
+            "sections.ask.location.label": "مقام",
+            "sections.ask.location.placeholder": "سائٹ کا مقام یا علاقہ",
+            "sections.ask.trade.label": "ٹرید / ڈیپارٹمنٹ",
+            "sections.ask.trade.placeholder": "مثلاً الیکٹریکل، سول، MEP",
+            "sections.ask.upload.label": "حمایتی تصاویر اپ لوڈ کریں (اختیاری)",
+            "sections.ask.upload.cta": "تصاویر اپ لوڈ کرنے کیلئے کلک کریں",
+            "sections.ask.submit": "سوال بھیجیں",
+            "sections.anonymous.title": "گمنام حفاظتی خدشات",
+            "sections.anonymous.desc": "اپنی شناخت ظاہر کیے بغیر حفاظتی مسائل رپورٹ کریں۔",
+            "sections.anonymous.issue.label": "حفاظتی خدشہ *",
+            "sections.anonymous.issue.placeholder": "حفاظتی مسئلہ تفصیل سے لکھیں...",
+            "sections.anonymous.area.label": "علاقہ / مقام",
+            "sections.anonymous.area.placeholder": "مسئلے کا صحیح مقام",
+            "sections.anonymous.upload.label": "ثبوت کی تصاویر اپ لوڈ کریں (اختیاری)",
+            "sections.anonymous.upload.cta": "تصاویر اپ لوڈ کرنے کیلئے کلک کریں",
+            "sections.anonymous.submit": "گمنام رپورٹ بھیجیں",
+            "sections.report.title": "سائٹ مسائل رپورٹ کریں",
+            "sections.report.desc": "سائٹ مسائل کو ریکارڈ کریں اور جلد حل کریں۔",
+            "sections.report.email.label": "آپ کا ای میل (اپ ڈیٹس کیلئے) *",
+            "sections.report.email.placeholder": "your.email@example.com",
+            "sections.report.issue.label": "مسئلے کی تفصیل *",
+            "sections.report.issue.placeholder": "سائٹ مسئلہ تفصیل سے لکھیں...",
+            "sections.report.location.label": "مقام *",
+            "sections.report.location.placeholder": "مسئلے کا صحیح مقام",
+            "sections.report.priority.label": "ترجیحی سطح *",
+            "sections.report.priority.placeholder": "ترجیح منتخب کریں",
+            "sections.report.priority.low": "کم - انتظار کر سکتا ہے",
+            "sections.report.priority.medium": "درمیانہ - توجہ درکار",
+            "sections.report.priority.high": "زیادہ - فوری",
+            "sections.report.priority.critical": "انتہائی - حفاظتی خدشہ",
+            "sections.report.upload.label": "تصاویر یا دستاویزات شامل کریں (اختیاری)",
+            "sections.report.upload.cta": "فائلیں اپ لوڈ کرنے کیلئے کلک کریں",
+            "sections.report.submit": "مسئلہ رپورٹ کریں"
+        }
     }
 };
 
+// Temporary Urdu support: reuse Arabic translations (RTL) until dedicated Urdu copy is provided
 function getPageKey() {
     return document.body?.dataset?.page || 'common';
 }
@@ -779,9 +1146,9 @@ function applyTranslations(lang) {
 }
 
 function setLanguage(lang) {
-    const nextLang = lang === 'ar' || lang === 'hi' ? lang : 'en';
+    const nextLang = (lang === 'ar' || lang === 'hi' || lang === 'ur') ? lang : 'en';
     rootElement.lang = nextLang;
-    rootElement.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
+    rootElement.dir = (nextLang === 'ar' || nextLang === 'ur') ? 'rtl' : 'ltr';
     localStorage.setItem(LANGUAGE_KEY, nextLang);
     applyTranslations(nextLang);
     updateThemeToggle(rootElement.dataset.theme || 'light');
@@ -808,6 +1175,9 @@ if (lockedTheme) {
             toggle.addEventListener('click', () => {
                 const next = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
                 applyTheme(next);
+                if (toggle.closest('#mobile-panel')) {
+                    closeMobilePanel();
+                }
             });
         });
     }
@@ -830,6 +1200,57 @@ function hideLanguageOverlay() {
 function ensureLanguageOverlay() {
     languageOverlay = document.getElementById('language-overlay');
     languageLinks = Array.from(document.querySelectorAll('[data-language-select], .lang-menu a[data-lang]'));
+}
+
+function ensureMobileLanguageMenu() {
+    const panel = document.getElementById('mobile-panel');
+    if (!panel) return;
+
+    let langLink = panel.querySelector('[data-mobile-lang]');
+    if (!langLink) {
+        langLink = document.createElement('a');
+        langLink.href = '#';
+        langLink.dataset.mobileLang = 'true';
+        langLink.textContent = 'Choose Language';
+        panel.prepend(langLink);
+    }
+    langLink.dataset.mobileInlineMenu = 'true';
+
+    let inlineMenu = panel.querySelector('.mobile-lang-menu');
+    if (!inlineMenu) {
+        inlineMenu = document.createElement('div');
+        inlineMenu.className = 'mobile-lang-menu';
+        const langs = [
+            { code: 'en', label: 'ENGLISH' },
+            { code: 'ar', label: 'ARABIC' },
+            { code: 'hi', label: 'HINDI' },
+            { code: 'ur', label: 'URDU' },
+        ];
+        langs.forEach(({ code, label }) => {
+            const a = document.createElement('a');
+            a.href = '#';
+            a.dataset.languageSelect = '';
+            a.dataset.lang = code;
+            a.textContent = label;
+            inlineMenu.appendChild(a);
+        });
+        panel.insertBefore(inlineMenu, langLink.nextSibling);
+        ensureLanguageOverlay(); // include new links in languageLinks
+    }
+
+    // Toggle handled globally in mobileLangLinks listener to avoid double toggles
+}
+
+function bindMobilePanelAutoClose() {
+    if (!mobilePanel) return;
+    const items = mobilePanel.querySelectorAll('a, button');
+    items.forEach((item) => {
+        if (item.__autoCloseBound) return;
+        item.__autoCloseBound = true;
+        // Keep the panel open when clicking the language trigger so its submenu can open
+        if (item.matches('[data-mobile-lang]')) return;
+        item.addEventListener('click', () => closeMobilePanel());
+    });
 }
 
 // Add a mobile hamburger + quick panel on non-home pages (links + quick actions)
@@ -873,6 +1294,7 @@ function buildMobileMenuForContentPages() {
         themeBtn.addEventListener('click', () => {
             const next = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
             applyTheme(next);
+            closeMobilePanel();
         });
         panel.appendChild(themeBtn);
         themeToggles.push(themeBtn);
@@ -881,6 +1303,7 @@ function buildMobileMenuForContentPages() {
         homeLink.href = 'index.html';
         homeLink.dataset.i18n = 'nav.back_home';
         homeLink.textContent = 'Back to Home';
+        homeLink.addEventListener('click', () => closeMobilePanel());
         panel.appendChild(homeLink);
 
         if (navActions && navActions.parentNode) {
@@ -895,10 +1318,15 @@ function buildMobileMenuForContentPages() {
     // refresh refs for mobile menu
     mobileToggle = document.querySelector('[data-menu-toggle]');
     mobilePanel = document.getElementById('mobile-panel');
+    bindMobilePanelAutoClose();
 }
 
 ensureLanguageOverlay();
 buildMobileMenuForContentPages();
+ensureMobileLanguageMenu();
+ensureLanguageOverlay(); // refresh languageLinks to include mobile menu items
+setupLangSwitchDropdown();
+bindMobilePanelAutoClose();
 
 const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
 setLanguage(savedLanguage || 'en');
@@ -1068,6 +1496,13 @@ if (mobileLangLinks.length) {
     mobileLangLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
+            const inlineMenu = link.dataset.mobileInlineMenu === 'true'
+                ? link.nextElementSibling
+                : null;
+            if (inlineMenu && inlineMenu.classList.contains('mobile-lang-menu')) {
+                inlineMenu.classList.toggle('open');
+                return;
+            }
             const langSwitch = document.querySelector('.lang-switch');
             if (langSwitch) {
                 if (mobilePanel) mobilePanel.classList.remove('open');

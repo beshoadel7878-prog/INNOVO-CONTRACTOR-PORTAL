@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Issue & Feedback | Innovo</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
     <style>
         /* All CSS styles remain exactly the same */
         :root {
@@ -478,34 +479,43 @@
 
         @media (max-width: 768px) {
             .page-nav {
-                padding: 20px 16px;
-                flex-direction: column;
-                gap: 16px;
+                padding: 18px 16px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                position: relative;
             }
             
             .nav-actions {
-                width: 100%;
-                justify-content: center;
-                flex-direction: column;
-                align-items: stretch;
+                width: auto;
+                justify-content: flex-end;
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: nowrap;
+                gap: 10px;
             }
             
+            .nav-actions .nav-action {
+                display: none;
+            }
+
             .lang-switch {
-                width: 100%;
+                width: auto;
             }
             
             .lang-switch summary {
-                width: 100%;
-                text-align: center;
+                width: auto;
+                text-align: left;
             }
             
             .lang-menu {
-                position: relative;
-                top: 10px;
-                right: auto;
-                left: 0;
-                width: 100%;
-                margin-top: 5px;
+                position: absolute;
+                top: calc(100% + 10px);
+                right: 0;
+                left: auto;
+                width: 220px;
+                margin-top: 0;
             }
             
             .page-title {
@@ -532,17 +542,17 @@
             .action-icon {
                 margin: 0 auto;
             }
+
+            .menu-trigger {
+                display: inline-flex;
+            }
         }
 
         @media (max-width: 480px) {
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
             .nav-actions {
-                flex-direction: column;
-                width: 100%;
+                flex-direction: row;
+                width: auto;
+                gap: 8px;
             }
         }
 
@@ -585,7 +595,7 @@
         <a href="index.html" class="logo-link">
             <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
                  alt="Innovo Logo"
-                 class="logo-img glow-logo"
+                 class="logo-img"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
             <span style="display: none;">INNOVO</span>
         </a>
