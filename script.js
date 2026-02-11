@@ -11,6 +11,7 @@ let mobilePanel = document.getElementById('mobile-panel');
 const defaultTitle = document.title;
 let heroTypingTimer = null;
 let heroTypingFrame = null;
+let hasTypedInitial = false;
 const heroSubtitleSelector = '.hero-subtitle';
 
 const closeMobilePanel = () => {
@@ -1121,6 +1122,8 @@ function applyTranslations(lang) {
     const pageKey = getPageKey();
     const pageTranslations = translations[lang]?.[pageKey] || {};
     const commonTranslations = translations[lang]?.common || {};
+    const heroSubtitleKey = 'hero.subtitle';
+    let heroTextOverride = null;
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
@@ -1161,9 +1164,11 @@ function applyTranslations(lang) {
         }
     }
 
-    // Retype hero subtitle on home page after translation update
+    // Retype hero subtitle on home page after translation update (slight delay for smoother render)
     if (isHomePage()) {
-        startHeroTyping();
+        heroTextOverride = pageTranslations[heroSubtitleKey] ?? commonTranslations[heroSubtitleKey] ?? null;
+        const textToType = heroTextOverride;
+        setTimeout(() => startHeroTyping(textToType), 50);
     }
 }
 
@@ -1359,6 +1364,7 @@ if (languageLinks.length) {
                 clearTimeout(languageShowTimer);
                 languageShowTimer = null;
             }
+            const currentLang = rootElement.lang || 'en';
             const lang = link.getAttribute('data-lang') || link.dataset.lang;
             if (lang) {
                 setLanguage(lang);
@@ -1372,6 +1378,11 @@ if (languageLinks.length) {
             }
             if (mobilePanel) {
                 mobilePanel.classList.remove('open');
+            }
+
+            // بعد تغيير اللغة، أعد تحميل الصفحة لضمان تحديث كامل للنصوص إذا اختلفت اللغة
+            if (lang && lang !== currentLang) {
+                setTimeout(() => window.location.reload(), 60);
             }
         });
     });
@@ -1492,36 +1503,50 @@ if (siteHeader) {
     window.addEventListener('scroll', updateHeaderState, { passive: true });
 }
 
-function startHeroTyping() {
+function startHeroTyping(overrideText = null) {
     if (!isHomePage()) return;
+
     const subtitle = document.querySelector(heroSubtitleSelector);
     if (!subtitle) return;
-    const text = subtitle.textContent.trim();
-    if (!text) return;
-    // Respect reduced motion preference
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-        subtitle.textContent = text;
-        return;
-    }
-    if (heroTypingTimer) {
-        clearInterval(heroTypingTimer);
-        heroTypingTimer = null;
-    }
+
+    const text = (overrideText ?? subtitle.textContent).trim();
+
+    // تنظيف كامل للمؤقتات السابقة
     if (heroTypingFrame) {
         cancelAnimationFrame(heroTypingFrame);
         heroTypingFrame = null;
     }
+    if (heroTypingTimer) {
+        clearTimeout(heroTypingTimer);
+        heroTypingTimer = null;
+    }
+
+    // المرة الأولى: اعرض النص فورًا ثم ابدأ الأنيميشن بعد 1.5s
+    if (!hasTypedInitial) {
+        hasTypedInitial = true;
+        subtitle.textContent = text;
+        heroTypingTimer = setTimeout(() => {
+            executeTypingEffect(subtitle, text);
+        }, 1500);
+        return;
+    }
+
+    // في المرات التالية (تغيير لغة): ابدأ الأنيميشن فورًا
+    executeTypingEffect(subtitle, text);
+}
+
+function executeTypingEffect(subtitle, text) {
     subtitle.textContent = '';
-    let i = 0;
+
     const isMobile = window.matchMedia('(max-width: 640px)').matches;
-    const perCharMs = isMobile ? 32 : 45; // faster on mobile to reduce perceived lag
+    const perCharMs = isMobile ? 32 : 45;
+
+    let i = 0;
     let lastTs = performance.now();
     let carry = 0;
 
     const safetyTimeout = setTimeout(() => {
         subtitle.textContent = text;
-        if (heroTypingFrame) cancelAnimationFrame(heroTypingFrame);
         heroTypingFrame = null;
     }, Math.max(isMobile ? 2800 : 4500, text.length * perCharMs * 1.2));
 
@@ -1530,18 +1555,22 @@ function startHeroTyping() {
         lastTs = ts;
         carry += delta;
         const add = Math.floor(carry / perCharMs);
+
         if (add > 0) {
             i = Math.min(text.length, i + add);
             carry -= add * perCharMs;
             subtitle.textContent = text.slice(0, i);
         }
+
         if (i >= text.length) {
             clearTimeout(safetyTimeout);
             heroTypingFrame = null;
             return;
         }
+
         heroTypingFrame = requestAnimationFrame(step);
     };
+
     heroTypingFrame = requestAnimationFrame(step);
 }
 
@@ -1761,7 +1790,3 @@ window.onload = () => {
         });
     }
 };
-
-
-
-
