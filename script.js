@@ -10,6 +10,7 @@ let mobileToggle = document.querySelector('[data-menu-toggle]');
 let mobilePanel = document.getElementById('mobile-panel');
 const defaultTitle = document.title;
 let heroTypingTimer = null;
+let heroTypingFrame = null;
 const heroSubtitleSelector = '.hero-subtitle';
 
 const closeMobilePanel = () => {
@@ -1497,29 +1498,51 @@ function startHeroTyping() {
     if (!subtitle) return;
     const text = subtitle.textContent.trim();
     if (!text) return;
+    // Respect reduced motion preference
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+        subtitle.textContent = text;
+        return;
+    }
     if (heroTypingTimer) {
         clearInterval(heroTypingTimer);
         heroTypingTimer = null;
     }
+    if (heroTypingFrame) {
+        cancelAnimationFrame(heroTypingFrame);
+        heroTypingFrame = null;
+    }
     subtitle.textContent = '';
     let i = 0;
-    // Safety fallback: ensure full text appears even if tab throttles timers
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const perCharMs = isMobile ? 32 : 45; // faster on mobile to reduce perceived lag
+    let lastTs = performance.now();
+    let carry = 0;
+
     const safetyTimeout = setTimeout(() => {
         subtitle.textContent = text;
-        if (heroTypingTimer) clearInterval(heroTypingTimer);
-        heroTypingTimer = null;
-    }, Math.max(2200, text.length * 25));
+        if (heroTypingFrame) cancelAnimationFrame(heroTypingFrame);
+        heroTypingFrame = null;
+    }, Math.max(isMobile ? 2800 : 4500, text.length * perCharMs * 1.2));
 
-    heroTypingTimer = setInterval(() => {
-        if (i <= text.length) {
+    const step = (ts) => {
+        const delta = ts - lastTs;
+        lastTs = ts;
+        carry += delta;
+        const add = Math.floor(carry / perCharMs);
+        if (add > 0) {
+            i = Math.min(text.length, i + add);
+            carry -= add * perCharMs;
             subtitle.textContent = text.slice(0, i);
-            i += 1;
-        } else {
-            clearInterval(heroTypingTimer);
-            heroTypingTimer = null;
-            clearTimeout(safetyTimeout);
         }
-    }, 38); // slower typing to be noticeable on both desktop and mobile
+        if (i >= text.length) {
+            clearTimeout(safetyTimeout);
+            heroTypingFrame = null;
+            return;
+        }
+        heroTypingFrame = requestAnimationFrame(step);
+    };
+    heroTypingFrame = requestAnimationFrame(step);
 }
 
 if (mobileToggle && mobilePanel) {
