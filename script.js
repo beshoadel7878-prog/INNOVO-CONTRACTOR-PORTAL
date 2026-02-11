@@ -6,6 +6,8 @@ const lockedTheme = rootElement.dataset.themeLock;
 let languageOverlay = document.getElementById('language-overlay');
 let languageLinks = Array.from(document.querySelectorAll('[data-language-select]'));
 let languageShowTimer = null;
+let mobileToggle = document.querySelector('[data-menu-toggle]');
+let mobilePanel = document.getElementById('mobile-panel');
 const defaultTitle = document.title;
 
 function isHomePage() {
@@ -830,7 +832,73 @@ function ensureLanguageOverlay() {
     languageLinks = Array.from(document.querySelectorAll('[data-language-select], .lang-menu a[data-lang]'));
 }
 
+// Add a mobile hamburger + quick panel on non-home pages (links + quick actions)
+function buildMobileMenuForContentPages() {
+    if (isHomePage()) return;
+
+    const navActions = document.querySelector('.nav-actions') || document.querySelector('.page-nav');
+
+    if (!document.querySelector('[data-menu-toggle]')) {
+        const trigger = document.createElement('button');
+        trigger.type = 'button';
+        trigger.className = 'menu-trigger';
+        trigger.setAttribute('aria-label', 'Toggle menu');
+        trigger.setAttribute('data-menu-toggle', '');
+        trigger.innerHTML = '<span></span><span></span>';
+        if (navActions) {
+            navActions.appendChild(trigger);
+        } else {
+            document.body.prepend(trigger);
+        }
+    }
+
+    if (!document.getElementById('mobile-panel')) {
+        const panel = document.createElement('div');
+        panel.id = 'mobile-panel';
+        panel.className = 'mobile-panel';
+
+        // Quick actions
+        const langLink = document.createElement('a');
+        langLink.href = '#';
+        langLink.dataset.mobileLang = 'true';
+        langLink.dataset.i18n = 'nav.choose_language';
+        langLink.textContent = 'Choose Language';
+        panel.appendChild(langLink);
+
+        const themeBtn = document.createElement('button');
+        themeBtn.type = 'button';
+        themeBtn.className = 'mobile-panel-link';
+        themeBtn.dataset.themeToggle = '';
+        themeBtn.textContent = 'Dark Mode';
+        themeBtn.addEventListener('click', () => {
+            const next = rootElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        });
+        panel.appendChild(themeBtn);
+        themeToggles.push(themeBtn);
+
+        const homeLink = document.createElement('a');
+        homeLink.href = 'index.html';
+        homeLink.dataset.i18n = 'nav.back_home';
+        homeLink.textContent = 'Back to Home';
+        panel.appendChild(homeLink);
+
+        if (navActions && navActions.parentNode) {
+            navActions.parentNode.insertBefore(panel, navActions.nextSibling);
+        } else {
+            document.body.appendChild(panel);
+        }
+
+        updateThemeToggle(rootElement.dataset.theme || 'light');
+    }
+
+    // refresh refs for mobile menu
+    mobileToggle = document.querySelector('[data-menu-toggle]');
+    mobilePanel = document.getElementById('mobile-panel');
+}
+
 ensureLanguageOverlay();
+buildMobileMenuForContentPages();
 
 const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
 setLanguage(savedLanguage || 'en');
@@ -853,6 +921,9 @@ if (languageLinks.length) {
             }
             if (languageOverlay) {
                 hideLanguageOverlay();
+            }
+            if (mobilePanel) {
+                mobilePanel.classList.remove('open');
             }
         });
     });
@@ -954,8 +1025,6 @@ window.addEventListener('scroll', () => {
 });
 
 const siteHeader = document.getElementById('site-header');
-const mobileToggle = document.querySelector('[data-menu-toggle]');
-const mobilePanel = document.getElementById('mobile-panel');
 const searchOpens = Array.from(document.querySelectorAll('[data-search-open]'));
 const searchClose = document.querySelector('[data-search-close]');
 const searchOverlay = document.getElementById('search-overlay');
@@ -977,7 +1046,38 @@ if (siteHeader) {
 
 if (mobileToggle && mobilePanel) {
     mobileToggle.addEventListener('click', () => {
+        const langDetails = document.querySelector('.lang-switch');
+        if (langDetails) langDetails.removeAttribute('open');
         mobilePanel.classList.toggle('open');
+    });
+}
+
+// Close mobile panel if language dropdown opens
+const langDetails = document.querySelector('.lang-switch');
+if (langDetails) {
+    langDetails.addEventListener('toggle', () => {
+        if (langDetails.open && mobilePanel) {
+            mobilePanel.classList.remove('open');
+        }
+    });
+}
+
+// Mobile menu: choose language shortcut
+const mobileLangLinks = Array.from(document.querySelectorAll('[data-mobile-lang]'));
+if (mobileLangLinks.length) {
+    mobileLangLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const langSwitch = document.querySelector('.lang-switch');
+            if (langSwitch) {
+                if (mobilePanel) mobilePanel.classList.remove('open');
+                langSwitch.open = true;
+                const summary = langSwitch.querySelector('summary');
+                if (summary) summary.focus({ preventScroll: true });
+            } else if (typeof showLanguageOverlay === 'function') {
+                showLanguageOverlay();
+            }
+        });
     });
 }
 

@@ -1553,22 +1553,72 @@ nav {
     display: none;
     flex-direction: column;
     gap: 12px;
-    padding: 18px 24px 24px;
-    background: rgba(248, 250, 252, 0.98);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 18px 22px 22px;
+    margin: 8px 14px 16px;
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+    backdrop-filter: blur(10px);
 }
 
 .mobile-panel.open {
     display: flex;
 }
 
-.mobile-panel a {
+.mobile-panel a,
+.mobile-panel button {
     text-decoration: none;
     color: #0f172a;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-size: 0.7rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.mobile-panel a + a,
+.mobile-panel a + button,
+.mobile-panel button + a,
+.mobile-panel button + button {
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    padding-top: 12px;
+}
+
+.mobile-panel a:hover,
+.mobile-panel button:hover {
+    background: rgba(37, 99, 235, 0.08);
+    color: #0f172a;
+    transform: translateX(2px);
+}
+
+[data-theme="dark"] .mobile-panel {
+    background: rgba(15, 20, 29, 0.92);
+    border: 1px solid rgba(31, 41, 55, 0.7);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .mobile-panel a,
+[data-theme="dark"] .mobile-panel button {
+    color: #e5e7eb;
+}
+
+[data-theme="dark"] .mobile-panel a:hover,
+[data-theme="dark"] .mobile-panel button:hover {
+    background: rgba(59, 130, 246, 0.16);
+    color: #f8fafc;
+}
+
+.mobile-lang-inline {
+    display: none;
 }
 
 .home {
@@ -1997,9 +2047,46 @@ nav {
 @media (max-width: 640px) {
     .site-header-inner {
         padding: 1rem 1.2rem;
+        justify-content: space-between;
+        gap: 10px;
     }
 
     .hero-actions {
         flex-direction: column;
+    }
+
+    .hero {
+        min-height: 92vh;
+        padding: 130px 16px 70px;
+    }
+
+    .hero-content {
+        max-width: 90vw;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* Hide inline nav action buttons on mobile; leave language visible */
+    .nav-actions .nav-action {
+        display: none;
+    }
+
+    .mobile-lang-inline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-left: 0;
+    }
+
+    .site-actions {
+        margin-inline-start: auto;
+        margin-left: auto;
+    }
+
+    .site-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
     }
 }

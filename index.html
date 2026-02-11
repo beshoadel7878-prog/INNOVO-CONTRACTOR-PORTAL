@@ -18,13 +18,26 @@
 
     <header class="site-header" id="site-header">
         <div class="site-header-inner">
-            <a class="brand" href="index.html" aria-label="Innovo Contractor Portal">
-                <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
-                     alt="Innovo Logo"
-                     class="brand-logo"
-                     onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-flex';">
-                <span id="logo-text" class="brand-text" style="display: none;">INNOVO<span class="brand-accent">_</span></span>
-            </a>
+            <div class="site-left">
+                <a class="brand" href="index.html" aria-label="Innovo Contractor Portal">
+                    <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                         alt="Innovo Logo"
+                         class="brand-logo"
+                         onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-flex';">
+                    <span id="logo-text" class="brand-text" style="display: none;">INNOVO<span class="brand-accent">_</span></span>
+                </a>
+                <div class="mobile-lang-inline">
+                    <details class="lang-switch">
+                        <summary class="nav-link" data-i18n="nav.choose_language">Choose Language</summary>
+                        <div class="lang-menu">
+                            <a href="#" data-lang="en">English</a>
+                            <a href="#" data-lang="ar">Arabic</a>
+                            <a href="#" data-lang="hi">Hindi</a>
+                            <a href="lang-ur.html">Urdu</a>
+                        </div>
+                    </details>
+                </div>
+            </div>
 
             <nav class="site-nav">
                 <a href="dashboard.html" class="nav-link" data-i18n="nav.main_portal">Main Portal</a>
@@ -62,6 +75,9 @@
             <a href="documents.html" data-i18n="nav.documents">Documents</a>
             <a href="safety.html" data-i18n="nav.safety">Safety</a>
             <a href="payment-claims.html" data-i18n="nav.payment_claims">Payment Claims</a>
+            <a href="#" data-mobile-lang="true" data-i18n="nav.choose_language">Choose Language</a>
+            <button type="button" data-theme-toggle class="mobile-panel-link">Dark Mode</button>
+            <a href="index.html" data-i18n="nav.back_home">Back to Home</a>
         </div>
     </header>
 
