@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="title">Choose Category | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="uae-ksa-category" data-title-key="title">
+        <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language"><span>Choose Language</span></summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle><span>Dark Mode</span></button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home"><span>Back to Home</span></a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard"><span>Back to Dashboard</span></a>
+            <a href="uae-ksa-video.html" class="nav-action" data-i18n="btn.back"><span>Back</span></a>
+        </div>
+    </div></details>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">Thank you for watching the video</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Please select a category</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M22 18h20l8 10-8 10H22l-8-10z"/>
+                            <path d="M30 28h4v8h-4z"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="card.title">Welcome to the Innovo Safety Induction</h3>
+                </div>
+                <p class="text-gray-400" data-i18n="card.copy">
+                    If you are an external visitor please click on the Visitor button. If you are an Innovo employee please click on the Innovo Employee button.
+                </p>
+            </div>
+
+            <div class="grid gap-4 md:grid-cols-2">
+                <a class="btn-pill btn-pill-primary text-center" href="uae-ksa-visitor-form.html" data-i18n="btn.visitor">Visitor</a>
+                <a class="btn-pill btn-pill-locked text-center" href="uae-ksa-employee-form.html" style="border-color:#0b3059;background:#0b3059;box-shadow:0 12px 24px rgba(11,48,89,0.35);opacity:1;" data-i18n="btn.employee">Innovo Employee</a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navActions = document.getElementById("navActions");
+menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.classList.toggle('active');
+    navActions?.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+document.querySelectorAll('.nav-action').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (e.currentTarget.closest('.lang-switch')) return;
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
+
+

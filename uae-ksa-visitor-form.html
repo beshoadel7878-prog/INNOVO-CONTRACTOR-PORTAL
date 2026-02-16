@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="title">Visitor Safety Induction | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="uae-ksa-visitor-form" data-title-key="title">
+        <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language">
+                    <span>Choose Language</span>
+                </summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle>
+                <span>Dark Mode</span>
+            </button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home">
+                <span>Back to Home</span>
+            </a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard">
+                <span>Back to Dashboard</span>
+            </a>
+            <a href="uae-ksa-category.html" class="nav-action" data-i18n="btn.back">
+                <span>Back</span>
+            </a>
+        </div>
+    </div></details>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">Innovo safety induction form for visitors</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">In order to complete your safety induction, please fill up the form below.</p>
+    </div>
+
+    <div class="content-section">
+        <form class="max-w-4xl mx-auto space-y-6" action="uae-ksa-qr.html" method="get">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M12 22h40v28H12z"/>
+                            <path d="M24 22v-6a8 8 0 0 1 16 0v6"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="section.visitor.title">Visitor details</h3>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <label class="form-control"><span data-i18n="field.site">Please Select the site you are visiting:</span>
+                        <select name="site" required class="form-input">
+                            <option value="" disabled selected data-i18n="field.site.placeholder">Select Site...</option>
+                            <option>INNOVO Dubai</option>
+                            <option>INNOVO KSA</option>
+                            <option>INNOVO Egypt</option>
+                        </select>
+                    </label>
+                    <label class="form-control"><span data-i18n="field.first">First Name:</span>
+                        <input name="firstName" required class="form-input" placeholder="first name" data-i18n-placeholder="field.first.placeholder">
+                    </label>
+                    <label class="form-control"><span data-i18n="field.last">Last Name:</span>
+                        <input name="lastName" required class="form-input" placeholder="last name" data-i18n-placeholder="field.last.placeholder">
+                    </label>
+                    <label class="form-control"><span data-i18n="field.mobile">Mobile No:</span>
+                        <input name="mobile" required class="form-input" placeholder="eg. 0555555555" data-i18n-placeholder="field.mobile.placeholder" pattern="^\d{10}$" inputmode="numeric">
+                    </label>
+                    <label class="form-control"><span data-i18n="field.email">Email:</span>
+                        <input type="email" name="email" required class="form-input" placeholder="email" data-i18n-placeholder="field.email.placeholder">
+                    </label>
+                    <label class="form-control"><span data-i18n="field.company">Company Name:</span>
+                        <input name="company" required class="form-input" placeholder="company" data-i18n-placeholder="field.company.placeholder">
+                    </label>
+                    <label class="form-control"><span data-i18n="field.position">Position:</span>
+                        <input name="position" required class="form-input" placeholder="position" data-i18n-placeholder="field.position.placeholder">
+                    </label>
+                </div>
+            </div>
+
+            <div class="section-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="14" y="16" width="36" height="32" rx="6"/>
+                            <path d="M22 30h20M22 38h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="section.agree.title">Agreements</h3>
+                </div>
+                <div class="space-y-3">
+                    <label class="flex gap-3 items-start">
+                        <input type="checkbox" name="privacy" required class="mt-1">
+                        <span><span data-i18n="agree.privacy">Data Privacy Policy</span><br><span data-i18n="agree.privacy.copy">I agree to share my information with Innovo.</span></span>
+                    </label>
+                    <label class="flex gap-3 items-start">
+                        <input type="checkbox" name="safety" required class="mt-1">
+                        <span><span data-i18n="agree.safety">Safety induction Agreement</span><br><span data-i18n="agree.safety.copy">I agree to comply with all safety procedures throughout my visit on site.</span></span>
+                    </label>
+                    <div class="space-y-2">
+                        <p class="font-semibold text-sm text-gray-700" data-i18n="human.title">Human verification</p>
+                        <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY" data-callback="onHumanVerified" data-expired-callback="onHumanExpired"></div>
+                        <p class="text-xs text-gray-500"><span data-i18n="human.note">Please complete the reCAPTCHA to continue.</span></p>
+                    </div>
+                    <input type="text" name="website" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" tabindex="-1">
+                </div>
+            </div>
+
+            <div class="section-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M20 18h24M20 26h24M20 34h18M20 42h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="section.visit.title">Visit & contacts</h3>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <label class="form-control"><span data-i18n="visit.datetime">Date and Time of upcoming visit</span>
+                        <div class="grid gap-3 md:grid-cols-2">
+                            <input type="date" name="visitDate" required class="form-input" placeholder="dd/mm/yyyy">
+                            <input type="time" name="visitTime" required class="form-input" placeholder="--:-- --">
+                        </div>
+                    </label>
+                    <label class="form-control"><span data-i18n="contact.site">Site Contact</span><br><span class="text-gray-500 text-sm" data-i18n="contact.site.note">Innovo contact on site:</span>
+                        <input name="siteContact" class="form-input" placeholder="">
+                    </label>
+                    <label class="form-control"><span data-i18n="contact.person">Contact Person's Number:</span>
+                        <input name="siteContactNumber" class="form-input" placeholder="eg. 0555555555" data-i18n-placeholder="contact.person.placeholder" pattern="^\d{10}$" inputmode="numeric">
+                    </label>
+                    <label class="form-control"><span data-i18n="contact.email">Innovo contact email:</span>
+                        <input type="email" name="siteContactEmail" class="form-input" placeholder="">
+                    </label>
+                    <label class="form-control md:col-span-2"><span data-i18n="visit.purpose">Purpose of Visit:</span>
+                        <textarea name="purpose" class="form-input" rows="3" placeholder="Please describe the purpose of your visit..." data-i18n-placeholder="visit.purpose.placeholder"></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M32 10c8 0 14 6 14 14 0 12-14 22-14 22S18 36 18 24c0-8 6-14 14-14z"/>
+                            <circle cx="32" cy="24" r="5"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="section.emergency.title">Emergency Contact Details</h3>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <label class="form-control"><span data-i18n="emergency.person">Emergency Contact Person:</span>
+                        <input name="emergencyPerson" class="form-input">
+                    </label>
+                    <label class="form-control"><span data-i18n="emergency.number">Emergency Contact Number:</span>
+                        <input name="emergencyNumber" class="form-input" placeholder="eg. 0555555555" data-i18n-placeholder="emergency.number.placeholder" pattern="^\d{10}$" inputmode="numeric">
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+                <a href="uae-ksa-category.html" class="btn btn-outline" data-i18n="btn.back">Back</a>
+                <button id="visitor-submit" type="submit" class="btn btn-primary" data-i18n="btn.next">Next</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function onHumanVerified() {
+            const btn = document.getElementById('visitor-submit');
+            if (btn) btn.disabled = false;
+        }
+        function onHumanExpired() {
+            const btn = document.getElementById('visitor-submit');
+            // keep enabled as temporary fallback until real site key is added
+        }
+        // Fallback: enable submit if reCAPTCHA cannot load (e.g., invalid site key during setup)
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('visitor-submit');
+            if (!window.grecaptcha && btn) {
+                btn.disabled = false;
+            }
+        });
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<script>
+// Drawer menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navActions = document.getElementById('navActions');
+menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.classList.toggle('active');
+    navActions?.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+document.querySelectorAll('.nav-action').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (e.currentTarget.closest('.lang-switch')) return;
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
+
+

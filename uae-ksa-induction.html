@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="title">U.A.E &amp; KSA Induction | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="uae-ksa-induction" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language">
+                    <span>Choose Language</span>
+                </summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle>
+                <span>Dark Mode</span>
+            </button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home">
+                <span>Back to Home</span>
+            </a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard">
+                <span>Back to Dashboard</span>
+            </a>
+            <a href="safety.html" class="nav-action" data-i18n="btn.back">
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">Welcome to the Innovo Safety Induction</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Follow the steps below to complete your safety induction.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M12 28l20-12 20 12v20H12z"/>
+                            <path d="M24 30v12M40 30v12"/>
+                            <path d="M12 48h40"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.step1.title">Step 1: Watch the induction video</h3>
+                </div>
+                <p class="text-gray-400" data-i18n="sections.step1.copy">We would like you to watch a short video before you arrive on site.</p>
+            </div>
+
+            <div class="section-card card-accent-green">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <rect x="14" y="18" width="36" height="28" rx="4"/>
+                            <path d="M24 28h16M24 36h12"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.step2.title">Step 2: Complete the safety induction form</h3>
+                </div>
+                <p class="text-gray-400" data-i18n="sections.step2.copy">Please complete the safety induction form with your information afterwards.</p>
+            </div>
+
+            <div class="section-card card-accent-amber">
+                <div class="card-header">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64">
+                            <path d="M18 22h28v20H18z"/>
+                            <path d="M28 34l6 6 10-14"/>
+                        </svg>
+                    </span>
+                    <h3 class="text-xl font-bold" data-i18n="sections.qr.title">Your QR code</h3>
+                </div>
+                <p class="text-gray-400" data-i18n="sections.qr.copy">You will receive a QR code after completing these two steps, which you must present upon your arrival on site.</p>
+            </div>
+
+            <div class="text-center">
+                <a class="btn-pill btn-pill-primary" href="uae-ksa-video.html" data-i18n="cta.start">
+                    Click Here to Start Your Safety Induction
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Drawer menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navActions = document.getElementById('navActions');
+        menuToggle?.addEventListener('click', () => {
+            const isOpen = menuToggle.classList.toggle('active');
+            navActions?.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.querySelectorAll('.nav-action').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (e.currentTarget.closest('.lang-switch')) return;
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

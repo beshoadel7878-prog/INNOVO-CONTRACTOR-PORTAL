@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="title">Induction Complete | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="uae-ksa-qr" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language"><span>Choose Language</span></summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle><span>Dark Mode</span></button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home"><span>Back to Home</span></a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard"><span>Back to Dashboard</span></a>
+            <a href="safety.html" class="nav-action" data-i18n="btn.back"><span>Back</span></a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="header.title">You’re cleared for site entry</h1>
+        <p class="page-subtitle" data-i18n="header.subtitle">Show this QR at the gate. Remember: hard hat, high-vis vest, and safety boots are mandatory.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-4xl mx-auto grid gap-6 md:grid-cols-2 items-center">
+            <div class="anim-card">
+                <div class="success-burst"></div>
+                <div class="success-ring"></div>
+                <div class="success-icon">
+                    <svg viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="28" fill="currentColor" opacity="0.08"></circle>
+                        <path d="M20 33l8 8 16-18" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="anim-text">
+                    <p class="eyebrow" data-i18n="card.done.eyebrow">INDUCTION COMPLETE</p>
+                    <h3 data-i18n="card.done.title">Thank you for prioritizing safety.</h3>
+                    <p class="muted" data-i18n="card.done.copy">Keep your PPE on: hard hat, high-vis vest, safety boots.</p>
+                </div>
+            </div>
+
+            <div class="qr-card">
+                <p class="qr-title" data-i18n="qr.title">Your Site QR</p>
+                <div class="qr-box">
+                    <div class="qr-pattern"></div>
+                    <div class="qr-center">INNOVO</div>
+                </div>
+                <p class="qr-note" data-i18n="qr.note">Present this QR at the gate. Keep your ID ready.</p>
+                <div class="qr-actions">
+                    <a class="btn btn-primary" href="#" data-i18n="btn.download">Download QR</a>
+                    <a class="btn btn-outline" href="index.html" data-i18n="btn.home">Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+const menuToggle = document.getElementById("menuToggle");
+const navActions = document.getElementById("navActions");
+menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.classList.toggle('active');
+    navActions?.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+document.querySelectorAll('.nav-action').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (e.currentTarget.closest('.lang-switch')) return;
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
+</body>
+</html>
+

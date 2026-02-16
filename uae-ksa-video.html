@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-title-key="video.title">Induction Video | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="uae-ksa-video" data-title-key="video.title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language">
+                    <span>Choose Language</span>
+                </summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle>
+                <span>Dark Mode</span>
+            </button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home">
+                <span>Back to Home</span>
+            </a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard">
+                <span>Back to Dashboard</span>
+            </a>
+            <a href="uae-ksa-induction.html" class="nav-action" data-i18n="btn.back">
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1 class="page-title" data-i18n="video.header.title">Your safety is our priority</h1>
+        <p class="page-subtitle" data-i18n="video.header.subtitle">This video is a part of your safety orientation. After viewing the safety video, please proceed to fill up the safety induction form.</p>
+    </div>
+
+    <div class="content-section">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="section-card card-accent-blue">
+                <div class="card-header">
+                    <h3 class="text-xl font-bold" data-i18n="video.card.title">Safety Induction Video</h3>
+                </div>
+                <div id="video-shell" class="relative aspect-video rounded-xl overflow-hidden bg-black shadow-lg">
+                    <video id="induction-video"
+                           class="w-full h-full"
+                           preload="auto"
+                           playsinline
+                           controlsList="nodownload noplaybackrate noremoteplayback"
+                           disablePictureInPicture
+                           oncontextmenu="return false;">
+                        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-control-overlay">
+                        <button id="overlay-toggle" class="video-play-btn" type="button" aria-label="Play or pause video">
+                            <svg id="overlay-icon" viewBox="0 0 64 64">
+                                <path d="M24 18l24 14-24 14z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button id="fs-toggle" class="fs-btn" type="button" aria-label="Toggle fullscreen">
+                        <svg id="fs-icon" viewBox="0 0 24 24">
+                            <path d="M4 9V5h4M4 4l6 6"/>
+                            <path d="M20 9V5h-4M20 4l-6 6"/>
+                            <path d="M4 15v4h4M4 20l6-6"/>
+                            <path d="M20 15v4h-4M20 20l-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-gray-400 mt-3 text-sm" data-i18n="video.card.note">Please watch the full video. Seeking/fast-forward is disabled.</p>
+                <button id="next-button" class="btn-pill btn-pill-locked" type="button" disabled data-i18n="btn.next">
+                    <svg id="lock-icon" class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="4" y="11" width="16" height="9" rx="2" ry="2"></rect>
+                        <path d="M8 11V7a4 4 0 1 1 8 0v4"></path>
+                    </svg>
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const video = document.getElementById('induction-video');
+            const nextBtn = document.getElementById('next-button');
+            const lockIcon = document.getElementById('lock-icon');
+            const shell = document.getElementById('video-shell');
+            const overlayToggle = document.getElementById('overlay-toggle');
+            const overlayIcon = document.getElementById('overlay-icon');
+            const fsToggle = document.getElementById('fs-toggle');
+            const fsIcon = document.getElementById('fs-icon');
+            let lastTime = 0;
+            let lastAlertAt = 0;
+            const safetyMsg = "For your safety and smooth site entry, please watch the full induction video before moving on.";
+
+            if (video) {
+                // Disable native controls to block seeking; use custom play/pause.
+                video.controls = false;
+
+                const toggleVideo = async () => {
+                    if (video.paused) {
+                        await video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                };
+
+                if (overlayToggle) {
+                    overlayToggle.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        await toggleVideo();
+                    });
+                }
+
+                // Allow click anywhere on video to toggle
+                video.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await toggleVideo();
+                });
+
+                const showPlayIcon = () => {
+                    if (overlayToggle) overlayToggle.classList.remove('hide');
+                    if (overlayIcon) overlayIcon.innerHTML = '<path d="M24 18l24 14-24 14z"/>';
+                };
+                const showPauseIcon = () => {
+                    if (overlayToggle) overlayToggle.classList.add('hide');
+                };
+
+                video.addEventListener('play', showPauseIcon);
+                video.addEventListener('pause', showPlayIcon);
+                showPlayIcon();
+
+                // Fullscreen handling
+                const isFull = () => {
+                    const el = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+                    return el === shell;
+                };
+                const enterFull = () => {
+                    const target = shell || video;
+                    if (target.requestFullscreen) return target.requestFullscreen();
+                    if (target.webkitRequestFullscreen) return target.webkitRequestFullscreen();
+                    if (target.msRequestFullscreen) return target.msRequestFullscreen();
+                };
+                const exitFull = () => {
+                    if (document.exitFullscreen) return document.exitFullscreen();
+                    if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+                    if (document.msExitFullscreen) return document.msExitFullscreen();
+                };
+                const updateFsIcon = () => {
+                    if (!fsIcon) return;
+                    if (isFull()) {
+                        fsIcon.innerHTML = '<path d="M9 9H5v4M4 4l6 6"/><path d="M15 9h4V5m1-1-6 6"/><path d="M9 15H5v4m-1 1 6-6"/><path d="M15 15h4v4m1 1-6-6"/>';
+                    } else {
+                        fsIcon.innerHTML = '<path d="M4 9V5h4M4 4l6 6"/><path d="M20 9V5h-4M20 4l-6 6"/><path d="M4 15v4h4M4 20l6-6"/><path d="M20 15v4h-4M20 20l-6-6"/>';
+                    }
+                };
+
+                if (fsToggle) {
+                    fsToggle.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (isFull()) {
+                            exitFull();
+                        } else {
+                            enterFull();
+                        }
+                    });
+                }
+
+                ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach((ev) => {
+                    document.addEventListener(ev, updateFsIcon);
+                });
+                updateFsIcon();
+
+                // Block keyboard seeking during fullscreen
+                document.addEventListener('keydown', (e) => {
+                    if (!isFull()) return;
+                    const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'];
+                    if (keys.includes(e.key)) {
+                        e.preventDefault();
+                        if (Date.now() - lastAlertAt > 1200) {
+                            alert(safetyMsg);
+                            lastAlertAt = Date.now();
+                        }
+                    }
+                });
+
+                video.addEventListener('timeupdate', () => {
+                    lastTime = video.currentTime;
+                });
+
+                // Prevent skipping/dragging forward
+                video.addEventListener('seeking', () => {
+                    if (video.currentTime > lastTime + 0.3) {
+                        video.currentTime = lastTime;
+                        if (Date.now() - lastAlertAt > 1200) {
+                            alert(safetyMsg);
+                            lastAlertAt = Date.now();
+                        }
+                    }
+                });
+
+                video.addEventListener('ended', () => {
+                    nextBtn.disabled = false;
+                    nextBtn.classList.remove('btn-pill-locked');
+                    nextBtn.classList.add('btn-pill-primary');
+                    if (lockIcon) {
+                        lockIcon.classList.add('unlock');
+                        lockIcon.innerHTML = '<rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect><path d="M9 11V8a3 3 0 1 1 6 0"></path>';
+                    }
+                    nextBtn.onclick = () => window.location.href = 'uae-ksa-category.html';
+                });
+
+                nextBtn.addEventListener('click', (e) => {
+                    if (nextBtn.disabled) {
+                        e.preventDefault();
+                        if (Date.now() - lastAlertAt > 1200) {
+                            alert(safetyMsg);
+                            lastAlertAt = Date.now();
+                        }
+                    }
+                });
+            }
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+// Drawer menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navActions = document.getElementById('navActions');
+menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.classList.toggle('active');
+    navActions?.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.addEventListener('click', (e) => {
+    if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+document.querySelectorAll('.nav-action').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (e.currentTarget.closest('.lang-switch')) return;
+        menuToggle.classList.remove('active');
+        navActions.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>

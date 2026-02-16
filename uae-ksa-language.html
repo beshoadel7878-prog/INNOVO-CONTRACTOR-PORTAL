@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Language | Innovo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* شريط التنقل العلوي مع قائمة جانبية */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .logo-link { display: flex; align-items: center; transition: transform 0.3s ease; }
+        .logo-link:hover { transform: scale(1.05); }
+        .logo-img { height: 90px; width: auto; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05)); }
+
+        .menu-toggle {
+            position: relative;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease; z-index: 1000;
+        }
+        .menu-toggle span { width: 22px; height: 2px; background: white; border-radius: 4px; transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scale(0); }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+        .menu-toggle:hover { transform: scale(1.1) rotate(180deg); box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.6); }
+
+        .nav-actions {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: min(320px, 92vw);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59,130,246,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-actions.active { right: 20px; }
+
+        .nav-action {
+            position: relative;
+            padding: 1rem 1.5rem !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            border-radius: 60px !important;
+            background: white !important;
+            border: 2px solid #e2e8f0 !important;
+            color: #1e293b !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            cursor: pointer;
+            text-decoration: none;
+            width: 100%;
+            text-align: left;
+            transform-origin: right;
+            animation: slideIn 0.3s ease backwards;
+        }
+        .nav-action:nth-child(1){animation-delay:0.1s;} .nav-action:nth-child(2){animation-delay:0.15s;}
+        .nav-action:nth-child(3){animation-delay:0.2s;} .nav-action:nth-child(4){animation-delay:0.25s;}
+        .nav-action:nth-child(5){animation-delay:0.3s;}
+        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0);} }
+        .nav-action:hover {
+            transform: translateX(-8px) scale(1.02) !important;
+            border-color: transparent !important;
+            background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(59,130,246,0.3) !important;
+        }
+
+        /* قائمة اللغة داخل النافبار */
+        .lang-switch { width: 100%; }
+        .lang-switch summary { list-style: none; cursor: pointer; width: 100%; }
+        .lang-switch summary::-webkit-details-marker { display: none; }
+        .lang-menu {
+            background: white; border-radius: 16px; padding: 8px; margin-top: 8px;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0;
+        }
+        .lang-menu a {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            text-decoration: none; color: #1e293b; font-size: 0.95rem; font-weight: 500;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .lang-menu a:hover { background: linear-gradient(135deg, #f8fafc, #f1f5f9); transform: translateX(8px); }
+
+        /* خلفية وبطاقة اللغة */
+        .lang-hero {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.12), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(11,48,89,0.08), transparent 40%),
+                        linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .lang-hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMTBhMjAgMjAgMCAwIDEgMjAgMjAgMjAgMjAgMCAwIDEtNDAgMCAyMCAyMCAwIDAgMSAyMC0yMHoiIGZpbGw9InJnYmEoNTksMTMwLDI0NiwwLjAyKSIgZmlsdGVyPSJibHVyKDJweCkiLz48L3N2Zz4=');
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .lang-card {
+            max-width: 800px; width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 32px;
+            padding: 40px 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(59,130,246,0.1) inset;
+            position: relative; overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lang-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -12px rgba(11,48,89,0.3), 0 0 0 2px rgba(59,130,246,0.2) inset; }
+        .lang-card::after {
+            content: ""; position: absolute; inset: -50%;
+            background: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.15), transparent 50%);
+            pointer-events: none; animation: subtleGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes subtleGlow { 0% { transform: scale(1) rotate(0deg); opacity: 0.5; } 100% { transform: scale(1.1) rotate(2deg); opacity: 0.8; } }
+
+        .eyebrow {
+            font-size: 0.875rem; font-weight: 600; letter-spacing: 0.3em; color: #3b82f6;
+            margin-bottom: 1rem; text-transform: uppercase; position: relative; display: inline-block;
+        }
+        .eyebrow::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 40px; height: 2px; background: linear-gradient(90deg, #3b82f6, transparent); border-radius: 2px; }
+
+        .lang-text {
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.3;
+            min-height: 4rem;
+            color: #0b3059;
+            margin: 1.5rem 0 0.5rem;
+        }
+        .lang-animate {
+            display: inline-block;
+            animation: fadeUpIn 0.5s ease forwards;
+            background: linear-gradient(135deg, #0b3059, #1e4b7a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+        .lang-animate:hover { transform: translateY(-2px) scale(1.02); filter: drop-shadow(0 10px 20px rgba(59,130,246,0.3)); }
+        @keyframes fadeUpIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .lang-buttons {
+            display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin: 32px 0 28px;
+        }
+        .btn-lang {
+            position: relative;
+            padding: 16px 24px !important;
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            border-radius: 60px !important;
+            background: white !important;
+            border: 2px solid #e2e8f0 !important;
+            color: #1e293b !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        }
+        .btn-lang::before {
+            content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%;
+            background: rgba(59, 130, 246, 0.2); transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease;
+        }
+        .btn-lang:hover {
+            transform: translateY(-3px) scale(1.02) !important;
+            border-color: #3b82f6 !important;
+            color: #3b82f6 !important;
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3), 0 10px 10px -5px rgba(59, 130, 246, 0.2) !important;
+        }
+        .btn-lang:hover::before { width: 300px; height: 300px; }
+        .btn-lang.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+            border-color: #3b82f6 !important;
+            color: white !important;
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5), 0 10px 10px -5px rgba(59, 130, 246, 0.3) !important;
+            transform: scale(1.05);
+            animation: gentlePulse 2s infinite;
+        }
+        .btn-lang.active::before { display: none; }
+        @keyframes gentlePulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+
+        .nav-actions-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        .btn-nav {
+            padding: 14px 32px !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            border-radius: 40px !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex; align-items: center; gap: 8px; letter-spacing: 0.5px;
+        }
+        .btn-nav.back {
+            background: transparent !important;
+            border: 2px solid #e2e8f0 !important;
+            color: #64748b !important;
+        }
+        .btn-nav.back:hover { border-color: #94a3b8 !important; color: #334155 !important; transform: translateX(-4px) !important; background: #f8fafc !important; }
+        .btn-nav.next {
+            background: linear-gradient(135deg, #0b3059, #1e4b7a) !important;
+            border: none !important;
+            color: white !important;
+            box-shadow: 0 10px 15px -3px rgba(11,48,89,0.3) !important;
+        }
+        .btn-nav.next:hover { transform: translateX(4px) scale(1.05) !important; box-shadow: 0 20px 25px -5px rgba(11,48,89,0.4) !important; background: linear-gradient(135deg, #12406b, #2a5f94) !important; }
+        .btn-nav.next:active { transform: translateX(4px) scale(0.98) !important; }
+
+        @media (max-width: 768px) {
+            .page-nav { padding: 1rem; }
+            .nav-actions { width: calc(100% - 40px); right: -100%; }
+            .nav-actions.active { right: 20px; }
+            .lang-card { padding: 30px 20px; }
+            .lang-buttons { grid-template-columns: 1fr; }
+            .btn-lang { padding: 14px 20px !important; }
+            .nav-actions-bottom { flex-direction: column; gap: 12px; }
+            .btn-nav { width: 100%; justify-content: center; }
+        }
+
+        /* Dark mode overrides */
+        .dark-mode .page-nav { background: rgba(15, 23, 42, 0.85); border-bottom-color: rgba(51, 65, 85, 0.6); }
+        .dark-mode .nav-actions { background: rgba(30, 41, 59, 0.95); border-color: rgba(51, 65, 85, 0.3); }
+        .dark-mode .nav-action { background: #1e293b !important; border-color: #334155 !important; color: #e2e8f0 !important; }
+        .dark-mode .nav-action:hover { background: linear-gradient(135deg, #1e293b, #0f172a) !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(59,130,246,0.3) !important; }
+        .dark-mode .lang-menu { background: #1e293b; border-color: #334155; }
+        .dark-mode .lang-menu a { color: #e2e8f0; }
+        .dark-mode .lang-menu a:hover { background: #334155; }
+        .dark-mode .lang-card { background: rgba(30, 41, 59, 0.85); border-color: rgba(51, 65, 85, 0.3); }
+        .dark-mode .lang-text { color: #e2e8f0; }
+        .dark-mode .btn-lang { background: #1e293b !important; border-color: #334155 !important; color: #e2e8f0 !important; }
+        .dark-mode .btn-lang.active { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; color: white !important; }
+        .dark-mode .btn-nav.back { background: transparent !important; border-color: #334155 !important; color: #94a3b8 !important; }
+        .dark-mode .btn-nav.back:hover { background: #1e293b !important; color: #e2e8f0 !important; }
+    </style>
+</head>
+<body data-page="uae-ksa-language" data-title-key="title">
+    <div class="page-nav">
+        <a href="index.html" class="logo-link">
+            <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
+                 alt="Innovo Logo"
+                 class="logo-img"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <span style="display: none;">INNOVO</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <div class="nav-actions" id="navActions">
+            <details class="lang-switch">
+                <summary class="nav-action" data-i18n="nav.choose_language">
+                    <span>Choose Language</span>
+                </summary>
+                <div class="lang-menu">
+                    <a href="#" data-language-select data-lang="en">🇬🇧 ENGLISH</a>
+                    <a href="#" data-language-select data-lang="ar">🇸🇦 ARABIC</a>
+                    <a href="#" data-language-select data-lang="hi">🇮🇳 HINDI</a>
+                    <a href="#" data-language-select data-lang="ur">🇵🇰 URDU</a>
+                </div>
+            </details>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle>
+                <span>Dark Mode</span>
+            </button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home">
+                <span>Back to Home</span>
+            </a>
+            <a href="dashboard.html" class="nav-action" data-i18n="nav.back_dashboard">
+                <span>Back to Dashboard</span>
+            </a>
+            <a href="uae-ksa-induction.html" class="nav-action" data-i18n="btn.back">
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="lang-hero">
+        <div class="lang-card">
+            <p class="eyebrow" style="letter-spacing:0.2em;">CHOOSE LANGUAGE</p>
+            <div class="lang-text" id="lang-rotator"></div>
+            <p class="text-gray-500 mt-3">Pick your preferred language to continue the safety induction.</p>
+            <div class="lang-buttons">
+                <button class="btn btn-outline btn-lang active" data-lang-choice="en">English</button>
+                <button class="btn btn-outline btn-lang" data-lang-choice="ar">Arabic</button>
+                <button class="btn btn-outline btn-lang" data-lang-choice="hi">Hindi</button>
+                <button class="btn btn-outline btn-lang" data-lang-choice="ur">Urdu</button>
+            </div>
+            <div class="flex justify-between items-center mt-6">
+                <a href="safety.html" class="btn btn-outline">Back</a>
+                <button id="next-lang" class="btn btn-primary" type="button">Next</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const messages = [
+            { lang: 'en', text: 'Would you like to continue your training in English?' },
+            { lang: 'ar', text: 'هل تود إكمال التدريب باللغة العربية؟' },
+            { lang: 'hi', text: 'क्या आप प्रशिक्षण हिंदी में जारी रखना चाहेंगे?' },
+            { lang: 'ur', text: 'کیا آپ تربیت اردو میں جاری رکھنا چاہیں گے؟' }
+        ];
+        const rotator = document.getElementById('lang-rotator');
+        const langButtons = document.querySelectorAll('[data-lang-choice]');
+        let idx = 0;
+        let chosenLang = 'en';
+
+        // القائمة الجانبية (الهامبرغر)
+        const menuToggle = document.getElementById('menuToggle');
+        const navActions = document.getElementById('navActions');
+        menuToggle?.addEventListener('click', () => {
+            const isOpen = menuToggle.classList.toggle('active');
+            navActions?.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.querySelectorAll('.nav-action').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // لا تغلق القائمة إذا كان النقر داخل اختيار اللغة
+                if (e.currentTarget.closest('.lang-switch')) return;
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        function resetLanguageChoice() {
+            chosenLang = 'en';
+            langButtons.forEach((b) => {
+                if (b.dataset.langChoice === 'en') {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+        }
+        function showMessage() {
+            if (!rotator) return;
+            const m = messages[idx];
+            rotator.innerHTML = `<span class="lang-animate">${m.text}</span>`;
+            idx = (idx + 1) % messages.length;
+        }
+        showMessage();
+        setInterval(showMessage, 1800);
+
+        // language selection sets localStorage (for next pages only) and highlights choice
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = e.currentTarget.dataset.langChoice || 'en';
+                chosenLang = lang;
+                langButtons.forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                e.currentTarget.classList.add('pop');
+                e.currentTarget.addEventListener('animationend', () => e.currentTarget.classList.remove('pop'), { once: true });
+                try { localStorage.setItem('innovo-lang', chosenLang); } catch (err) {}
+            });
+        });
+
+        document.getElementById('next-lang')?.addEventListener('click', () => {
+            try { localStorage.setItem('innovo-lang', chosenLang); } catch (err) {}
+            window.location.href = 'uae-ksa-induction.html';
+        });
+
+        // Always start English (do not persist on this page)
+        resetLanguageChoice();
+        window.addEventListener('pageshow', resetLanguageChoice);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

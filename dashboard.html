@@ -16,9 +16,14 @@
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
             <span style="display: none;">INNOVO</span>
         </a>
-        <div class="nav-actions">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-actions nav-drawer" id="navActions">
             <details class="lang-switch">
-                <summary class="btn btn-outline nav-action" data-i18n="nav.choose_language">Choose Language</summary>
+                <summary class="nav-action" data-i18n="nav.choose_language">
+                    <span>Choose Language</span>
+                </summary>
                 <div class="lang-menu">
                     <a href="#" data-language-select data-lang="en">ENGLISH</a>
                     <a href="#" data-language-select data-lang="ar">ARABIC</a>
@@ -26,8 +31,12 @@
                     <a href="#" data-language-select data-lang="ur">URDU</a>
                 </div>
             </details>
-            <button type="button" class="btn btn-outline nav-action theme-toggle" data-theme-toggle>Dark Mode</button>
-            <a href="index.html" class="btn btn-outline nav-action" data-i18n="nav.back_home">Back to Home</a>
+            <button type="button" class="nav-action theme-toggle" data-theme-toggle>
+                <span>Dark Mode</span>
+            </button>
+            <a href="index.html" class="nav-action" data-i18n="nav.back_home">
+                <span>Back to Home</span>
+            </a>
         </div>
     </div>
 
@@ -121,6 +130,50 @@
             </a>
         </div>
     </div>
+    <script>
+        // Drawer menu toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navActions = document.getElementById("navActions");
+        menuToggle?.addEventListener('click', () => {
+            const isOpen = menuToggle.classList.toggle('active');
+            navActions?.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navActions.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.querySelectorAll('.nav-action').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (e.currentTarget.closest('.lang-switch')) return;
+                menuToggle.classList.remove('active');
+                navActions.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Dark mode toggle (uses .dark-mode class defined in styles.css)
+        const themeToggle = document.querySelector('[data-theme-toggle]');
+        if (themeToggle) {
+            const applyTheme = (mode) => {
+                document.body.classList.toggle('dark-mode', mode === 'dark');
+                themeToggle.innerHTML = `<span>${mode === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>`;
+                localStorage.setItem('theme', mode);
+            };
+            const saved = localStorage.getItem('theme');
+            applyTheme(saved === 'dark' ? 'dark' : 'light');
+            themeToggle.addEventListener('click', () => {
+                const mode = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+                applyTheme(mode);
+                menuToggle?.classList.remove('active');
+                navActions?.classList.remove('active');
+                menuToggle?.setAttribute('aria-expanded', 'false');
+            });
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
