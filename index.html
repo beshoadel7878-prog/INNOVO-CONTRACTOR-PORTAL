@@ -1,153 +1,686 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-theme-lock="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Subcontractor Portal | Construction Excellence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Innovo | Subcontractor Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins (الخط الرسمي) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== الألوان الرسمية من Brand Guidelines صفحة 26 ===== */
+        :root {
+            --slate: #122023;
+            --white: #ffffff;
+            --aqua: #9ef3ee;
+            --slate-rgb: 18, 32, 35;
+            --aqua-rgb: 158, 243, 238;
+        }
+
+        /* ===== تطبيق خط Poppins ===== */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--slate);
+            background-color: var(--white);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ===== ألوان الخلفيات ===== */
+        .bg-slate {
+            background-color: var(--slate) !important;
+        }
+        .bg-white {
+            background-color: var(--white) !important;
+        }
+        .bg-aqua {
+            background-color: var(--aqua) !important;
+        }
+        .text-slate {
+            color: var(--slate) !important;
+        }
+        .text-white {
+            color: var(--white) !important;
+        }
+        .text-aqua {
+            color: var(--aqua) !important;
+        }
+
+        /* ===== شريط التنقل (مطابق للموقع الرسمي) ===== */
+        .navbar {
+            background-color: var(--white) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 0.8rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand img {
+            height: 45px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--slate);
+            padding: 0.5rem 1rem !important;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: var(--aqua);
+        }
+        .lang-dropdown .dropdown-toggle {
+            background: none;
+            border: none;
+            font-weight: 500;
+            color: var(--slate);
+        }
+        .lang-dropdown .dropdown-menu {
+            min-width: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+            padding: 0.5rem 0;
+        }
+        .lang-dropdown .dropdown-item {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .lang-dropdown .dropdown-item:hover {
+            background-color: rgba(158, 243, 238, 0.1);
+            color: var(--slate);
+        }
+        .search-trigger {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--slate);
+            cursor: pointer;
+        }
+
+        /* ===== قسم الفيديو (مطابق تماماً للموقع الرسمي) ===== */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(18, 32, 35, 0.8) 0%, rgba(18, 32, 35, 0.4) 100%);
+            z-index: 2;
+        }
+        .video-content {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            width: 100%;
+            padding-top: 80px;
+        }
+        .video-content h1 {
+            font-size: 4.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .video-content h1 .accent {
+            color: var(--aqua);
+            display: block;
+            font-weight: 300;
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .video-content .lead {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+        .btn-primary-custom {
+            background-color: var(--aqua);
+            border: 2px solid var(--aqua);
+            color: var(--slate);
+            font-weight: 600;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(158, 243, 238, 0.3);
+        }
+        .btn-primary-custom:hover {
+            background-color: transparent;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(158, 243, 238, 0.4);
+        }
+        .btn-outline-custom {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            font-weight: 600;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+        .btn-outline-custom:hover {
+            background-color: var(--white);
+            color: var(--slate);
+            transform: translateY(-2px);
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            color: var(--white);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+
+        /* ===== قسم البطاقات ===== */
+        .section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--slate);
+        }
+        .section-title .accent {
+            color: var(--aqua);
+            font-weight: 300;
+        }
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+        .portal-card {
+            background-color: var(--white);
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        }
+        .portal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(18, 32, 35, 0.1);
+            border-color: var(--aqua);
+        }
+        .portal-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(158, 243, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2.5rem;
+            color: var(--slate);
+            transition: all 0.3s ease;
+        }
+        .portal-card:hover .portal-icon {
+            background: var(--aqua);
+            color: var(--slate);
+            transform: scale(1.1);
+        }
+        .portal-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .portal-card p {
+            color: #6c757d;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        .card-label {
+            display: inline-block;
+            background: rgba(158, 243, 238, 0.2);
+            border-radius: 50px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--slate);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* ===== الإحصائيات ===== */
+        .stats-row {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--aqua);
+            line-height: 1.2;
+        }
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Why Innovo Section ===== */
+        .why-innovo {
+            background-color: #f8f9fa;
+        }
+        .why-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+
+        /* ===== تذييل الصفحة ===== */
+        .footer {
+            background-color: var(--slate);
+            color: var(--white);
+            padding: 4rem 0 2rem 0;
+        }
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 1.5rem;
+            filter: brightness(0) invert(1);
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--aqua);
+        }
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--white);
+            margin-right: 0.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--aqua);
+            color: var(--slate);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== تحسينات الجوال ===== */
+        @media (max-width: 991.98px) {
+            .video-content h1 {
+                font-size: 3rem;
+            }
+            .video-content h1 .accent {
+                font-size: 0.9em;
+            }
+            .btn-outline-custom {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        @media (max-width: 767.98px) {
+            .video-content h1 {
+                font-size: 2.5rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-<body data-page="index" data-title-key="title" class="page-home">
+<body>
 
-    <div id="loader">
-        <div class="spinner"></div>
-    </div>
+    <!-- ======= شريط التنقل ======= -->
+    <nav class="navbar" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png" 
+                     alt="Innovo"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%2240%22%20viewBox%3D%220%200%20120%2040%22%3E%3Ctext%20x%3D%2210%22%20y%3D%2230%22%20font-family%3D%27Poppins%27%20font-size%3D%2224%22%20fill%3D%22%23122023%22%3EINNOVO%3C%2Ftext%3E%3C%2Fsvg%3E';">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Main Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="site-entry.html">Site Entry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="documents.html">Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="safety.html">Safety</a>
+                    </li>
+                    <li class="nav-item dropdown lang-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe"></i> EN
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ar">العربية</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="hi">हिन्दी</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ur">اردو</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="search-trigger ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-    <header class="site-header" id="site-header">
-        <div class="site-header-inner">
-            <div class="site-left">
-                <a class="brand" href="index.html" aria-label="Innovo Contractor Portal">
-                    <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png"
-                         alt="Innovo Logo"
-                         class="brand-logo"
-                         onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-flex';">
-                    <span id="logo-text" class="brand-text" style="display: none;">INNOVO<span class="brand-accent">_</span></span>
-                </a>
-                <div class="mobile-lang-inline">
-                    <details class="lang-switch">
-                        <summary class="nav-link" data-i18n="nav.choose_language">Choose Language</summary>
-                        <div class="lang-menu">
-                            <a href="#" data-lang="en">English</a>
-                            <a href="#" data-lang="ar">Arabic</a>
-                            <a href="#" data-lang="hi">Hindi</a>
-                            <a href="#" data-lang="ur">Urdu</a>
+    <!-- ======= قسم الفيديو (مطابق للموقع الرسمي) ======= -->
+    <section class="video-wrapper">
+        <!-- فيديو الخلفية -->
+        <video poster="https://media.innovogroup.com/assets/img/banner/inner-b.jpg" 
+               src="https://www.innovogroup.com/assets/video/Build_Website_June_2025.mp4" 
+               autoplay loop playsinline muted></video>
+        
+        <!-- طبقة التدرج فوق الفيديو -->
+        <div class="video-overlay"></div>
+        
+        <!-- محتوى الفيديو -->
+        <div class="video-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1>
+                            <span class="accent">Subcontractor</span>
+                            Portal
+                        </h1>
+                        <p class="lead">
+                            Access safety rules, inductions, and documents required to work on Innovo sites. Everything you need for safe, compliant, and fast site access.
+                        </p>
+                        <div class="mt-4">
+                            <a href="dashboard.html" class="btn-primary-custom">Enter Portal</a>
+                            <a href="payment-claims.html" class="btn-outline-custom">Payment Claims</a>
                         </div>
-                    </details>
-                </div>
-            </div>
-
-            <nav class="site-nav">
-                <a href="dashboard.html" class="nav-link" data-i18n="nav.main_portal">Main Portal</a>
-                <a href="site-entry.html" class="nav-link" data-i18n="nav.site_entry">Site Entry</a>
-                <a href="documents.html" class="nav-link" data-i18n="nav.documents">Documents</a>
-                <a href="safety.html" class="nav-link" data-i18n="nav.safety">Safety</a>
-                <details class="lang-switch">
-                    <summary class="nav-link" data-i18n="nav.choose_language">Choose Language</summary>
-                    <div class="lang-menu">
-                        <a href="#" data-lang="en">English</a>
-                        <a href="#" data-lang="ar">Arabic</a>
-                        <a href="#" data-lang="hi">Hindi</a>
-                        <a href="#" data-lang="ur">Urdu</a>
                     </div>
-                </details>
-            </nav>
-
-            <div class="site-actions">
-                <button class="search-trigger" type="button" data-search-open aria-label="Open search">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7"></circle>
-                        <path d="M16.8 16.8L21 21"></path>
-                    </svg>
-                </button>
-                <button class="menu-trigger" type="button" data-menu-toggle aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                </button>
+                </div>
+                
+                <!-- إحصائيات -->
+                <div class="row stats-row">
+                    <div class="col-md-4 stat-item">
+                        <div class="stat-number">1,500+</div>
+                        <div class="stat-label">Active Subcontractors</div>
+                    </div>
+                    <div class="col-md-4 stat-item">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Active Sites</div>
+                    </div>
+                    <div class="col-md-4 stat-item">
+                        <div class="stat-number">2.5M+</div>
+                        <div class="stat-label">Safe Man-Hours</div>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <!-- سهم التمرير لأسفل -->
+        <a href="#portal-areas" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
 
-        <div class="mobile-panel" id="mobile-panel">
-            <a href="dashboard.html" data-i18n="nav.main_portal">Main Portal</a>
-            <a href="site-entry.html" data-i18n="nav.site_entry">Site Entry</a>
-            <a href="documents.html" data-i18n="nav.documents">Documents</a>
-            <a href="safety.html" data-i18n="nav.safety">Safety</a>
-            <a href="payment-claims.html" data-i18n="nav.payment_claims">Payment Claims</a>
-            <a href="#" data-mobile-lang="true" data-i18n="nav.choose_language">Choose Language</a>
-            <button type="button" data-theme-toggle class="mobile-panel-link">Dark Mode</button>
-            <a href="index.html" data-i18n="nav.back_home">Back to Home</a>
-        </div>
-    </header>
-
-    <main class="home">
-        <section class="hero">
-            <div class="hero-media">
-                <div class="hero-image"></div>
-                <div class="hero-overlay"></div>
-                <div class="light-pointer" id="light-pointer"></div>
-            </div>
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span data-i18n="hero.title_main">Contractor</span>
-                    <span class="hero-title-accent" data-i18n="hero.title_accent">Portal</span>
-                </h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">
-                    Access safety rules, inductions, and documents required to work on Innovo sites.
+    <!-- ======= قسم بطاقات البوابة ======= -->
+    <section class="section" id="portal-areas">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Portal <span class="accent">Areas</span></h2>
+                <p class="section-subtitle mx-auto">
+                    Everything you need for safe, compliant, and fast site access.
                 </p>
-                <div class="hero-actions">
-                    <a href="dashboard.html" class="btn-primary-hero" data-i18n="hero.enter_portal">Enter Portal</a>
-                    <a href="payment-claims.html" class="btn-outline-hero" data-i18n="hero.payment_claims">Payment Claims</a>
-                </div>
             </div>
-        </section>
 
-        <section class="section section-dark">
-            <div class="section-inner">
-                <div class="section-header">
-                    <h2 class="section-title" data-i18n="section.portal.title">Portal Areas</h2>
-                    <p class="section-subtitle" data-i18n="section.portal.subtitle">Everything you need for safe, compliant, and fast site access.</p>
-                </div>
-                <div class="feature-grid">
-                    <a class="feature-card" href="site-entry.html">
-                        <span class="feature-label" data-i18n="section.portal.site_entry.label">Site Entry</span>
-                        <h3 data-i18n="section.portal.site_entry.title">Safety Rules & Entry Steps</h3>
-                        <p data-i18n="section.portal.site_entry.copy">Key rules, PPE requirements, and daily access instructions.</p>
-                    </a>
-                    <a class="feature-card" href="documents.html">
-                        <span class="feature-label" data-i18n="section.portal.documents.label">Documents</span>
-                        <h3 data-i18n="section.portal.documents.title">Guides & Downloads</h3>
-                        <p data-i18n="section.portal.documents.copy">Policies, forms, and approved checklists ready to use.</p>
-                    </a>
-                    <a class="feature-card" href="safety.html">
-                        <span class="feature-label" data-i18n="section.portal.hse.label">HSE</span>
-                        <h3 data-i18n="section.portal.hse.title">Safety & Incident Support</h3>
-                        <p data-i18n="section.portal.hse.copy">Procedures, reporting, and on-site best practices.</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <a href="site-entry.html" class="portal-card">
+                        <span class="card-label">Site Entry</span>
+                        <div class="portal-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>Safety Rules & Entry Steps</h3>
+                        <p>Key rules, PPE requirements, and daily access instructions.</p>
                     </a>
                 </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="documents.html" class="portal-card">
+                        <span class="card-label">Documents</span>
+                        <div class="portal-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Guides & Downloads</h3>
+                        <p>Policies, forms, and approved checklists ready to use.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="safety.html" class="portal-card">
+                        <span class="card-label">HSE</span>
+                        <div class="portal-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Safety & Incident Support</h3>
+                        <p>Procedures, reporting, and on-site best practices.</p>
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <div class="search-overlay" id="search-overlay" aria-hidden="true">
-        <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
-            <div class="search-header">
-                <h2 id="search-title" data-i18n="search.title">Search the portal</h2>
-                <button class="search-close" type="button" data-search-close aria-label="Close search">✕</button>
+    <!-- ======= قسم Why Innovo ======= -->
+    <section class="section why-innovo">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Why <span class="accent">Innovo</span> Portal?</h2>
+                    <p class="mb-4" style="color: #6c757d;">
+                        We align our subcontractor processes with internationally recognised standards for quality, safety, and compliance. By combining emerging technologies with well-established practices, Innovo ensures every site entry is efficient, safe, and equipped to meet future demands.
+                    </p>
+                    <p style="color: #6c757d;">
+                        Our flexible portal supports subcontractors from initial induction through to daily site access and payment claims, maintaining speed and precision throughout. Guided by a strong HSE culture, Innovo remains focused on delivering long-term value to all our partners.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="why-image">
+                        <img src="https://media.innovogroup.com/assets/img/whychoose-construction-new.jpg" alt="Why Innovo" class="img-fluid">
+                    </div>
+                </div>
             </div>
-            <form class="search-form">
-                <input type="search" placeholder="Search safety, documents, claims..." aria-label="Search" data-i18n-placeholder="search.placeholder">
-                <button type="submit" data-i18n="search.button">Search</button>
+        </div>
+    </section>
+
+    <!-- ======= Offcanvas للبحث ======= -->
+    <div class="offcanvas offcanvas-top" style="height: 30vh; background-color: var(--white);" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel">
+        <div class="container d-flex flex-row py-6 h-100 align-items-center">
+            <form class="search-form w-100" onsubmit="event.preventDefault(); alert('Search functionality would go here.');">
+                <input id="search-form" type="text" class="form-control form-control-lg" placeholder="Type keyword and hit enter" value="" style="border: 2px solid var(--aqua); border-radius: 50px; padding: 1rem 1.5rem;">
             </form>
-            <div class="search-suggestions">
-                <button type="button" data-i18n="search.payment_claims">Payment claims</button>
-            </div>
-            <div class="search-results" id="search-results" aria-live="polite"></div>
+            <button type="button" class="btn-close ms-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
     </div>
 
+    <!-- ======= تذييل الصفحة ======= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-logo">
+                        <img src="https://raw.githubusercontent.com/beshoadel7878-prog/website-images/refs/heads/main/innovo%20subcontractor.png" 
+                             alt="Innovo"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%2240%22%20viewBox%3D%220%200%20120%2040%22%3E%3Ctext%20x%3D%2210%22%20y%3D%2230%22%20font-family%3D%27Poppins%27%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%3EINNOVO%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">
+                        Your gateway to safe and compliant site access on all Innovo projects.
+                    </p>
+                    <div class="social-links mt-4">
+                        <a href="https://www.linkedin.com/company/theinnovogroup/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/theinnovogroup/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@theinnovogroup" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://x.com/Innovo_Group" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-3 col-6">
+                            <h6 class="fw-bold mb-3" style="color: var(--aqua);">Portal</h6>
+                            <ul class="footer-links">
+                                <li><a href="dashboard.html">Main Portal</a></li>
+                                <li><a href="site-entry.html">Site Entry</a></li>
+                                <li><a href="documents.html">Documents</a></li>
+                                <li><a href="safety.html">Safety</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h6 class="fw-bold mb-3" style="color: var(--aqua);">Support</h6>
+                            <ul class="footer-links">
+                                <li><a href="payment-claims.html">Payment Claims</a></li>
+                                <li><a href="#">Help & Support</a></li>
+                                <li><a href="#">Contact Portal Admin</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h6 class="fw-bold mb-3" style="color: var(--aqua);">Company</h6>
+                            <ul class="footer-links">
+                                <li><a href="https://www.innovogroup.com/about-us" target="_blank">About Innovo</a></li>
+                                <li><a href="https://www.innovogroup.com/contact" target="_blank">Contact</a></li>
+                                <li><a href="https://www.innovogroup.com/careers" target="_blank">Careers</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h6 class="fw-bold mb-3" style="color: var(--aqua);">Legal</h6>
+                            <ul class="footer-links">
+                                <li><a href="#">Terms of Use</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">© INNOVO 2026 All rights reserved. Subcontractor Portal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // تغيير لون الشريط عند التمرير
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // كود اللغة
+        document.querySelectorAll('.dropdown-item[data-lang]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                alert('Language switched to: ' + lang);
+            });
+        });
+
+        // تمرير سلس لسهم التمرير
+        document.querySelector('.scroll-down').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#portal-areas').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
     <script src="script.js"></script>
-</body> 
+</body>
 </html>
